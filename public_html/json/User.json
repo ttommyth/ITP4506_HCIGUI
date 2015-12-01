@@ -1,7 +1,7 @@
 {
     "users": [
         {
-            "userName": "",
+            "username": "",
             "password": "",
             "name": "",
             "email": "",
@@ -9,7 +9,7 @@
             "creditCardNum": ""
         },
         {
-            "userName": "",
+            "username": "",
             "password": "",
             "name": "",
             "email": "",
@@ -17,7 +17,7 @@
             "creditCardNum": ""
         },
         {
-            "userName": "tester",
+            "username": "tester",
             "password": "123456",
             "name": "Tester",
             "email": "test@mail.com",

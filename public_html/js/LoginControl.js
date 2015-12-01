@@ -9,8 +9,8 @@ $.ajax({
     async: false
 });
 
-
+//return the user
 function login(username, password){
-    var paras = [new WherePara("userName",jadbOP.equal, username),new WherePara("password", jadbOP.equal, password)];
-    return User.find(paras);
+    var paras = [new WherePara("username",jadbOP.equals, username),new WherePara("password", jadbOP.equals, password)];
+    return User.find(paras)[0];
 };

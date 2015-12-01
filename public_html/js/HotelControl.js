@@ -25,7 +25,6 @@ function Hotel() {//object
         this.content="";
     }
 
-    function find(Query) {
 
-    }
+    this.loadJSON = function (jsonObject) {return loadJSON(this, jsonObject);};
 }

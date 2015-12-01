@@ -20,4 +20,6 @@ function Flight(){//object
         this.star="";
         this.content="";
     }
+    
+    this.loadJSON = function (jsonObject) {return loadJSON(this, jsonObject);};
 }

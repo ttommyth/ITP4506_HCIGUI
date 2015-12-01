@@ -10,4 +10,5 @@ function Package(){//object
     this.packageID="";
     this.hotelID="";
     this.flightID="";
+    this.loadJSON = function (jsonObject) {return loadJSON(this, jsonObject);};
 }
