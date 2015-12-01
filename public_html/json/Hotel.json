@@ -9,7 +9,7 @@
             "img": [
                 "", ""
             ],
-            "roomType":
+            "roomTypes":
                     [
                         {
                             "qty": "",
@@ -30,7 +30,7 @@
                             ]
                         }
                     ],
-            "comment": [
+            "comments": [
                 {
                     "username": "",
                     "star": "",
@@ -48,7 +48,7 @@
             "img": [
                 "", ""
             ],
-            "roomType":
+            "roomTypes":
                     [
                         {
                             "qty": "",
@@ -69,7 +69,7 @@
                             ]
                         }
                     ],
-            "comment": [
+            "comments": [
                 {
                     "username": "",
                     "star": "",

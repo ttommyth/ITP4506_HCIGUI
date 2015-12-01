@@ -16,4 +16,4 @@ function User() {//object
 }
 ;
 
-User.find = function (paras) {return find("json/User.json",paras);};
+User.find = function (paras) {return find(User, "json/User.json","users",paras);};

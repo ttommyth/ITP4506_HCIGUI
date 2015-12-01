@@ -28,3 +28,5 @@ function Hotel() {//object
 
     this.loadJSON = function (jsonObject) {return loadJSON(this, jsonObject);};
 }
+
+Hotel.find = function (paras) {return find(Hotel, "json/Hotel.json","hotels",paras);};

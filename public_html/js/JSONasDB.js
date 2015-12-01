@@ -38,7 +38,7 @@ jadbOP.like = function (a, b) {
 
 //the basic find method
 //<editor-fold>
-function find(url,paras) {
+function find(targetObject,url,table,paras) {
     if (paras == null)
         paras = [];
 
@@ -48,18 +48,18 @@ function find(url,paras) {
         dataType: 'json',
         async: false,
         success: function (jsons) {
-            $.each(jsons["users"], function (i, user) {
+            $.each(jsons[table], function (i, row) {
                 $.each(paras, function (j, para) {
-                    if (para.operator(user[para.key], para.value)) {
+                    if (para.operator(row[para.key], para.value)) {
                         if (j != paras.length - 1) {//if is last element
                             return true;//continue
                         }
                     } else {
                         return false;//break
                     }
-                    var u = new User();
-                    u.loadJSON(user);
-                    results.push(u);
+                    var tar = new targetObject();
+                    tar.loadJSON(row);
+                    results.push(tar);
                 });
             });
         }

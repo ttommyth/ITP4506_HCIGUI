@@ -23,3 +23,4 @@ function Flight(){//object
     
     this.loadJSON = function (jsonObject) {return loadJSON(this, jsonObject);};
 }
+Flight.find = function (paras) {return find(Flight, "json/Flight.json","Flight",paras);};

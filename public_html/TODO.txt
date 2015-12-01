@@ -1,0 +1,11 @@
+1.  make connection to JSON - done
+2.  insert record - doing
+3.  index (contain search) -TODO: search
+4.  Hotel main page
+5.  Hotel search Result page
+6.  Hotel Detail page (contain room detail, comments)
+7.  Hotel ordering page
+8.  Flight main page
+9.  Flight search Result page
+10. Flight Detail page (contain seat detail, comments)
+11. Flight ordering page

@@ -7,7 +7,7 @@
             "img": [
                 "", ""
             ],
-            "seatType": [
+            "seatTypes": [
                 {
                     "name": "",
                     "price": "",
@@ -19,7 +19,7 @@
                     "avaSeat": ""
                 }
             ],
-            "comment": [
+            "comments": [
                 {
                     "username": "",
                     "star": "",
