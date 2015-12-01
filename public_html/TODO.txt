@@ -9,3 +9,6 @@
 9.  Flight search Result page
 10. Flight Detail page (contain seat detail, comments)
 11. Flight ordering page
+12.  Package search Result page
+13.  Package Detail page (contain room detail, comments)
+14.  Package ordering page
