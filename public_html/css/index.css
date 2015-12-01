@@ -7,6 +7,6 @@ and open the template in the editor.
     Created on : 2015年11月29日, 下午04:23:16
     Author     : User
 */
-
-.functionImage{
+body{
+    background-image: url('img/indexBG.jpg');
 }

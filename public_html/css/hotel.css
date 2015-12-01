@@ -1,0 +1,20 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2015年12月1日, 下午06:14:08
+    Author     : User
+*/
+
+.hotHotelImg{
+  object-fit: cover;
+    min-width: 100%;
+    height: 225px;
+    max-height: 225px;
+    margin: 0 auto;
+}
+.thumbnail{
+    display:inline-block
+}

@@ -1,0 +1,76 @@
+{
+    "hotels": [
+        {
+            "hotelName": "",
+            "region": "",
+            "address": "",
+            "star": "",
+            "price": "",
+            "comment": [
+                {
+                    "username": "",
+                    "star": "",
+                    "content": ""
+                }
+            ],
+            "image": [
+                "", ""
+            ],
+            "roomType":
+                    [
+                        {
+                            "qty": "",
+                            "name": "",
+                            "description": "",
+                            "image": [
+                                "", ""
+                            ]
+                        },
+                        {
+                            "qty": "",
+                            "name": "",
+                            "description": "",
+                            "image": [
+                                "", ""
+                            ]
+                        }
+                    ]
+        },
+        {
+            "hotelName": "",
+            "region": "",
+            "address": "",
+            "star": "",
+            "price": "",
+            "comment": [
+                {
+                    "username": "",
+                    "star": "",
+                    "content": ""
+                }
+            ],
+            "image": [
+                "", ""
+            ],
+            "roomType":
+                    [
+                        {
+                            "qty": "",
+                            "name": "",
+                            "description": "",
+                            "image": [
+                                "", ""
+                            ]
+                        },
+                        {
+                            "qty": "",
+                            "name": "",
+                            "description": "",
+                            "image": [
+                                "", ""
+                            ]
+                        }
+                    ]
+        }
+    ]
+}

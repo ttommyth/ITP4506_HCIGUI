@@ -1,5 +1,5 @@
 function User(){
-    this.username;
+    this.username="";
     
     function find(){
         
