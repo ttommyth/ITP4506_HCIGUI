@@ -1,12 +1,7 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>BestTrip</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script type="application/javascript" src="libs/jquery/jquery-2.1.4.js"></script>
@@ -19,12 +14,14 @@ and open the template in the editor.
         </script> 
         <script>
             $(document).ready(function () {
-                $(".functionImage").css({"background-size":"100%"});
+                $(".functionImage").css({"background-size": "100%"});
                 $(".functionImage").mouseenter(function () {
-                    $(this).animate({"background-size":"150%"}, 1000);
+                    $(this).stop();
+                    $(this).animate({"background-size": "150%"}, 1000);
                 });
-                $(".functionImage").mouseleave(function(){
-                    $(this).animate({"background-size":"100%"}, 1000);
+                $(".functionImage").mouseleave(function () {
+                    $(this).stop();
+                    $(this).animate({"background-size": "100%"}, 1000);
                 });
             });
         </script>
@@ -36,16 +33,39 @@ and open the template in the editor.
 
         <div class="jumbotron functionImage" style="background: url('img/plane.jpg') no-repeat center center">
             <div class="container">
-                <h1>Plane</h1>
+                <h1>Flight</h1>
                 <p><br /><br /><br /></p>
-                <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+                <p><a class="btn btn-primary btn-lg"  data-toggle="modal" data-target="#flightSearchModal" role="button">Learn more</a></p>
             </div>
         </div>
         <div class="jumbotron functionImage" style="background: url('img/hotel.jpg') no-repeat center center">
             <div class="container">
                 <h1>Hotel</h1>
                 <p><br /><br /><br /></p>
-                <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+                <p><a class="btn btn-primary btn-lg"  data-toggle="modal" data-target="#hotelSearchModal" role="button">Learn more</a></p>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="flightSearchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <!--TODO: flight Search form-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="hotelSearchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <!--TODO: hotel Search form-->
+                    </div>
+                </div>
             </div>
         </div>
     </body>
