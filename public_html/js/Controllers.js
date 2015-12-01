@@ -1,4 +1,15 @@
-$.getScript("js/CookieControl.js");
-$.getScript("js/LoginControl.js");
-$.getScript("js/FlightControl.js");
-$.getScript("js/GET.js");
+$.ajax({
+    url: 'js/JSONasDB.js',
+    dataType: 'script',
+    async: false
+});
+$.ajax({
+    url: 'js/GET.js',
+    dataType: 'script',
+    async: false
+});
+$.ajax({
+    url: 'js/CookieControl.js',
+    dataType: 'script',
+    async: false
+});

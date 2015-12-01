@@ -1,3 +1,31 @@
 {
-    "name": "User"
+    "flights": [
+        {
+            "flightID": "",
+            "region": "",
+            "companyName": "",
+            "img": [
+                "", ""
+            ],
+            "seatType": [
+                {
+                    "name": "",
+                    "price": "",
+                    "avaSeat": ""
+                },
+                {
+                    "name": "",
+                    "price": "",
+                    "avaSeat": ""
+                }
+            ],
+            "comment": [
+                {
+                    "username": "",
+                    "star": "",
+                    "content": ""
+                }
+            ]
+        }
+    ]
 }

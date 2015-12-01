@@ -1,9 +1,28 @@
 {
-    "Users":[
-     {
-         "username":"",
-         "password":"",
-         "email":""
-     }   
+    "users": [
+        {
+            "userName": "",
+            "password": "",
+            "name": "",
+            "email": "",
+            "tel": "",
+            "creditCardNum": ""
+        },
+        {
+            "userName": "",
+            "password": "",
+            "name": "",
+            "email": "",
+            "tel": "",
+            "creditCardNum": ""
+        },
+        {
+            "userName": "tester",
+            "password": "123456",
+            "name": "Tester",
+            "email": "test@mail.com",
+            "tel": "21800000",
+            "creditCardNum": "18780000"
+        }
     ]
 }

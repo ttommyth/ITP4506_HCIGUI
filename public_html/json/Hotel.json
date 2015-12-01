@@ -1,19 +1,12 @@
 {
     "hotels": [
         {
+            "hotelID": "",
             "hotelName": "",
             "region": "",
             "address": "",
             "star": "",
-            "price": "",
-            "comment": [
-                {
-                    "username": "",
-                    "star": "",
-                    "content": ""
-                }
-            ],
-            "image": [
+            "img": [
                 "", ""
             ],
             "roomType":
@@ -21,35 +14,38 @@
                         {
                             "qty": "",
                             "name": "",
+                            "price": "",
                             "description": "",
-                            "image": [
+                            "img": [
                                 "", ""
                             ]
                         },
                         {
                             "qty": "",
                             "name": "",
+                            "price": "",
                             "description": "",
-                            "image": [
+                            "img": [
                                 "", ""
                             ]
                         }
-                    ]
-        },
+                    ],
+            "comment": [
+                {
+                    "username": "",
+                    "star": "",
+                    "content": ""
+                }
+            ]
+        }
+        ,
         {
+            "hotelID": "",
             "hotelName": "",
             "region": "",
             "address": "",
             "star": "",
-            "price": "",
-            "comment": [
-                {
-                    "username": "",
-                    "star": "",
-                    "content": ""
-                }
-            ],
-            "image": [
+            "img": [
                 "", ""
             ],
             "roomType":
@@ -57,20 +53,29 @@
                         {
                             "qty": "",
                             "name": "",
+                            "price": "",
                             "description": "",
-                            "image": [
+                            "img": [
                                 "", ""
                             ]
                         },
                         {
                             "qty": "",
                             "name": "",
+                            "price": "",
                             "description": "",
-                            "image": [
+                            "img": [
                                 "", ""
                             ]
                         }
-                    ]
+                    ],
+            "comment": [
+                {
+                    "username": "",
+                    "star": "",
+                    "content": ""
+                }
+            ]
         }
     ]
 }
