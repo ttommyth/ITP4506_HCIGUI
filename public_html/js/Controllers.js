@@ -13,3 +13,9 @@ $.ajax({
     dataType: 'script',
     async: false
 });
+$.ajax({
+    url: 'js/LocalStorageSetup.js',
+    dataType: 'script',
+    async: false
+});
+LocalStorgeSetup();

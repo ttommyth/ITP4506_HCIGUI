@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : User
 */
 body{
-    width: 1024px;
+    max-width: 1024px;
     margin-left: auto;
     margin-right: auto;
 }

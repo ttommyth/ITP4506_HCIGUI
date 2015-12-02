@@ -38,45 +38,71 @@ jadbOP.like = function (a, b) {
 
 //the basic find method
 //<editor-fold>
-function find(targetObject,url,table,paras) {
+/** old find
+ function find(targetObject,url,table,paras) {
+ if (paras == null)
+ paras = [];
+ 
+ var results = new Array();
+ $.ajax({
+ url: ""+url,
+ dataType: 'json',
+ async: false,
+ success: function (jsons) {
+ $.each(jsons[table], function (i, row) {
+ $.each(paras, function (j, para) {
+ if (para.operator(row[para.key], para.value)) {
+ if (j != paras.length - 1) {//if is last element
+ return true;//continue
+ }
+ } else {
+ return false;//break
+ }
+ var tar = new targetObject();
+ tar.loadJSON(row);
+ results.push(tar);
+ });
+ });
+ }
+ });
+ return results;
+ }
+ **/
+function find(targetObject, url, table, paras) {
     if (paras == null)
         paras = [];
 
     var results = new Array();
-    $.ajax({
-        url: ""+url,
-        dataType: 'json',
-        async: false,
-        success: function (jsons) {
-            $.each(jsons[table], function (i, row) {
-                $.each(paras, function (j, para) {
-                    if (para.operator(row[para.key], para.value)) {
-                        if (j != paras.length - 1) {//if is last element
-                            return true;//continue
-                        }
-                    } else {
-                        return false;//break
-                    }
-                    var tar = new targetObject();
-                    tar.loadJSON(row);
-                    results.push(tar);
-                });
-            });
-        }
+    var jsons = JSON.parse(localStorage.getItem(url));
+    $.each(jsons[table], function (i, row) {
+        $.each(paras, function (j, para) {
+            if (para.operator(row[para.key], para.value)) {
+                if (j != paras.length - 1) {//if is last element
+                    return true;//continue
+                }
+            } else {
+                return false;//break
+            }
+            var tar = new targetObject();
+            tar.loadJSON(row);
+            results.push(tar);
+        });
     });
+
     return results;
 }
 //</editor-fold>
 
 //the basic loadJSON method for the virual Database object
 //<editor-fold>
-    function loadJSON(targetObject,jsonObject) {
-        for (var name in jsonObject) {
-            if(typeof targetObject[name]=="function"){
-                targetObject[name].loadJSON(jsonObject[name]);
-            }else{
-                targetObject[name] = jsonObject[name];
-            }
+function loadJSON(targetObject, jsonObject) {
+    for (var name in jsonObject) {
+        if (typeof targetObject[name] == "function") {
+            targetObject[name].loadJSON(jsonObject[name]);
+        } else {
+            targetObject[name] = jsonObject[name];
         }
-    };
+    }
+}
+;
 //</editor-fold>

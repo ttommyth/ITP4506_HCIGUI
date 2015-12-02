@@ -1,4 +1,57 @@
-
+<script>
+    function doLogin() {
+        $.getScript("js/LoginControl.js", function () {
+            var username = $('#loginUsername').val();
+            var password = $('#loginPassword').val();
+            var user = login(username, password);
+            if (user != null) {
+                $('#loginModal').modal('hide');
+                $('#welcomeMsgForName').append(" "+user['name']);
+                $('#loginSuccessModal').modal('show');
+            } else {
+                $('#wrongMsg').show();
+            }
+            updateLogin();
+        });
+    }
+    function doLogout() {
+        $.getScript("js/LoginControl.js", function () {
+            logout();
+            updateLogin();
+            $('#logoutModal').modal('show');
+            window.setTimeout(function () {
+                location.href = "index.html";
+            }, 3000);
+        });
+    }
+    function updateLogin() {
+        var user = getCookie("user");
+        if (user != undefined) {
+            $('#welcomeMsg').html("Welcome " + user["name"]);
+            $('.afterLogin').show();
+            $('.beforeLogin').hide();
+        } else {
+            $('.afterLogin').hide();
+            $('.beforeLogin').show();
+        }
+    }
+    $(document).ready(function () {
+        updateLogin();
+        $('#wrongMsg').hide();
+        $('#loginSuccessModal').on('show.bs.modal', function () {
+            var myModal = $(this);
+            clearTimeout(myModal.data('hideInterval'));
+            myModal.data('hideInterval', setTimeout(function () {
+                myModal.modal('hide');
+            }, 3000));
+        });
+    });
+</script>
+<style>
+    .navbar{
+        margin: 0px;
+    }
+</style>
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -14,7 +67,10 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right" style="margin-right: 2%">
-            <li><button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#loginModal">Log in</button></li>
+            <li><button type="button" class="btn btn-primary navbar-btn beforeLogin" data-toggle="modal" data-target="#loginModal">Log in</button></li>
+
+            <li><a id="welcomeMsg" class="afterLogin"></a></li>
+            <li><button type="button" class="btn btn-primary navbar-btn afterLogin" onclick="doLogout();">Log out</button></li>
         </ul>
     </div>
 </nav>
@@ -29,23 +85,54 @@
                 </div>
                 <form class="form-horizontal">
                     <div class="form-group">
-                        <label for="inputUsername" class="col-sm-2 control-label">Username</label>
+                        <label for="loginUsername" class="col-sm-2 control-label">Username</label>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control" id="inputUsername" placeholder="Username">
+                            <input type="text" name="loginUsername" class="form-control" id="loginUsername" placeholder="Username">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+                        <label for="loginPassword" class="col-sm-2 control-label">Password</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                            <input type="password" name="loginPassword" class="form-control" id="loginPassword" placeholder="Password">
                         </div>
-                    </div>
+                    </div>                
+
                     <p class="text-right">
-                <button type="button" class="btn btn-primary">Login</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="doLogin();">Login</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </p>
                 </form>
-                <p class="text-right"><a>or register here</a></p>
+
+                <p class="text-right"><a href="registration.html">or register here</a></p>
+                <div id="wrongMsg" class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" onclick="$('#wrongMsg').hide();"><span aria-hidden="true">&times;</span></button>
+                    Wrong Username and password combination. 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="loginSuccessModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div class="page-header">
+                    <h1>Login Success
+                        <small id="welcomeMsgForName">Welcome!</small></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="logoutModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="page-header">
+                    <h1>Logout Success
+                        <br /><small>We will redirect you to home page in 3 second...</small></h1>
+                </div>
             </div>
         </div>
     </div>
