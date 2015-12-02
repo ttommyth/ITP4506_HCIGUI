@@ -149,3 +149,62 @@ img{
 .FS_table{
     width: 100%;
 }
+.seatSelect{
+    margin-top: 30px;
+    width: 755px;
+    height: 600px;
+    background: #eeeeee;
+}
+#flightBody{
+    height: 100%;
+    overflow: scroll;
+    width: 500px;
+    background: black;
+    margin-left: auto;
+    margin-right: auto;
+}
+#flightSeat tr td{
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+    text-align: center;
+    color: white;
+}
+.seat{
+    margin-left: 2px;
+    margin-right: 2px;
+    border: 1px solid #bbbbbb;
+    width: 33px;
+    height: 33px;
+    text-align: center;
+    vertical-align: middle;
+    background: #66afe9
+}
+.seatE{
+    margin-left: 2px;
+    margin-right: 2px;
+    width: 33px;
+    height: 33px;
+    text-align: center;
+    vertical-align: middle;
+}
+.seatB{
+    margin-left: 2px;
+    margin-right: 2px;
+    width: 33px;
+    height: 33px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #bbbbbb;
+    background: yellowgreen;
+}
+.seatC{
+    margin-left: 2px;
+    margin-right: 2px;
+    width: 33px;
+    height: 33px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #bbbbbb;
+    background: #eea236
+}
