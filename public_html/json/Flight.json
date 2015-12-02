@@ -1,29 +1,71 @@
 {
     "flights": [
         {
-            "flightID": "",
-            "region": "",
-            "companyName": "",
+            "flightID": "FL1337",
+            "fromCity": "Hong Kong",
+            "fromAirport": "Hong Kong International Airport",
+            "toCity": "New York",
+            "toAirport": "John F. Kennedy International Airport",
+            "duration": "15:40",
+            "takeoffTime": "9:35",
+            "companyName": "Cathay Pacific",
+            "tax": "5",
             "img": [
-                "", ""
             ],
             "seatTypes": [
                 {
-                    "name": "",
-                    "price": "",
-                    "avaSeat": ""
+                    "name": "Economy",
+                    "price": "5396",
+                    "avaSeat": "100"
                 },
                 {
-                    "name": "",
-                    "price": "",
-                    "avaSeat": ""
+                    "name": "Business",
+                    "price": "10300",
+                    "avaSeat": "10"
                 }
             ],
             "comments": [
                 {
-                    "username": "",
-                    "star": "",
-                    "content": ""
+                    "username": "Hater",
+                    "star": "1",
+                    "content": "I Hate therefore I am."
+                }
+            ]
+        },
+        {
+            "flightID": "FL1388",
+            "fromCity": "Hong Kong",
+            "fromAirport": "Hong Kong International Airport",
+            "toCity": "Shang Hai",
+            "toAirport": "Pudong Airport",
+            "duration": "02:50",
+            "takeoffTime": "7:15",
+            "companyName": "Cathay Pacific",
+            "tax": "3",
+            "img": [
+            ],
+            "seatTypes": [
+                {
+                    "name": "Economy",
+                    "price": "570",
+                    "avaSeat": "102"
+                },
+                {
+                    "name": "Business",
+                    "price": "1337",
+                    "avaSeat": "10"
+                }
+            ],
+            "comments": [
+                {
+                    "username": "Hater",
+                    "star": "1",
+                    "content": "I Hate therefore I am."
+                },
+                {
+                    "username": "Lover",
+                    "star": "5",
+                    "content": "I lovin it"
                 }
             ]
         }
