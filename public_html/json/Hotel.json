@@ -37,8 +37,7 @@
                     "content": "The bed are soft"
                 }
             ]
-        }
-        ,
+        },
         {
             "hotelID": "H0002",
             "hotelName": "T Hotel",
@@ -65,6 +64,122 @@
                     "username": "Normal Person",
                     "star": "5",
                     "content": "Wow, so normal"
+                }
+            ]
+        },
+        {
+            "hotelID": "H0003",
+            "hotelName": "Sejong Hotel",
+            "region": "Korea",
+            "address": "145, Toegye-ro, Jung-gu, Myeong-dong, Seoul, South Korea",
+            "star": "5",
+            "img": [
+                ""
+            ],
+            "roomTypes":
+                    [
+                        {
+                            "qty": "1000",
+                            "name": "Normal",
+                            "price": "1100",
+                            "description": "Easy to access and nearby metro station",
+                            "img": [
+                                ""
+                            ]
+                        }
+                    ],
+            "comments": [
+                {
+                    "username": "Hurry Traveller",
+                    "star": "5",
+                    "content": "It's real close to metro station, only need to walk 3 mins"
+                }
+            ]
+        },
+        {
+            "hotelID": "H0004",
+            "hotelName": "Lotte Seoul Hotel",
+            "region": "Korea",
+            "address": "1, Sogong-dong, Jung-gu, Myeong-dong, Seoul, South Korea",
+            "star": "5",
+            "img": [
+                ""
+            ],
+            "roomTypes":
+                    [
+                        {
+                            "qty": "1120",
+                            "name": "Normal",
+                            "price": "1350",
+                            "description": "Convenient, Friendly Staffs and what so ever",
+                            "img": [
+                                ""
+                            ]
+                        }
+                    ],
+            "comments": [
+                {
+                    "username": "Lovely Lady",
+                    "star": "4.5",
+                    "content": "The staff is very polite and helpful"
+                }
+            ]
+        },
+        {
+            "hotelID": "H0005",
+            "hotelName": "AKA United Nations",
+            "region": "USA",
+            "address": "234 East 46th Street, Midtown East, New York, NY 10017, USA",
+            "star": "4",
+            "img": [
+                ""
+            ],
+            "roomTypes":
+                    [
+                        {
+                            "qty": "1007",
+                            "name": "Normal",
+                            "price": "2130",
+                            "description": "On East 46th Street, one block from United Nations Headquarters, this property offers one-bedroom apartments with fully equipped kitchens, private balconies and free high-speed internet access.",
+                            "img": [
+                                ""
+                            ]
+                        }
+                    ],
+            "comments": [
+                {
+                    "username": "USA Lover",
+                    "star": "4",
+                    "content": "Staying at the room, is like staying at home "
+                }
+            ]
+        },
+        {
+            "hotelID": "H0006",
+            "hotelName": "The William",
+            "region": "USA",
+            "address": "24 East 39th Street, Murray Hill, New York, NY 10016, USA",
+            "star": "4",
+            "img": [
+                ""
+            ],
+            "roomTypes":
+                    [
+                        {
+                            "qty": "1016",
+                            "name": "Normal",
+                            "price": "1120",
+                            "description": "This modern and elegant design hotel offers self-catering accommodation with free Wi-Fi and panoramic views of New York City. The William is located within walking distance from the iconic Fifth Avenue and 450 metres from Grand Central Station.",
+                            "img": [
+                                ""
+                            ]
+                        }
+                    ],
+            "comments": [
+                {
+                    "username": "The Great Great man",
+                    "star": "4",
+                    "content": "That's Great and .....hmm, Great!"
                 }
             ]
         }

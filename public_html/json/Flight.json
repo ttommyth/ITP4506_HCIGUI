@@ -22,6 +22,11 @@
                     "name": "Business",
                     "price": "10300",
                     "avaSeat": "10"
+                },
+                {
+                    "name": "First",
+                    "price": "14023",
+                    "avaSeat": "10"
                 }
             ],
             "comments": [
@@ -54,6 +59,11 @@
                     "name": "Business",
                     "price": "1337",
                     "avaSeat": "10"
+                },
+                {
+                    "name": "First",
+                    "price": "2300",
+                    "avaSeat": "10"
                 }
             ],
             "comments": [
@@ -66,6 +76,112 @@
                     "username": "Lover",
                     "star": "5",
                     "content": "I lovin it"
+                }
+            ]
+        },
+        {
+            "flightID": "FL1578",
+            "fromCity": "Japan",
+            "fromAirport": "Haneda Airport",
+            "toCity": "Korea",
+            "toAirport": "Cheongju International Airport",
+            "duration": "17:00",
+            "takeoffTime": "19:20",
+            "companyName": "Japan AirLines",
+            "tax": "7",
+            "img": [
+            ],
+            "seatTypes": [
+                {
+                    "name": "Economy",
+                    "price": "1800",
+                    "avaSeat": "100"
+                },
+                {
+                    "name": "Business",
+                    "price": "3500",
+                    "avaSeat": "10"
+                },
+                {
+                    "name": "First",
+                    "price": "4300",
+                    "avaSeat": "10"
+                }
+            ],
+            "comments": [
+                {
+                    "username": "Korean Lover",
+                    "star": "5",
+                    "content": "Good Services"
+                }
+            ]
+        },
+        {
+            "flightID": "FL1658",
+            "fromCity": "Swedish",
+            "fromAirport": "Anderstorp Airport",
+            "toCity": "UK",
+            "toAirport": "London Heathrow Airport",
+            "duration": "19:00",
+            "takeoffTime": "05:25",
+            "companyName": "Scandinavian Airlines",
+            "tax": "8",
+            "img": [
+            ],
+            "seatTypes": [
+                {
+                    "name": "Economy",
+                    "price": "1800",
+                    "avaSeat": "100"
+                },
+                {
+                    "name": "Business",
+                    "price": "3500",
+                    "avaSeat": "10"
+                },
+                {
+                    "name": "First",
+                    "price": "5500",
+                    "avaSeat": "10"
+                }
+            ],
+            "comments": [
+                {
+                    "username": "UK traveller",
+                    "star": "4.5",
+                    "content": "Nice IKEA Cup! xD"
+                }
+            ]
+        },
+        {
+            "flightID": "FL1008",
+            "fromCity": "Japan",
+            "fromAirport": "Kansai International Airport",
+            "toCity": "USA",
+            "toAirport": "Dothan Regional Airport",
+            "duration": "13:45",
+            "takeoffTime": "16:55",
+            "companyName": "Japan AirLines",
+            "tax": "8",
+            "img": [
+            ],
+            "seatTypes": [
+                {
+                    "name": "",
+                    "price": "1800",
+                    "avaSeat": "100"
+                },
+                {
+                    "name": "Business",
+                    "price": "3500",
+                    "avaSeat": "10"
+                }
+            ],
+            "comments": [
+                {
+                    "username": "USA Man",
+                    "star": "5",
+                    "content": "Woo Hoo ~! Great Travel"
                 }
             ]
         }
