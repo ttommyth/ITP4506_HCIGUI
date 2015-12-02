@@ -1,70 +1,79 @@
 {
     "hotels": [
         {
-            "hotelID": "H0001",
-            "hotelName": "Testing Hotel",
-            "region": "Hong Kong",
-            "address": "1 Debug Street, Testing Place, Hong Kong",
-            "star": "4",
+            "hotelID": "",
+            "hotelName": "",
+            "region": "",
+            "address": "",
+            "star": "",
             "img": [
                 "", ""
             ],
             "roomTypes":
                     [
                         {
-                            "qty": "500",
-                            "name": "Normal",
-                            "price": "200",
-                            "description": "Have the best bed",
+                            "qty": "",
+                            "name": "",
+                            "price": "",
+                            "description": "",
                             "img": [
-                                ""
+                                "", ""
                             ]
                         },
                         {
-                            "qty": "3",
-                            "name": "Golden",
-                            "price": "1000",
-                            "description": "Golden price, Golden service",
+                            "qty": "",
+                            "name": "",
+                            "price": "",
+                            "description": "",
                             "img": [
-                                ""
+                                "", ""
                             ]
                         }
                     ],
             "comments": [
                 {
-                    "username": "sleeper",
-                    "star": "4",
-                    "content": "The bed are soft"
+                    "username": "",
+                    "star": "",
+                    "content": ""
                 }
             ]
         }
         ,
         {
-            "hotelID": "H0002",
-            "hotelName": "T Hotel",
-            "region": "Hong Kong",
-            "address": "145 Pokfulam Road, Pokfulam, Hong Kong",
-            "star": "5",
+            "hotelID": "",
+            "hotelName": "",
+            "region": "",
+            "address": "",
+            "star": "",
             "img": [
-                ""
+                "", ""
             ],
             "roomTypes":
                     [
                         {
-                            "qty": "1000",
-                            "name": "Normal",
-                            "price": "300",
-                            "description": "Just normal",
+                            "qty": "",
+                            "name": "",
+                            "price": "",
+                            "description": "",
                             "img": [
-                                ""
+                                "", ""
+                            ]
+                        },
+                        {
+                            "qty": "",
+                            "name": "",
+                            "price": "",
+                            "description": "",
+                            "img": [
+                                "", ""
                             ]
                         }
                     ],
             "comments": [
                 {
-                    "username": "Normal Person",
-                    "star": "5",
-                    "content": "Wow, so normal"
+                    "username": "",
+                    "star": "",
+                    "content": ""
                 }
             ]
         }
