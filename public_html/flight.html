@@ -8,6 +8,7 @@
         <script src="libs/bootstrap/js/bootstrap.js" type="text/javascript"></script>
         <link href="libs/bootstrap/css/bootstrap.css" rel="stylesheet"/>
         <link href="css/index.css" rel="stylesheet" type="text/css"/>
+        <link href="css/hotel.css" rel="stylesheet"/>
         <script>
             $.getScript("js/Controllers.js");
             $(function () {
@@ -16,16 +17,16 @@
         </script> 
         <script>
             $(document).ready(function () {
+
             });
         </script>
 
-        <link href="css/hotel.css" rel="stylesheet"/>
+        
     </head>
     <body>
         <div id="header"></div>
-
         <!-- content -->
-        
+       
         
         <div id="hotHotelImages" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
@@ -67,33 +68,106 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
+        <div class="searchDiv">
+            <form>
+                <table id="flightTable">
+                    <tr>
+                        <td>
+                             <p>
+                    <div class="btn-group" data-toggle="buttons">
+                      <label class="btn btn-primary active">
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked="checked"/>
+                        Round-Trip
+                      </label>
+                      <label class="btn btn-primary">
+                        <input type="radio" name="options" id="option2" autocomplete="off"/>
+                        One-Way
+                      </label>
+                    </div>
+                 </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                Departing From <input type="text" name="startPlace"/>
+                 Going To <input type="text" name="endPlace"/>
+                </p>
+                 <p>
+                    Date <input type="date" name="sDate"/>
+                     to <input type="date" name="eDate"/>
+                 </p>
+                        </td>
+                        <td>
+                            <lable class="miniNumInput">
+                     Adult <input type="number" name="adult" value="1" />
+                 </lable>
+                 <label class="miniNumInput">
+                      Child <input type="number" name="child"/>
+                 </label>
+                 <label class="miniNumInput">
+                      Infant <input type="number" name="infant"/>
+                 </label>
+                    <p>
+                        <button type="button" id="submitBtn" class="btn btn-primary navbar-btn">Search</button>
+                    </p>
+                        </td>
+                    </tr>
+                </table>
+              
+            </form>
+        </div>
         <div class="content">
         <div class="page-header">
   <h1 class="pageTitle">Flight <small>that satisfy you</small></h1>
 </div>
         <div class="subTitleIcon">
             <img src="img/f1.jpg"/>
+            <div class="iconOverlap">
+                <a class="subTitleIconWord">12355</a>
+            </div>
         </div>
         <div class="subTitleIcon">
             <img src="img/f2.jpg" alt=""/>
+            <div class="iconOverlap">
+                <a class="subTitleIconWord">12355</a>
+            </div>
         </div>
         <div class="subTitleIcon">
             <img src="img/f3.jpg" alt=""/>
+            <div class="iconOverlap">
+                <a class="subTitleIconWord">12355</a>
+            </div>
         </div>
         <div class="subTitleIcon">
             <img src="img/f4.jpg" alt=""/>
+            <div class="iconOverlap">
+                <a class="subTitleIconWord">12355</a>
+            </div>
         </div>
         <div class="subTitleIcon">
             <img src="img/f5.jpg" alt=""/>
+            <div class="iconOverlap">
+                <a class="subTitleIconWord">12355</a>
+            </div>
         </div>
         <div class="subTitleIcon">
             <img src="img/f6.jpg" alt=""/>
+            <div class="iconOverlap">
+                <a class="subTitleIconWord">12355</a>
+            </div>
         </div>
         <div class="subTitleIcon">
             <img src="img/f7.jpg" alt=""/>
+            <div class="iconOverlap">
+                <a class="subTitleIconWord">12355</a>
+            </div>
         </div>
         <div class="subTitleIcon">
             <img src="img/f8.jpg" alt=""/>
+            <div class="iconOverlap">
+                <a class="subTitleIconWord">12355</a>
+            </div>s
         </div>
             </div>
     </body>

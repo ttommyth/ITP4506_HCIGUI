@@ -34,4 +34,49 @@ img{
     overflow:  hidden;
     display: inline-block;
     margin: 15px 15px 15px 15px;
+    background: #28a4c9;
+}
+.subTitleIconWord{
+       margin-left: 40px;
+       color: white;
+       font-size: 16px;
+       
+}
+.iconOverlap{
+    position: relative;
+    width: 220px;
+    height: 23px;
+    margin-top: -30px;
+    background: #286090; 
+    border-radius: 15px;
+}
+.searchDiv{
+    width: 100%;
+    margin-top: 40px;
+    height: 180px;
+    padding-top:1px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px #aaaaaa;
+    background: #ffffff;
+}
+.miniNumInput input{
+    width: 40px;
+}
+.miniNumInput{
+    margin-right: 10px;
+}
+#flightTable td{
+    vertical-align: top;
+}
+#flightTable tr td:first-child{
+    width: 590px;
+}
+#flightTable{
+    width: 950px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+#submitBtn{
+    margin-left: 200px;
 }
