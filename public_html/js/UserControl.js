@@ -13,7 +13,10 @@ function User() {//object
     this.creditCardNum = "";
 
     this.loadJSON = function (jsonObject) {return loadJSON(this, jsonObject);};
-}
-;
+};
 
 User.find = function (paras) {return find(User, "json/User.json","users",paras);};
+
+User.register = function(newUser){
+    
+};

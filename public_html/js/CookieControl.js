@@ -27,25 +27,25 @@
 function setCookie(c_name, value, expiredays)
 {
     var fakeCookie = JSON.parse(localStorage.getItem('json/fakeCookie.json'));
-    if(typeof fakeCookie != 'object'){
+    if (typeof fakeCookie != 'object') {
         fakeCookie = $.parseJSON("{}");
         console.log("not object");
     }
-    if(fakeCookie==null){
+    if (fakeCookie == null) {
         fakeCookie = $.parseJSON("{}");
     }
-    fakeCookie[c_name]=value;
+    fakeCookie[c_name] = value;
     localStorage.setItem('json/fakeCookie.json', JSON.stringify(fakeCookie));
 }
 
 function getCookie(c_name)
 {
-        var fakeCookie = JSON.parse(localStorage.getItem('json/fakeCookie.json'));
-    if(typeof fakeCookie != 'object'){
+    var fakeCookie = JSON.parse(localStorage.getItem('json/fakeCookie.json'));
+    if (typeof fakeCookie != 'object') {
         fakeCookie = $.parseJSON("{}");
         console.log("not object");
     }
-    if(fakeCookie==null){
+    if (fakeCookie == null) {
         fakeCookie = $.parseJSON("{}");
     }
     return fakeCookie[c_name];
@@ -53,13 +53,13 @@ function getCookie(c_name)
 function removeCookie(c_name)
 {
     var fakeCookie = JSON.parse(localStorage.getItem('json/fakeCookie.json'));
-    if(typeof fakeCookie != 'object'){
+    if (typeof fakeCookie != 'object') {
         fakeCookie = $.parseJSON("{}");
         console.log("not object");
     }
-    if(fakeCookie==null){
+    if (fakeCookie == null) {
         fakeCookie = $.parseJSON("{}");
     }
-    fakeCookie[c_name]=undefined;
+    fakeCookie[c_name] = undefined;
     localStorage.setItem('json/fakeCookie.json', JSON.stringify(fakeCookie));
 }
