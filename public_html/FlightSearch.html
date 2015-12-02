@@ -15,7 +15,11 @@ and open the template in the editor.
         <link href="css/index.css" rel="stylesheet" type="text/css"/>
         <link href="css/hotel.css" rel="stylesheet"/>
         <script>
-            $.getScript("js/Controllers.js");
+            $.ajax({
+                url: 'js/Controllers.js',
+                dataType: 'script',
+                async: false
+            });
             $(function () {
                 $("#header").load("components/header.html");
             });
@@ -53,8 +57,11 @@ and open the template in the editor.
                     $("#Container_ThereToHere").append(toFlightRow(f, "selectedGoFlightID"));
 
                 });
-                $("#Msg_HereToThere").html("Hong Kong To WuXi");
-                $("#Msg_ThereToHere").html("WuXi To Hong Kong");
+                for(var name in _GET){
+                    $("."+name).html(_GET[name]);
+                }
+                $("#Msg_HereToThere").html(_GET["startPlace"]+" To "+_GET["endPlace"]);
+                $("#Msg_ThereToHere").html(_GET["endPlace"]+" To "+_GET["startPlace"]);
                 $('#Container_HereToThere').animate({"table-layout": "auto"});
             });
         </script>
@@ -80,15 +87,15 @@ and open the template in the editor.
                             <tr>
                                 <td>
                                     <label class="FSD_title">Departing</label><br/>
-                                    <label class="FSD_content" id="test">Fri,11 Dec 2015</label>
+                                    <label class="FSD_content sDate">Fri,11 Dec 2015</label>
                                 </td>
                                 <td>
                                     <label class="FSD_title">Returning</label><br/>
-                                    <label class="FSD_content">Fri,11 Dec 2015</label>
+                                    <label class="FSD_content eDate">Fri,11 Dec 2015</label>
                                 </td>
                                 <td>
                                     <label class="FSD_title">Guest</label><br/>
-                                    <label class="FSD_content">Adult X1, Child X0, Infant X0</label>
+                                    <label class="FSD_content">Adult X<span class="adult"></span>, Child X<span class="child"></span>, Infant X<span class="infant"></span></label>
                                 </td>
                                 <td>
                                     <button type="button" id="submitBtn" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#searchModal">Modify Search</button>
@@ -153,14 +160,14 @@ and open the template in the editor.
                         <label class="BS_title">Booking Summary</label>
                         <div class="BSD_contextDiv">
                             <h4>Departing</h4>
-                            <span>Fir, 11,Des 2015</span>
+                            <span class="eDate">Fir, 11,Des 2015</span>
                             <br/>
                             <label>Flight: UO 1360</label>
                             <table width="100%">
                                 <tr>
-                                    <th>HKG</th>
+                                    <th class="startPlace">HKG</th>
                                     <th>To</th>
-                                    <th>WUX</th>
+                                    <th class="endPlace">WUX</th>
                                 </tr>
                                 <tr>
                                     <td>11:30</td>
@@ -171,14 +178,14 @@ and open the template in the editor.
                             <hr>
                             <div id="returnFlight">
                                 <h4>Returning</h4>
-                                <span>Fir, 11,Des 2015</span>
+                                <span class="sDate">Fir, 11,Des 2015</span>
                                 <br/>
                                 <label>Flight: UO 1360</label>
                                 <table width="100%">
                                     <tr>
-                                        <th>HKG</th>
+                                        <th class="endPlace">HKG</th>
                                         <th>To</th>
-                                        <th>WUX</th>
+                                        <th class="startPlace">WUX</th>
                                     </tr>
                                     <tr>
                                         <td>11:30</td>
@@ -222,7 +229,7 @@ and open the template in the editor.
                                 <tr><td>
                                         <h3>Total</h3>
                                     </td>
-                                    <td><h3>HDK 550</h3></td></tr>
+                                    <td><h3>HKD 550</h3></td></tr>
                             </table>
                         </div>
                     </div>
