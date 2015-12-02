@@ -2,8 +2,14 @@
     "flights": [
         {
             "flightID": "",
-            "region": "",
+            "fromCity": "",
+            "fromAirport": "",
+            "toCity": "",
+            "toAirport": "",
+            "duration":"",
+            "takeoffTime":"",
             "companyName": "",
+            "tax":"",
             "img": [
                 "", ""
             ],

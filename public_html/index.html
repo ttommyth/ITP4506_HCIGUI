@@ -18,6 +18,9 @@
             });
         </script> 
         <script>
+            function btn_FlightSearch_click() {
+            }
+            ;
             $(document).ready(function () {
                 $(".functionImage").css({"background-size": "100%"});
                 $(".functionImage").mouseenter(function () {
@@ -33,25 +36,34 @@
         <style>
             .jumbotron{
                 margin:0px;
+                overflow: hidden;
+            }
+            .container{
+                overflow: hidden;
+            }
+            .indexSearch{
+                z-index: -1;
             }
         </style>
         <link href="css/index.css" rel="stylesheet"/>
     </head>
     <body>
         <div id="header"></div>
-
         <div class="jumbotron functionImage" style="background: url('img/plane.jpg') no-repeat center center">
             <div class="container">
                 <h1>Flight</h1>
                 <p><br /><br /></p>
-                <p><a class="btn btn-primary btn-lg"  data-toggle="modal" data-target="#flightSearchModal" role="button"><span class="glyphicon glyphicon-search"></span>Search</a></p>
+                <p><a class="btn btn-primary btn-lg" href="FlightSearch.html" role="button"><span class="glyphicon glyphicon-search"></span>Search</a></p>
             </div>
+        </div>
+        <div class="indexSearch">
+
         </div>
         <div class="jumbotron functionImage" style="background: url('img/hotel.jpg') no-repeat center center">
             <div class="container">
                 <h1>Hotel</h1>
                 <p><br /><br /></p>
-                <p><a class="btn btn-primary btn-lg"  data-toggle="modal" data-target="#hotelSearchModal" role="button"><span class="glyphicon glyphicon-search"></span>Search</a></p>
+                <p><a class="btn btn-primary btn-lg" href="HotelSearch.html" role="button"><span class="glyphicon glyphicon-search"></span>Search</a></p>
             </div>
         </div>
 

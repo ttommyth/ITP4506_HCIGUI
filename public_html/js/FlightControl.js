@@ -5,8 +5,14 @@ $.ajax({
 });
 function Flight(){//object
     this.flight="";
-    this.region="";
+    this.fromCity="";
+    this.fromAirport="";
+    this.toCity="";
+    this.toAirport="";
+    this.duration="";
+    this.takeoffTime="";
     this.companyName="";
+    this.tax="";
     this.img=[];
     this.seatTypes = [];
     this.comments=[];
