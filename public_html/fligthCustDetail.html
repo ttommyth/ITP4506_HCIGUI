@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="application/javascript" src="libs/jquery/jquery-2.1.4.js"></script>
+        <script src="libs/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+        <link href="libs/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+        <link href="css/index.css" rel="stylesheet" type="text/css"/>
+        <link href="css/hotel.css" rel="stylesheet"/>
+        <script>
+            $.getScript("js/Controllers.js");
+            $(function () {
+                $("#header").load("components/header.html");
+            });
+        </script> 
+        <script>
+            $(document).ready(function () {
+
+            });
+        </script>
+    </head>
+    <body>
+        <div id="header"></div>
+        <!-- content -->
+        <table >
+        <tr>
+        <td>
+            <div class="flightSearchDetails">
+            <table>
+            <tr>
+            <td>
+                <label class="FSD_title">Departing</label><br/>
+                <label class="FSD_content">Fri,11 Dec 2015</label>
+            </td>
+            <td>
+                <label class="FSD_title">Returning</label><br/>
+                <label class="FSD_content">Fri,11 Dec 2015</label>
+            </td>
+            <td>
+                <label class="FSD_title">Guest</label><br/>
+                <label class="FSD_content">Adult X1, Child X0, Infant X0</label>
+            </td>
+            <td>
+                <button type="button" id="submitBtn" class="btn btn-primary navbar-btn">Modify Search</button>
+            </td>
+            </tr>
+            </table>
+            </div>
+            <div class="mainform"><h3>Passenger Details</h3>
+                <hr/>
+            <div>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                  <li role="presentation" class="active"><a href="#Passenger1" aria-controls="Passenger1" role="tab" data-toggle="tab">Passenger 1</a></li>
+                  <li role="presentation"><a href="#Passenger2" aria-controls="Passenger2" role="tab" data-toggle="tab">Passenger 2</a></li>
+                  <li role="presentation"><a href="#Passenger3" aria-controls="Passenger3" role="tab" data-toggle="tab">Passenger 3</a></li>
+                  <li role="presentation"><a href="#Passenger4" aria-controls="Passenger4" role="tab" data-toggle="tab">Passenger 4</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <form>
+                <div class="tab-content">
+                  <div role="tabpanel" class="tab-pane active" id="Passenger1">
+                      <select>
+                          <option p="1" value="Mr" name="title">Mr.</option>
+                          <option p="1" value="Mrs" name="title">Mrs.</option>
+                          <option p="1" value="Ms" name="title">Ms.</option>
+                      </select>
+                      <label>Full Name: <input type="text" p="1" name="fName" /></label>
+                      <label>Grender: <select>
+                          <option p="1" value="m" name="title">M</option>
+                          <option p="1" value="f" name="title">F</option>
+                      </select>
+                      </label><br/>
+                      <label>Brithday: <input type="date" p="1" name="bod"/></label><br/>
+                      <label>ID: <input type="text" p="1" name="id"/></label><br/>
+                  </div>
+                  <div role="tabpanel" class="tab-pane" id="Passenger2">21312</div>
+                  <div role="tabpanel" class="tab-pane" id="Passenger3">...</div>
+                  <div role="tabpanel" class="tab-pane" id="Passenger4">...</div>
+                </div>
+                    <div>
+                        <h3>Payment</h3><hr/>
+                        <label>Full Name: <input type="text" name="fName" /></label><br/>
+                        <label>Email: <input type="text" name="email"/></label><br/>
+                        <label>Phone: <input type="text" name="tel"/></label><br/>
+                        <label>Credit Card: <input type="text" name="ccard"</label><br/>
+                    </div>
+                </form>
+              </div>
+            </div>
+            
+            <button type="button" id="submitBtn" class="btn btn-primary navbar-btn">Modify Search</button>
+        </td>
+        <td>
+            <div class="bookingSummaryDiv">
+                <label class="BS_title">Booking Summary</label>
+                <div class="BSD_contextDiv">
+                    <h4>Departing</h4>
+                    <span>Fir, 11,Des 2015</span>
+                    <br/>
+                    <label>Flight: UO 1360</label>
+                    <table width="100%">
+                    <tr>
+                        <th>HKG</th>
+                        <th>To</th>
+                        <th>WUX</th>
+                    </tr>
+                    <tr>
+                        <td>11:30</td>
+                        <td></td>
+                        <td>15:40</td>
+                    </tr>
+                    </table>
+                    <hr>
+                    <div id="returnFlight">
+                    <h4>Returning</h4>
+                    <span>Fir, 11,Des 2015</span>
+                    <br/>
+                    <label>Flight: UO 1360</label>
+                    <table width="100%">
+                    <tr>
+                        <th>HKG</th>
+                        <th>To</th>
+                        <th>WUX</th>
+                    </tr>
+                    <tr>
+                        <td>11:30</td>
+                        <td></td>
+                        <td>15:40</td>
+                    </tr>
+                    </table>
+                    <hr>
+                    </div>
+                    <h4>Fees</h4>
+                    <table class="feeTable">
+                        <tr>
+                            <th>Departing</th>
+                            <th>HKD<span id="dFees">359</span></th>
+                        </tr>
+                        <tr>
+                            <td>Fare</td>
+                            <td>HKD<span id="goFare">359</span></td>    
+                        </tr>
+                        <tr>
+                            <td>Tax</td>
+                            <td>HKD<span id="goTax">359</span></td>    
+                        </tr>
+                    </table>
+                    <table id="returnFee" class="feeTable">
+                        <tr>
+                            <th>Returning</th>
+                            <th>HKD<span id="dFees">359</span></th>
+                        </tr>
+                        <tr>
+                            <td>Fare</td>
+                            <td>HKD<span id="goFare">359</span></td>    
+                        </tr>
+                        <tr>
+                            <td>Tax</td>
+                            <td>HKD<span id="goTax">359</span></td>    
+                        </tr>
+                    </table>
+                    <hr>
+                    <table class="totalFeeTalbe">
+                        <tr><td>
+                                <h3>Total</h3>
+                            </td>
+                            <td><h3>HDK 550</h3></td></tr>
+                    </table>
+                </div>
+            </div>
+        </td>
+        </tr>
+        </table>
+    </body>
+</html>

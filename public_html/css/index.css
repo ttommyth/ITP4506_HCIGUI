@@ -88,6 +88,9 @@ img{
     margin-left: 200px;
 }
 .flightSearchDetails{
+    margin-left: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     padding: 20px;
     background: #eeeeee;
 }
@@ -211,4 +214,12 @@ img{
     vertical-align: middle;
     border: 1px solid #bbbbbb;
     background: #eea236
+}
+.tab-content tab-pane{
+    width: 90%;
+}
+.mainform{
+    margin-left: 10px;
+    width: 740px;
+    background: #88aaFF;
 }
