@@ -12,6 +12,9 @@ body{
     margin-left: auto;
     margin-right: auto;
 }
+table td{
+    vertical-align: top;
+}
 .hotHotelImg{
   object-fit: cover;
     min-width: 100%;
@@ -79,4 +82,70 @@ img{
 }
 #submitBtn{
     margin-left: 200px;
+}
+.flightSearchDetails{
+    padding: 20px;
+    background: #eeeeee;
+}
+.flightSearchDetails td{
+    width: 150px;
+}
+.FSD_title{
+    color: #88aaFF;
+}
+.BS_title{
+    width: 250px;
+    height: 35px;
+    background: #1D76C4;
+    color: white;
+    text-align: center;
+    padding-top: 2px;
+    font-size: 23px;
+}
+.bookingSummaryDiv{
+    margin-left: 20px;
+}
+.bookingSummaryDiv table tr th, .bookingSummaryDiv table tr td{
+    text-align: center;
+}
+.BSD_contextDiv{
+    width: 100%;
+    margin-top: -5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    background: #eeeeee;
+}
+.bookingSummaryDiv hr{
+    border-top: 1px solid #bbbbbb;
+}
+.inline{
+    display: inline-block;
+    width: 50%;
+}
+.inline span{
+    margin-right: px;
+}
+.totalFeeTalbe{
+    width: 100%;
+    margin-top: -20px;
+}
+.totalFeeTalbe tr td:first-child{
+    width: 100px;
+    text-align: left;
+}
+.totalFeeTalbe tr td:nth-child(2){
+    text-align: right;
+}
+.feeTable{
+    width: 100%;
+}
+.feeTable td:nth-child(2), .feeTable th:nth-child(2){
+    text-align: right;
+}
+.feeTable td:nth-child(1), .feeTable th:nth-child(1){
+    text-align: left;
+}
+.FS_table{
+    width: 100%;
 }
