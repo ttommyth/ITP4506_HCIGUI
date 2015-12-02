@@ -1,22 +1,6 @@
 {
     "users": [
         {
-            "username": "",
-            "password": "",
-            "name": "",
-            "email": "",
-            "tel": "",
-            "creditCardNum": ""
-        },
-        {
-            "username": "",
-            "password": "",
-            "name": "",
-            "email": "",
-            "tel": "",
-            "creditCardNum": ""
-        },
-        {
             "username": "tester",
             "password": "123456",
             "name": "Tester",
