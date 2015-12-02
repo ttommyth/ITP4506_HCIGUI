@@ -37,7 +37,7 @@
             <label>Booking Info</label><br/>
             <div>
             Place: <input type="text" name="place"/><br/>
-            Date: <input type="date" name="date"/><br/>
+            Date:  <input type="date" name="date"/><br/>
             Night: <input type="number" name="night" class="smallNum"/>
             Rooms: <input type="number" name="rooms" class="smallNum"/><br/>
             <button type="button" class="btn btn-primary navbar-btn beforeLogin"
@@ -48,9 +48,43 @@
         <div class="hotelFilterDiv">
             <label>Filter</label><br/> 
             <div>
+                <h5>Price</h5>
+                <hr class="shortHr"/>
+                <table width='98%'><tr><td>$0</td>
+                        <td class="right"><input type='number' id='hotelPrince'/></td>
+                        <td class='right'>$1500+</td></tr>
+                    <tr><td colspan="3"><input type="range" id="range" max="1500" min="0"/></td></tr>
+                </table>
+                <hr class="longHr"/>
                 <h5>Rating</h5>
-                <hr/>
-                <span class="glyphicon glyphicon-star"></span>
+                <hr class="shortHr"/>
+                <table width="100%">
+                    <tr>
+                        <td><span class="glyphicon glyphicon-star"></span></td>
+                        <td><span class="glyphicon glyphicon-star"></span></td>
+                        <td><span class="glyphicon glyphicon-star"></span></td>
+                        <td><span class="glyphicon glyphicon-star"></span></td>
+                        <td><span class="glyphicon glyphicon-star"></span></td>
+                        <td><span class="glyphicon glyphicon-star"></span></td>
+                    </tr>
+                </table>
+                <hr class="longHr"/>
+                <br/>
+                <h5>Hotel Facilities</h5>
+                <hr class="shortHr"/>
+                <span><input type="radio"/>  Swimming Pool</span><br/>
+                <span><input type="radio"/>  Internet</span><br/>
+                <span><input type="radio"/>  Gym/Fitness</span><br/>
+                <span><input type="radio"/>  Car Park</span><br/>
+                <span><input type="radio"/>  Business Facilities</span><br/>
+                <span><input type="radio"/>  Restaurant</span><br/>
+                <span><input type="radio"/>  Non Smoking Rooms</span><br/>
+                <span><input type="radio"/>  Smoking Area</span><br/>
+                <span><input type="radio"/>  Airport Transfer</span><br/>
+                <span><input type="radio"/>  Pets Allowed</span><br/>
+                <span><input type="radio"/>  Golf Course</span><br/>
+                <hr class="longHr"/>
+                <br/>
             </div>
         </div>
         </form>

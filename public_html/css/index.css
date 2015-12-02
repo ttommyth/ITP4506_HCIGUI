@@ -158,6 +158,8 @@ img{
 }
 .FS_table tr th:nth-child(4), .FS_table tr td:nth-child(4){
     width: 200px;
+    text-align: center;
+    vertical-align: middle;
 }
 .seatSelect{
     margin-top: 30px;
@@ -261,7 +263,22 @@ img{
     margin-top: 10px;
     width: 230px;
 }
-.hotelFilterDiv div hr{
-    border: 1px solid #bbbbbb;
+.shortHr{
+    border: 1px solid #999999;
     margin-left: -10px;
+    width: 30px;
+    margin-top: -2px;
+}
+.longHr{
+    border: 1px solid #999999;
+}
+#range{
+    width: 205px;
+}
+.right{
+    text-align: right;
+}
+#hotelPrince{
+    
+    width: 60px;
 }
