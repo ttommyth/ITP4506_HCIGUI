@@ -21,196 +21,272 @@ and open the template in the editor.
             });
         </script> 
         <script>
-            $(document).ready(function () {
+            $.ajax({
+                url: 'js/Time.js',
+                dataType: 'script',
+                async: false
+            });
 
+            var selectedGoFlightID = "";
+            var selectedBackFlightID = "";
+            function toFlightRow(flight, targetVal) {
+                var arriveTime = new Time(flight["takeoffTime"]);
+                arriveTime.add(flight["duration"]);
+                var str = "<tr>\
+                                <td>" + flight["takeoffTime"] + "<br/>\
+                                    " + flight["fromCity"] + "<br/>\
+                                    " + flight["fromAirport"] + "</td>\
+                                <td>" + arriveTime.toSymbolTime() + "<br/>\
+                                    " + flight["toCity"] + "<br/>\
+                                    " + flight["toAirport"] + "</td>\
+                                <td>" + flight["companyName"] + " - " + flight["flightID"] + "<br/>\
+                                    Duration: " + (new Time(flight["duration"])).toShortTime() + "<br/>\
+                                </td>\
+                                <td><input type='radio' name='goflight' onclick='" + targetVal + "=\"" + flight["flightID"] + "\";'/>HKD " + flight["seatTypes"][0]["price"] + "</td>\
+                            </tr>";
+                return str;
+            }
+            $(document).ready(function () {
+                $.getScript("js/FlightControl.js", function () {
+                    var f = Flight.find([new WherePara("", jadbOP.all, "")])[0];
+                    $("#Container_HereToThere").append(toFlightRow(f, "selectedGoFlightID"));
+                    $("#Container_ThereToHere").append(toFlightRow(f, "selectedGoFlightID"));
+
+                });
+                $("#Msg_HereToThere").html("Hong Kong To WuXi");
+                $("#Msg_ThereToHere").html("WuXi To Hong Kong");
+                $('#Container_HereToThere').animate({"table-layout": "auto"});
             });
         </script>
+
+        <style>
+            .modal-dialog{
+                width:fit-content;
+            }
+            .input-group{
+                margin-bottom: 10px;
+            }
+        </style>
     </head>
     <body>
+        <div id="testing"></div>
         <div id="header"></div>
         <!-- content -->
         <table >
-        <tr>
-        <td>
-            <div class="flightSearchDetails">
-            <table>
             <tr>
-            <td>
-                <label class="FSD_title">Departing</label><br/>
-                <label class="FSD_content">Fri,11 Dec 2015</label>
-            </td>
-            <td>
-                <label class="FSD_title">Returning</label><br/>
-                <label class="FSD_content">Fri,11 Dec 2015</label>
-            </td>
-            <td>
-                <label class="FSD_title">Guest</label><br/>
-                <label class="FSD_content">Adult X1, Child X0, Infant X0</label>
-            </td>
-            <td>
-                <button type="button" id="submitBtn" class="btn btn-primary navbar-btn">Modify Search</button>
-            </td>
-            </tr>
-            </table>
-            </div>
-            <div class="goflightSelection">
-                <h3>Hong Kong To WuXi</h3>
-                <table class="FS_table">
-                    <tr>
-                        <th>Departure</th>
-                        <th>Arrival destination</th>
-                        <th>Flight</th>
-                        <th>Flex</th>
-                    </tr>
-                    <tr><td colspan="4"><hr class="dipHR"/></td></tr>
-                    <tr>
-                        <td>15:50<br/>
-                            Hong Kong<br/>
-                            International Airport<br/>
-                            Terminal2<br/>
-                        (HKG)</td>
-                        <td>15:50<br/>
-                            Hong Kong<br/>
-                            International Airport<br/>
-                            Terminal2<br/>
-                        (HKG)</td>
-                        <td>Fucking Airline - DN 689<br/>
-                            Duration: 2h50m<br/>
-                        </td>
-                        <td><input type="radio" name="goflight"/>HKD 11,889</td>
-                    </tr>
-                    <tr><td colspan="4"><hr class="dipHR"/></td></tr>
-                </table>
-            </div>
-            <div class="backflightSelection">
-                <h3>WuXi To Hong Kong</h3>
-                <table class="FS_table">
-                    <tr>
-                        <th>Departure</th>
-                        <th>Arrival destination</th>
-                        <th>Flight</th>
-                        <th>Flex</th>
-                    </tr>
-                    <tr><td colspan="4"><hr class="dipHR"/></td></tr>
-                    <tr>
-                        <td>15:50<br/>
-                            Hong Kong<br/>
-                            International Airport<br/>
-                            Terminal2<br/>
-                        (HKG)</td>
-                        <td>15:50<br/>
-                            Hong Kong<br/>
-                            International Airport<br/>
-                            Terminal2<br/>
-                        (HKG)</td>
-                        <td>Fucking Airline - DN 689<br/>
-                            Duration: 2h50m<br/>
-                        </td>
-                        <td><input type="radio" name="goflight"/>HKD 11,889</td>
-                    </tr>
-                    <tr><td colspan="4"><p/></td></tr>
-                    <tr>
-                        <td>15:50<br/>
-                            Hong Kong<br/>
-                            International Airport<br/>
-                            Terminal2<br/>
-                        (HKG)</td>
-                        <td>15:50<br/>
-                            Hong Kong<br/>
-                            International Airport<br/>
-                            Terminal2<br/>
-                        (HKG)</td>
-                        <td>Fucking Airline - DN 689<br/>
-                            Duration: 2h50m<br/>
-                        </td>
-                        <td><input type="radio" name="goflight"/>HKD 11,889</td>
-                    </tr>
-                    
-                    <tr><td colspan="4"><hr class="dipHR"/></td></tr>
-                </table>
-            </div>
-            <button type="button" id="submitBtn" class="btn btn-primary navbar-btn">Modify Search</button>
-        </td>
-        <td>
-            <div class="bookingSummaryDiv">
-                <label class="BS_title">Booking Summary</label>
-                <div class="BSD_contextDiv">
-                    <h4>Departing</h4>
-                    <span>Fir, 11,Des 2015</span>
-                    <br/>
-                    <label>Flight: UO 1360</label>
-                    <table width="100%">
-                    <tr>
-                        <th>HKG</th>
-                        <th>To</th>
-                        <th>WUX</th>
-                    </tr>
-                    <tr>
-                        <td>11:30</td>
-                        <td></td>
-                        <td>15:40</td>
-                    </tr>
-                    </table>
-                    <hr>
-                    <div id="returnFlight">
-                    <h4>Returning</h4>
-                    <span>Fir, 11,Des 2015</span>
-                    <br/>
-                    <label>Flight: UO 1360</label>
-                    <table width="100%">
-                    <tr>
-                        <th>HKG</th>
-                        <th>To</th>
-                        <th>WUX</th>
-                    </tr>
-                    <tr>
-                        <td>11:30</td>
-                        <td></td>
-                        <td>15:40</td>
-                    </tr>
-                    </table>
-                    <hr>
+                <td>
+                    <div class="flightSearchDetails">
+                        <table>
+                            <tr>
+                                <td>
+                                    <label class="FSD_title">Departing</label><br/>
+                                    <label class="FSD_content" id="test">Fri,11 Dec 2015</label>
+                                </td>
+                                <td>
+                                    <label class="FSD_title">Returning</label><br/>
+                                    <label class="FSD_content">Fri,11 Dec 2015</label>
+                                </td>
+                                <td>
+                                    <label class="FSD_title">Guest</label><br/>
+                                    <label class="FSD_content">Adult X1, Child X0, Infant X0</label>
+                                </td>
+                                <td>
+                                    <button type="button" id="submitBtn" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#searchModal">Modify Search</button>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
-                    <h4>Fees</h4>
-                    <table class="feeTable">
-                        <tr>
-                            <th>Departing</th>
-                            <th>HKD<span id="dFees">359</span></th>
-                        </tr>
-                        <tr>
-                            <td>Fare</td>
-                            <td>HKD<span id="goFare">359</span></td>    
-                        </tr>
-                        <tr>
-                            <td>Tax</td>
-                            <td>HKD<span id="goTax">359</span></td>    
-                        </tr>
-                    </table>
-                    <table id="returnFee" class="feeTable">
-                        <tr>
-                            <th>Returning</th>
-                            <th>HKD<span id="dFees">359</span></th>
-                        </tr>
-                        <tr>
-                            <td>Fare</td>
-                            <td>HKD<span id="goFare">359</span></td>    
-                        </tr>
-                        <tr>
-                            <td>Tax</td>
-                            <td>HKD<span id="goTax">359</span></td>    
-                        </tr>
-                    </table>
-                    <hr>
-                    <table class="totalFeeTalbe">
-                        <tr><td>
-                                <h3>Total</h3>
-                            </td>
-                            <td><h3>HDK 550</h3></td></tr>
-                    </table>
+                    <div class="page-header">
+                        <h1>Select the flight below</h1>
+                    </div>
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <span id="Msg_HereToThere"></span><span class="glyphicon glyphicon-chevron-down pull-right" />
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="goflightSelection">
+                                    <form>
+                                        <table class="FS_table table table-striped" id="Container_HereToThere">
+                                            <tr>
+                                                <th>Departure</th>
+                                                <th>Arrival destination</th>
+                                                <th>Flight</th>
+                                                <th>Flex</th>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-primary">
+                            <div class="panel-heading" role="tab" id="headingTwo">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        <span id="Msg_ThereToHere"></span><span class="glyphicon glyphicon-chevron-down pull-right" />
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                <div class="backflightSelection">
+                                    <form>
+                                        <table class="FS_table table table-striped" id="Container_ThereToHere">
+                                            <tr>
+                                                <th>Departure</th>
+                                                <th>Arrival destination</th>
+                                                <th>Flight</th>
+                                                <th>Flex</th>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="bookingSummaryDiv">
+                        <label class="BS_title">Booking Summary</label>
+                        <div class="BSD_contextDiv">
+                            <h4>Departing</h4>
+                            <span>Fir, 11,Des 2015</span>
+                            <br/>
+                            <label>Flight: UO 1360</label>
+                            <table width="100%">
+                                <tr>
+                                    <th>HKG</th>
+                                    <th>To</th>
+                                    <th>WUX</th>
+                                </tr>
+                                <tr>
+                                    <td>11:30</td>
+                                    <td></td>
+                                    <td>15:40</td>
+                                </tr>
+                            </table>
+                            <hr>
+                            <div id="returnFlight">
+                                <h4>Returning</h4>
+                                <span>Fir, 11,Des 2015</span>
+                                <br/>
+                                <label>Flight: UO 1360</label>
+                                <table width="100%">
+                                    <tr>
+                                        <th>HKG</th>
+                                        <th>To</th>
+                                        <th>WUX</th>
+                                    </tr>
+                                    <tr>
+                                        <td>11:30</td>
+                                        <td></td>
+                                        <td>15:40</td>
+                                    </tr>
+                                </table>
+                                <hr>
+                            </div>
+                            <h4>Fees</h4>
+                            <table class="feeTable">
+                                <tr>
+                                    <th>Departing</th>
+                                    <th>HKD<span id="dFees">359</span></th>
+                                </tr>
+                                <tr>
+                                    <td>Fare</td>
+                                    <td>HKD<span id="goFare">359</span></td>    
+                                </tr>
+                                <tr>
+                                    <td>Tax</td>
+                                    <td>HKD<span id="goTax">359</span></td>    
+                                </tr>
+                            </table>
+                            <table id="returnFee" class="feeTable">
+                                <tr>
+                                    <th>Returning</th>
+                                    <th>HKD<span id="dFees">359</span></th>
+                                </tr>
+                                <tr>
+                                    <td>Fare</td>
+                                    <td>HKD<span id="goFare">359</span></td>    
+                                </tr>
+                                <tr>
+                                    <td>Tax</td>
+                                    <td>HKD<span id="goTax">359</span></td>    
+                                </tr>
+                            </table>
+                            <hr>
+                            <table class="totalFeeTalbe">
+                                <tr><td>
+                                        <h3>Total</h3>
+                                    </td>
+                                    <td><h3>HDK 550</h3></td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h1 class="modal-title" id="myModalLabel">Looking for...</h1>
+                    </div>
+                    <form>
+                        <table id="flightTable" class="table">
+                            <tr>
+                                <td>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Departing From</span>
+                                        <input type="text" name="startPlace" class="form-control" aria-label="Place" required />
+                                        <span class="input-group-addon">Going To</span>
+                                        <input type="text" name="endPlace" class="form-control" aria-label="Place" required />
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Date</span>
+                                        <input type="date" name="sDate" class="form-control" aria-label="Place" required/>
+                                        <span class="input-group-addon">To</span>
+                                        <input type="date" name="eDate" class="form-control" aria-label="Place" required/>
+                                    </div>
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-primary active">
+                                            <input type="radio" name="options" id="option1" autocomplete="off" checked="checked"/>
+                                            Round-Trip
+                                        </label>
+                                        <label class="btn btn-primary">
+                                            <input type="radio" name="options" id="option2" autocomplete="off"/>
+                                            One-Way
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <h4><strong>Passenger:</strong></h4>
+                                    <div class="col-xs-3">
+                                        <label for="ex1">Adult</label>
+                                        <input class="form-control" id="ex1" type="number" name="adult" value="1" required />
+                                    </div><div class="col-xs-3">
+                                        <label for="ex2">Child</label>
+                                        <input class="form-control" id="ex2" type="number" name="child" value="0" required />
+                                    </div><div class="col-xs-3">
+                                        <label for="ex3">Infant</label>
+                                        <input class="form-control" id="ex3" type="number" name="infant" value="0" required />
+                                    </div>
+                                    <br/>
+
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary pull-right">Search</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </td>
-        </tr>
-        </table>
+        </div>
     </body>
 </html>

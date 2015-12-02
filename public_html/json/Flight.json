@@ -7,7 +7,7 @@
             "toCity": "New York",
             "toAirport": "John F. Kennedy International Airport",
             "duration": "15:40",
-            "takeoffTime": "9:35",
+            "takeoffTime": "5:35",
             "companyName": "Cathay Pacific",
             "tax": "5",
             "img": [
@@ -38,7 +38,7 @@
             "fromAirport": "Hong Kong International Airport",
             "toCity": "Shang Hai",
             "toAirport": "Pudong Airport",
-            "duration": "02:50",
+            "duration": "2:50",
             "takeoffTime": "7:15",
             "companyName": "Cathay Pacific",
             "tax": "3",

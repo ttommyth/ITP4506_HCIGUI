@@ -4,7 +4,7 @@ $.ajax({
     async: false
 });
 function Flight(){//object
-    this.flight="";
+    this.flightID="";
     this.fromCity="";
     this.fromAirport="";
     this.toCity="";
@@ -29,4 +29,4 @@ function Flight(){//object
     
     this.loadJSON = function (jsonObject) {return loadJSON(this, jsonObject);};
 }
-Flight.find = function (paras) {return find(Flight, "json/Flight.json","Flight",paras);};
+Flight.find = function (paras) {return find(Flight, "json/Flight.json","flights",paras);};

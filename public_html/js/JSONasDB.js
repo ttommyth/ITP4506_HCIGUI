@@ -34,6 +34,9 @@ jadbOP.lessThanOrEqual = function (a, b) {
 jadbOP.like = function (a, b) {
     return a.indexOf(b) > -1;
 };
+jadbOP.all = function(a,b){
+    return true;
+}
 //</editor-fold>
 
 //the basic find method

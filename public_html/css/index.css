@@ -8,13 +8,12 @@ and open the template in the editor.
     Author     : User
 */
 html{
-    background-color: #dddddd;
 }
 body{
     max-width: 1024px;
     margin-left: auto;
     margin-right: auto;
-    background: #ffffff;
+    background: url('../img/GrayBG.jpg') repeat center center;
 }
 table td{
     vertical-align: top;
@@ -59,8 +58,9 @@ img{
 }
 .searchDiv{
     width: 100%;
-    margin-top: 40px;
-    height: 180px;
+    padding-right: 10px;
+    margin-top: 0px;
+    height: 200px;
     padding-top:1px;
     border-radius: 10px;
     box-shadow: 2px 2px 10px #aaaaaa;
@@ -131,7 +131,7 @@ img{
     width: 50%;
 }
 .inline span{
-    margin-right: px;
+    margin-right: 0px;
 }
 .totalFeeTalbe{
     width: 100%;
