@@ -20,13 +20,19 @@
             });
         </script> 
         <script>//do your own function here
-
             $(document).ready(function () {
-                if (_GET["username"]!=undefined) {
-                    $('#successModal').modal('show');
-                    window.setTimeout(function () {
-                        location.href = "index.html";
-                    }, 5000);
+                if (_GET["username"] != undefined) {
+                    $.getScript("js/UserControl.js", function () {
+                        var newUser = new User();
+                        newUser.loadJSON(_GET);
+                        User.register(newUser);
+                        console.log(newUser);
+
+                        $('#successModal').modal('show');
+                        window.setTimeout(function () {
+                            location.href = "index.html";
+                        }, 5000);
+                    });
                 }
             });
         </script>
@@ -49,19 +55,29 @@
             }
             body{
                 background: url('img/Sky.jpg') no-repeat center center;
+                background-size:cover cover;
+            }
+            .panel-transparent{
+                background: none;
+            }
+            .panel-transparent .panel-heading{
+                background: rgba(51, 122, 183, 0.8)!important;
+            }
+            .panel-transparent .panel-body{
+                background: rgba(200, 200, 200, 0.2)!important;
             }
         </style>
     </head>
     <body>
         <div id="header"></div>
 
-        <div class="panel panel-primary" id="reg-panel">
+        <div class="panel panel-primary panel-transparent" id="reg-panel">
             <div class="panel-heading">
                 <h3 class="panel-title">Registration</h3>
             </div>
             <div class="panel-body">
                 <form id="regform">
-                    <h3>Account Infomation</h3>
+                    <h3><strong>Account Infomation</strong></h3>
                     <hr/>
                     <div class="input-group">
                         <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1"></span>
@@ -72,7 +88,7 @@
                         <input type="password" name="password" class="form-control" placeholder="Password" aria-describedby="basic-addon2" required>
                     </div>
 
-                    <h3>Personal Infomation</h3>
+                    <h3><strong>Personal Infomation</strong></h3>
                     <hr/>
                     <div class="input-group">
                         <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon3"></span>

@@ -18,5 +18,7 @@ function User() {//object
 User.find = function (paras) {return find(User, "json/User.json","users",paras);};
 
 User.register = function(newUser){
-    
+    var users = JSON.parse(localStorage.getItem("json/User.json"));
+    users["users"].push(newUser);
+    localStorage.setItem("json/User.json", JSON.stringify(users));
 };

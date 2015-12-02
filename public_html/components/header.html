@@ -6,6 +6,7 @@
             var user = login(username, password);
             if (user != null) {
                 $('#loginModal').modal('hide');
+                $('#welcomeMsgForName').append(" "+user['name']);
                 $('#loginSuccessModal').modal('show');
             } else {
                 $('#wrongMsg').show();
@@ -24,9 +25,9 @@
         });
     }
     function updateLogin() {
-        var username = getCookie("username");
-        if (typeof username == 'string') {
-            $('#welcomeMsg').html("Welcome " + username);
+        var user = getCookie("user");
+        if (user != undefined) {
+            $('#welcomeMsg').html("Welcome " + user["name"]);
             $('.afterLogin').show();
             $('.beforeLogin').hide();
         } else {
@@ -113,7 +114,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <div class="page-header">
                     <h1>Login Success
-                        <small>Welcome!</small></h1>
+                        <small id="welcomeMsgForName">Welcome!</small></h1>
                 </div>
             </div>
         </div>

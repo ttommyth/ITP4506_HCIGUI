@@ -18,11 +18,11 @@ function login(username, password){
     var paras = [new WherePara("username",jadbOP.equals, username),new WherePara("password", jadbOP.equals, password)];
     var user = User.find(paras)[0];
     if(typeof user !== "undefined"){
-        setCookie("username",user["username"], 1);
+        setCookie("user",user, 1);
         console.log("username "+user["username"]+" stored in cookie");
     }
     return user;
 };
 function logout(){
-    removeCookie("username");
+    removeCookie("user");
 }
