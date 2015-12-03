@@ -30,7 +30,18 @@ and open the template in the editor.
                 dataType: 'script',
                 async: false
             });
-
+            function fromDate_onchange() {
+                $("#in_toDate").attr({
+                    "min": $("#in_fromDate").val()
+                });
+                var toDate = Date.parse($("#in_toDate").val());
+                var fromDate = Date.parse($("#in_fromDate").val());
+                if (toDate < fromDate) {
+                    $("#in_toDate").attr({
+                        "value": $("#in_fromDate").val()
+                    });
+                }
+            }
             function selectedGoFlightID(id) {
                 currentGoFlightID = id;
                 $(".flightID_HereToThere").html(id);
@@ -41,6 +52,10 @@ and open the template in the editor.
                     $(".takeoffTime_HereToThere").html(f["takeoffTime"]);
                     $(".arriveTime_HereToThere").html(arriveTime.toSymbolTime());
                 });
+                $("#isGoFlightSelected").fadeIn();
+                if (_GET["type"] != "round-trip" || currentBackFlightID != undefined) {
+                    $('#bookDiv').slideDown();
+                }
             }
             function selectedBackFlightID(id) {
                 currentBackFlightID = id;
@@ -52,9 +67,13 @@ and open the template in the editor.
                     $(".takeoffTime_ThereToHere").html(f["takeoffTime"]);
                     $(".arriveTime_ThereToHere").html(arriveTime.toSymbolTime());
                 });
+                $("#isBackFlightSelected").fadeIn();
+                if (currentGoFlightID != undefined) {
+                    $('#bookDiv').fadeIn();
+                }
             }
-            var currentGoFlightID = "";
-            var currentBackFlightID = "";
+            var currentGoFlightID;
+            var currentBackFlightID;
             function toFlightRow(flight, targetVal) {
                 var arriveTime = new Time(flight["takeoffTime"]);
                 arriveTime.add(flight["duration"]);
@@ -81,15 +100,44 @@ and open the template in the editor.
                 }
             }
 
+            function doNextStep() {
+
+                window.location.href = 'flightCustDetail.html';
+            }
+
             $(document).ready(function () {
+                $("#isGoFlightSelected").hide();
+                $("#isBackFlightSelected").hide();
+                var d = new Date();
+
+                var month = d.getMonth() + 1;
+                var day = d.getDate();
+
+                var todayString = d.getFullYear() + '-' +
+                        (month < 10 ? '0' : '') + month + '-' +
+                        (day < 10 ? '0' : '') + day;
+
+                $("#in_fromDate").attr({
+                    "min": todayString,
+                    "value": todayString
+                });
+                $("#in_toDate").attr({
+                    "min": todayString,
+                    "value": todayString
+                });
+                fromDate_onchange();
+
                 $.getScript("js/FlightControl.js", function () {
                     var goflights = Flight.find([new WherePara("fromCity", jadbOP.like, _GET["startPlace"]),
                         new WherePara("toCity", jadbOP.like, _GET["endPlace"])]);
                     updateFlightList(goflights, "#Container_HereToThere", "selectedGoFlightID");
-                    var backflights = Flight.find([new WherePara("fromCity", jadbOP.like, _GET["endPlace"]),
-                        new WherePara("toCity", jadbOP.like, _GET["startPlace"])]);
-                    updateFlightList(backflights, "#Container_ThereToHere", "selectedBackFlightID");
-
+                    if (_GET["type"] == "round-trip") {
+                        var backflights = Flight.find([new WherePara("fromCity", jadbOP.like, _GET["endPlace"]),
+                            new WherePara("toCity", jadbOP.like, _GET["startPlace"])]);
+                        updateFlightList(backflights, "#Container_ThereToHere", "selectedBackFlightID");
+                    } else {
+                        $('.backFlightInfo').hide();
+                    }
                 });
                 for (var name in _GET) {
                     $("." + name).html(_GET[name]);
@@ -97,7 +145,7 @@ and open the template in the editor.
                 }
                 $("#Msg_HereToThere").html(_GET["startPlace"] + " To " + _GET["endPlace"]);
                 $("#Msg_ThereToHere").html(_GET["endPlace"] + " To " + _GET["startPlace"]);
-                $('#Container_HereToThere').animate({"table-layout": "auto"});
+                $('#bookDiv').hide();
             });
         </script>
 
@@ -119,7 +167,7 @@ and open the template in the editor.
         <div id="testing"></div>
         <div id="header"></div>
         <!-- content -->
-        <table >
+        <table style="margin-left:10px">
             <tr>
                 <td>
                     <div class="flightSearchDetails">
@@ -147,11 +195,13 @@ and open the template in the editor.
                         <h1>Select the flight below</h1>
                     </div>
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                        <div class="panel panel-primary">
+                        <div id="goFlightPanel" class="panel panel-primary">
                             <div class="panel-heading" role="tab" id="headingOne">
                                 <h4 class="panel-title">
                                     <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        <span id="Msg_HereToThere"></span><span class="glyphicon glyphicon-chevron-down pull-right" />
+                                        <span id="Msg_HereToThere"></span>
+                                        <span id="isGoFlightSelected" class="glyphicon glyphicon-ok" style="color:greenyellow">selected</span>
+                                        <span class="glyphicon glyphicon-chevron-down pull-right" />
                                     </a>
                                 </h4>
                             </div>
@@ -170,11 +220,13 @@ and open the template in the editor.
                                 </div>
                             </div>
                         </div>
-                        <div class="panel panel-primary">
+                        <div id="backFlightPanel" class="panel panel-primary backFlightInfo">
                             <div class="panel-heading" role="tab" id="headingTwo">
                                 <h4 class="panel-title">
                                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        <span id="Msg_ThereToHere"></span><span class="glyphicon glyphicon-chevron-down pull-right" />
+                                        <span id="Msg_ThereToHere"></span>
+                                        <span id="isBackFlightSelected" class="glyphicon glyphicon-ok" style="color:greenyellow">selected</span>
+                                        <span class="glyphicon glyphicon-chevron-down pull-right" />
                                     </a>
                                 </h4>
                             </div>
@@ -216,7 +268,7 @@ and open the template in the editor.
                                 </tr>
                             </table>
                             <hr>
-                            <div id="returnFlight">
+                            <div id="returnFlight" class="backFlightInfo">
                                 <h4>Returning</h4>
                                 <span class="sDate">Fir, 11,Des 2015</span>
                                 <br/>
@@ -235,7 +287,10 @@ and open the template in the editor.
                                 </table>
                                 <hr>
                             </div>
-
+                            <div id="bookDiv">
+                                <h4>To Book this flight...</h4>
+                                <button class="btn btn-primary center-block" style="width:100%;height:100px" onclick="doNextStep();"><h3>Next Step<span class="glyphicon glyphicon-chevron-right"></span></h3></button>
+                            </div>
                             <!--
                             <h4>Fees</h4>
                             <table class="feeTable">
