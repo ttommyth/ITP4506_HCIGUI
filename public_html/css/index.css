@@ -311,6 +311,7 @@ img, .hotels table{
 .score{
     font-size: 25px;
     text-align: right;
+    color: #E8AC34;
 }
 .hotels table tr td:nth-child(2){
     width: 360px;
@@ -319,24 +320,17 @@ img, .hotels table{
 .hotels table tr td:nth-child(3){
     text-align: right;
 }
-.hotelPrice{
-    font-size: 27px;
-    color: #eea236;
-}
 .hotels table td:nth-child(2){
     margin-left: 10px;
 }
-.hotelsRoom table tr td:nth-child(2){
-    text-align: right;
-}
 .hotelsPrice{
     font-size: 20px;
+    color: #8665E1;
 }
 .hotelsRoom{
     width: 98%;
     margin-left: auto;
     margin-right: auto;
-    background: #f5f5f5;
     padding: 4px;
 }
 .hotels a:hover{
@@ -354,9 +348,7 @@ img, .hotels table{
 #sortDropdown{
     margin-left: 700px;
 }
-.hotelsPrice{
-    color: #E8AC34;
-}
+
 .hotels a{
     color: #777777;
 }
@@ -374,4 +366,37 @@ img, .hotels table{
 }
 .hotelHr{
     border: 1px solid #bbbbbb;
+}
+.roomName{
+    width: 350px;
+    display: inline-block;
+    color: #348EE8;
+}
+.roomPrice{
+    width: 110px;
+    display: inline-block;
+    text-align: right;
+}
+.roomTable{
+    width: 100%;
+}
+.roomTable tr td{
+    text-align: center;
+    vertical-align: middle;
+    padding: 2px;
+    
+}
+.roomTable tr td:first-child{
+    width: 80%;
+}
+.roomTable tr td:nth-child(2){
+    border-left: 1px solid;
+}
+.roomTable tr:first-child{
+    border-bottom: 1px solid;
+}
+.roomTable tr:first-child td:nth-child(2),
+.roomTable tr:nth-child(2) td:nth-child(2){
+    text-align: center;
+    vertical-align: middle;
 }
