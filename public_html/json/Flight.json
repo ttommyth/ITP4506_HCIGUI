@@ -36,6 +36,39 @@
                     "content": "I Hate therefore I am."
                 }
             ]
+        },        {
+            "flightID": "FL1377",
+            "fromCity": "New York",
+            "fromAirport": "John F. Kennedy International Airport",
+            "toCity": "Hong Kong",
+            "toAirport": "Hong Kong International Airport",
+            "duration": "15:40",
+            "takeoffTime": "3:00",
+            "companyName": "Cathay Pacific",
+            "tax": "5",
+            "img": [
+            ],
+            "seatTypes": [
+                {
+                    "name": "Economy",
+                    "price": "5396",
+                    "avaSeat": "100"
+                },
+                {
+                    "name": "Business",
+                    "price": "10300",
+                    "avaSeat": "10"
+                },
+                {
+                    "name": "First",
+                    "price": "14023",
+                    "avaSeat": "10"
+                }
+            ],
+            "comments": [
+                {
+                }
+            ]
         },
         {
             "flightID": "FL1388",

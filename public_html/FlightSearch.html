@@ -13,7 +13,6 @@ and open the template in the editor.
         <script src="libs/bootstrap/js/bootstrap.js" type="text/javascript"></script>
         <link href="libs/bootstrap/css/bootstrap.css" rel="stylesheet"/>
         <link href="css/index.css" rel="stylesheet" type="text/css"/>
-        <link href="css/hotel.css" rel="stylesheet"/>
         <script>
             $.ajax({
                 url: 'js/Controllers.js',
@@ -31,8 +30,30 @@ and open the template in the editor.
                 async: false
             });
 
-            var selectedGoFlightID = "";
-            var selectedBackFlightID = "";
+            function selectedGoFlightID(id) {
+                currentGoFlightID = id;
+                $(".flightID_HereToThere").html(id);
+                $.getScript("js/FlightControl.js", function () {
+                    var f = Flight.find([new WherePara("flightID", jadbOP.equals, id)])[0];
+                    var arriveTime = new Time(f["takeoffTime"]);
+                    arriveTime.add(f["duration"]);
+                    $(".takeoffTime_HereToThere").html(f["takeoffTime"]);
+                    $(".arriveTime_HereToThere").html(arriveTime.toSymbolTime());
+                });
+            }
+            function selectedBackFlightID(id) {
+                currentBackFlightID = id;
+                $(".flightID_ThereToHere").html(id);
+                $.getScript("js/FlightControl.js", function () {
+                    var f = Flight.find([new WherePara("flightID", jadbOP.equals, id)])[0];
+                    var arriveTime = new Time(f["takeoffTime"]);
+                    arriveTime.add(f["duration"]);
+                    $(".takeoffTime_ThereToHere").html(f["takeoffTime"]);
+                    $(".arriveTime_ThereToHere").html(arriveTime.toSymbolTime());
+                });
+            }
+            var currentGoFlightID = "";
+            var currentBackFlightID = "";
             function toFlightRow(flight, targetVal) {
                 var arriveTime = new Time(flight["takeoffTime"]);
                 arriveTime.add(flight["duration"]);
@@ -46,22 +67,35 @@ and open the template in the editor.
                                 <td>" + flight["companyName"] + " - " + flight["flightID"] + "<br/>\
                                     Duration: " + (new Time(flight["duration"])).toShortTime() + "<br/>\
                                 </td>\
-                                <td><input type='radio' name='goflight' onclick='" + targetVal + "=\"" + flight["flightID"] + "\";'/>HKD " + flight["seatTypes"][0]["price"] + "</td>\
+                                <td><input type='radio' name='goflight' onclick='" + targetVal + "(\"" + flight["flightID"] + "\");'/>HKD " + flight["seatTypes"][0]["price"] + "</td>\
                             </tr>";
                 return str;
             }
+            function updateFlightList(flights, container, targetVal) {
+                if (flights[0] == undefined) {
+                    $(container).append("<tr><td colspan='4' class='flightNotFound'>No Available Flight Found</td></tr>");
+                }
+                for (var f in flights) {
+                    $(container).append(toFlightRow(flights[f], targetVal));
+                }
+            }
+
             $(document).ready(function () {
                 $.getScript("js/FlightControl.js", function () {
-                    var f = Flight.find([new WherePara("", jadbOP.all, "")])[0];
-                    $("#Container_HereToThere").append(toFlightRow(f, "selectedGoFlightID"));
-                    $("#Container_ThereToHere").append(toFlightRow(f, "selectedGoFlightID"));
+                    var goflights = Flight.find([new WherePara("fromCity", jadbOP.like, _GET["startPlace"]),
+                        new WherePara("toCity", jadbOP.like, _GET["endPlace"])]);
+                    updateFlightList(goflights, "#Container_HereToThere", "selectedGoFlightID");
+                    var backflights = Flight.find([new WherePara("fromCity", jadbOP.like, _GET["endPlace"]),
+                        new WherePara("toCity", jadbOP.like, _GET["startPlace"])]);
+                    updateFlightList(backflights, "#Container_ThereToHere", "selectedBackFlightID");
 
                 });
-                for(var name in _GET){
-                    $("."+name).html(_GET[name]);
+                for (var name in _GET) {
+                    $("." + name).html(_GET[name]);
+                    $("." + name).val(_GET[name]);
                 }
-                $("#Msg_HereToThere").html(_GET["startPlace"]+" To "+_GET["endPlace"]);
-                $("#Msg_ThereToHere").html(_GET["endPlace"]+" To "+_GET["startPlace"]);
+                $("#Msg_HereToThere").html(_GET["startPlace"] + " To " + _GET["endPlace"]);
+                $("#Msg_ThereToHere").html(_GET["endPlace"] + " To " + _GET["startPlace"]);
                 $('#Container_HereToThere').animate({"table-layout": "auto"});
             });
         </script>
@@ -72,6 +106,11 @@ and open the template in the editor.
             }
             .input-group{
                 margin-bottom: 10px;
+            }
+            .flightNotFound{
+                text-align: center;
+                color: #aaaaaa;
+                font-size: 32pt;
             }
         </style>
     </head>
@@ -162,7 +201,7 @@ and open the template in the editor.
                             <h4>Departing</h4>
                             <span class="eDate">Fir, 11,Des 2015</span>
                             <br/>
-                            <label>Flight: UO 1360</label>
+                            <label>Flight: <span class="flightID_HereToThere">------</span></label>
                             <table width="100%">
                                 <tr>
                                     <th class="startPlace">HKG</th>
@@ -170,9 +209,9 @@ and open the template in the editor.
                                     <th class="endPlace">WUX</th>
                                 </tr>
                                 <tr>
-                                    <td>11:30</td>
+                                    <td class="takeoffTime_HereToThere">--:--</td>
                                     <td></td>
-                                    <td>15:40</td>
+                                    <td class="arriveTime_HereToThere">--:--</td>
                                 </tr>
                             </table>
                             <hr>
@@ -180,7 +219,7 @@ and open the template in the editor.
                                 <h4>Returning</h4>
                                 <span class="sDate">Fir, 11,Des 2015</span>
                                 <br/>
-                                <label>Flight: UO 1360</label>
+                                <label>Flight: <span class="flightID_ThereToHere">------</span></label>
                                 <table width="100%">
                                     <tr>
                                         <th class="endPlace">HKG</th>
@@ -188,13 +227,15 @@ and open the template in the editor.
                                         <th class="startPlace">WUX</th>
                                     </tr>
                                     <tr>
-                                        <td>11:30</td>
+                                        <td class="takeoffTime_ThereToHere">--:--</td>
                                         <td></td>
-                                        <td>15:40</td>
+                                        <td class="arriveTime_ThereToHere">--:--</td>
                                     </tr>
                                 </table>
                                 <hr>
                             </div>
+
+                            <!--
                             <h4>Fees</h4>
                             <table class="feeTable">
                                 <tr>
@@ -231,6 +272,7 @@ and open the template in the editor.
                                     </td>
                                     <td><h3>HKD 550</h3></td></tr>
                             </table>
+                            -->
                         </div>
                     </div>
                 </td>
@@ -244,29 +286,30 @@ and open the template in the editor.
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h1 class="modal-title" id="myModalLabel">Looking for...</h1>
                     </div>
-                    <form>
+                    <form id="searchForm" action="flightsearch.html">
                         <table id="flightTable" class="table">
                             <tr>
                                 <td>
                                     <div class="input-group">
                                         <span class="input-group-addon">Departing From</span>
-                                        <input type="text" name="startPlace" class="form-control" aria-label="Place" required />
+                                        <input id="in_fromCity" type="text" name="startPlace" class="form-control startPlace" aria-label="Place" required />
                                         <span class="input-group-addon">Going To</span>
-                                        <input type="text" name="endPlace" class="form-control" aria-label="Place" required />
+                                        <input id="in_toCity" type="text" name="endPlace" class="form-control endPlace" aria-label="Place" required />
                                     </div>
                                     <div class="input-group">
                                         <span class="input-group-addon">Date</span>
-                                        <input type="date" name="sDate" class="form-control" aria-label="Place" required/>
+                                        <input id="in_fromDate" type="date" name="sDate" class="form-control sDate" aria-label="Place" required onchange="fromDate_onchange()
+                                                        ;"/>
                                         <span class="input-group-addon">To</span>
-                                        <input type="date" name="eDate" class="form-control" aria-label="Place" required/>
+                                        <input id="in_toDate" type="date" name="eDate" class="form-control eDate" aria-label="Place" required/>
                                     </div>
                                     <div class="btn-group" data-toggle="buttons">
                                         <label class="btn btn-primary active">
-                                            <input type="radio" name="options" id="option1" autocomplete="off" checked="checked"/>
+                                            <input type="radio" name="type" value="round-trip" id="in_type_roundTrip" autocomplete="off" checked="checked"/>
                                             Round-Trip
                                         </label>
                                         <label class="btn btn-primary">
-                                            <input type="radio" name="options" id="option2" autocomplete="off"/>
+                                            <input type="radio" name="type" value="one-way" id="in_type_oneWay" autocomplete="off"/>
                                             One-Way
                                         </label>
                                     </div>
@@ -275,13 +318,13 @@ and open the template in the editor.
                                     <h4><strong>Passenger:</strong></h4>
                                     <div class="col-xs-3">
                                         <label for="ex1">Adult</label>
-                                        <input class="form-control" id="ex1" type="number" name="adult" value="1" required />
+                                        <input class="form-control adult" id="ex1" type="number" name="adult" value="1" required />
                                     </div><div class="col-xs-3">
                                         <label for="ex2">Child</label>
-                                        <input class="form-control" id="ex2" type="number" name="child" value="0" required />
+                                        <input class="form-control child" id="ex2" type="number" name="child" value="0" required />
                                     </div><div class="col-xs-3">
                                         <label for="ex3">Infant</label>
-                                        <input class="form-control" id="ex3" type="number" name="infant" value="0" required />
+                                        <input class="form-control infant" id="ex3" type="number" name="infant" value="0" required />
                                     </div>
                                     <br/>
 
@@ -289,7 +332,7 @@ and open the template in the editor.
                             </tr>
                         </table>
                         <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary pull-right">Search</button>
+                            <input type="submit" class="btn btn-primary pull-right" value="Search" />
                         </div>
                     </form>
                 </div>
