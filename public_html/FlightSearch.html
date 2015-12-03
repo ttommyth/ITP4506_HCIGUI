@@ -102,7 +102,14 @@ and open the template in the editor.
 
             function doNextStep() {
 
-                window.location.href = 'flightCustDetail.html';
+                var url = 'flightCustDetail.html?goFlightID='+currentGoFlightID+'';
+                if(currentBackFlightID != undefined){
+                    url+="&backFlightID="+currentBackFlightID;
+                }
+                for (var name in _GET) {
+                    url+=_GET[name];
+                }
+                window.location.href = url;
             }
 
             $(document).ready(function () {
