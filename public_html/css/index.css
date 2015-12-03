@@ -111,7 +111,10 @@ img, .hotels table{
     font-size: 23px;
 }
 .bookingSummaryDiv{
+    margin-top: 20px;
     margin-left: 20px;
+    background: white;
+    box-shadow: 2px 2px 10px #aaaaaa;
 }
 .bookingSummaryDiv table tr th, .bookingSummaryDiv table tr td{
     text-align: center;
@@ -122,7 +125,7 @@ img, .hotels table{
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 5px;
-    background: #eeeeee;
+    background: white;
 }
 .bookingSummaryDiv hr{
     border-top: 1px solid #bbbbbb;
@@ -406,4 +409,26 @@ img, .hotels table{
 .mainHr{
     border: 1px solid #7644FF;
     margin-top: -2px;
+}
+#itineDiv{
+    padding: 12px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 97%;
+    background: #cccccc;
+}
+#goItinerary{
+    width:100%;
+    background: white;
+    margin-bottom: 10px;
+}
+#backItinerary{
+   width:100%;
+    background: white; 
+}
+.alignTop{
+    vertical-align: top;
+}
+#cfPaymentBtn{
+    margin-left: 500px;
 }
