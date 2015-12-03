@@ -36,10 +36,10 @@
         <div class="hotelSearchDiv">
             <label>Booking Info</label><br/>
             <div>
-            Place: <input type="text" name="place"/><br/>
-            Date:  <input type="date" name="date"/><br/>
-            Night: <input type="number" name="night" class="smallNum"/>
-            Rooms: <input type="number" name="rooms" class="smallNum"/><br/>
+                Place: <input type="text" name="place" class="form-control midNum"/><br/>
+                Date:  <input type="date" name="date" class="form-control midNum"/><br/>
+            Night: <input type="number" name="night" class="form-control smallNum"/>
+            Rooms: <input type="number" name="rooms" class="form-control smallNum"/><br/>
             <button type="button" class="btn btn-primary navbar-btn beforeLogin"
                     id="hSearch" data-toggle="modal" data-target="#loginModal">
                 Search Hotel</button>
@@ -51,7 +51,8 @@
                 <h5>Price</h5>
                 <hr class="shortHr"/>
                 <table width='98%'><tr><td>$0</td>
-                        <td class="right"><input type='number' id='hotelPrince'/></td>
+                        <td class="right">
+                            below:<input type='number' id='hotelPrince'/></td>
                         <td class='right'>$1500+</td></tr>
                     <tr><td colspan="3"><input type="range" id="range" max="1500" min="0"/></td></tr>
                 </table>
@@ -72,17 +73,17 @@
                 <br/>
                 <h5>Hotel Facilities</h5>
                 <hr class="shortHr"/>
-                <span><input type="radio"/>  Swimming Pool</span><br/>
-                <span><input type="radio"/>  Internet</span><br/>
-                <span><input type="radio"/>  Gym/Fitness</span><br/>
-                <span><input type="radio"/>  Car Park</span><br/>
-                <span><input type="radio"/>  Business Facilities</span><br/>
-                <span><input type="radio"/>  Restaurant</span><br/>
-                <span><input type="radio"/>  Non Smoking Rooms</span><br/>
-                <span><input type="radio"/>  Smoking Area</span><br/>
-                <span><input type="radio"/>  Airport Transfer</span><br/>
-                <span><input type="radio"/>  Pets Allowed</span><br/>
-                <span><input type="radio"/>  Golf Course</span><br/>
+                <span><input type="checkbox"/>  Swimming Pool</span><br/>
+                <span><input type="checkbox"/>  Internet</span><br/>
+                <span><input type="checkbox"/>  Gym/Fitness</span><br/>
+                <span><input type="checkbox"/>  Car Park</span><br/>
+                <span><input type="checkbox"/>  Business Facilities</span><br/>
+                <span><input type="checkbox"/>  Restaurant</span><br/>
+                <span><input type="checkbox"/>  Non Smoking Rooms</span><br/>
+                <span><input type="checkbox"/>  Smoking Area</span><br/>
+                <span><input type="checkbox"/>  Airport Transfer</span><br/>
+                <span><input type="checkbox"/>  Pets Allowed</span><br/>
+                <span><input type="checkbox"/>  Golf Course</span><br/>
                 <hr class="longHr"/>
                 <br/>
             </div>
@@ -92,14 +93,17 @@
         <td>
             <div class="hotelSearchResult">
                 <div class="sortDiv">
-                <table width="100%" border="1">
-                <tr>
-                <td>Sort by</td>
-                <td><a href="" id="sortbyName">Name</a></td>
-                <td><a href="" id="sortbyName">Price</a></td>
-                <td><a href="" id="sortbyName">Rating</a></td>
-                </tr>
-                </table>
+                    <span class="resultMsg">We found <span class="numOfHotels">2</span>
+                    hotels with availability in <span class="searchPlace">Hollwood</span>.</span>
+                <div class="dropdown" id="sortDropdown">
+                 <a id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort by
+                     <span class="caret"></span></a>
+                    <ul class="dropdown-menu" id="sortMenu">
+                  <li><a href="#">Name</a></li>
+                  <li><a href="#">Price</a></li>
+                  <li><a href="#">Rating</a></li>
+                </ul>
+              </div>
                 </div>
                 <br>
                 <div class="hotelRsult">
@@ -115,7 +119,7 @@
                         <td>
                         <div>
                             <span class="hotelNamelbl">Fucking Hotel</span><br>
-                            <div>
+                            <div class="hotelsRing">
                                 <span class="glyphicon glyphicon-star"></span>
                                 <span class="glyphicon glyphicon-star"></span>
                                 <span class="glyphicon glyphicon-star"></span>
@@ -123,7 +127,7 @@
                                 <span class="glyphicon glyphicon-star"></span>
                                 <span class="glyphicon glyphicon-star"></span>
                             </div>
-                            <a href="" class="hotelAddress">The Fucking Address</a>
+                            <a href="" class="hotelregion">The Fucking region</a>
                         </div>
                         </td>
                         <td>
@@ -138,16 +142,59 @@
                                 <div class="hotelsRoom">
                                     <table width="100%">
                                         <tr><td>Non somking room</td><td>rates per night from</td></tr>
-                                        <tr><td></td><td><span class="hotelsPrice">HKD 560</span></td></tr>
+                                        <tr><td></td><td>HKD <span class="hotelsPrice">560</span></td></tr>
                                     </table>
                                 </div>
                             </td>
                         </tr>
                         </table>
                         </a>
-                        <hr/>
+                        <hr class="hotelHr"/>
                     </div>
-                    
+                    <div class="hotels">
+                        <a href="">
+                        <table>
+                        <tr>
+                            <td rowspan="2">
+                        <div class="hotleImg">
+                        <img src="img/f4.jpg"/>
+                        </div>
+                        </td>
+                        <td>
+                        <div>
+                            <span class="hotelNamelbl">Fucking Hotel</span><br>
+                            <div class="hotelsRing">
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                            </div>
+                            <a href="" class="hotelregion">The Fucking region</a>
+                        </div>
+                        </td>
+                        <td>
+                            <span class="score">Very Good <span class="sMark">7.8</span></span>
+                            <button type="button" class="btn btn-primary navbar-btn beforeLogin"
+                    id="hSearch" data-toggle="modal" data-target="#loginModal">
+                More Detail</button>
+                        </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="hotelsRoom">
+                                    <table width="100%">
+                                        <tr><td>Non somking room</td><td>rates per night from</td></tr>
+                                        <tr><td></td><td>HKD <span class="hotelsPrice">560</span></td></tr>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                        </table>
+                        </a>
+                        <hr class="hotelHr"/>
+                    </div>
                 </div>
             </div>
         </td>
