@@ -250,8 +250,11 @@ img, .hotels table{
     margin-left: 10px;
 }
 .smallNum{
-    width: 40px;
-    margin-right: 10px;
+    width: 60px;
+}
+.midNum{
+    width: 210px;
+    margin-bottom: -15px;
 }
 #hSearch{
     width: 130px;
