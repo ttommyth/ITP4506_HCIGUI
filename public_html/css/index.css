@@ -92,7 +92,8 @@ img, .hotels table{
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 20px;
-    background: #eeeeee;
+    background: #ffffff;
+    box-shadow: 2px 2px 10px #aaaaaa;
 }
 .flightSearchDetails td{
     width: 150px;
@@ -128,7 +129,7 @@ img, .hotels table{
 }
 .inline{
     display: inline-block;
-    width: 50%;
+    margin: 10px;
 }
 .inline span{
     margin-right: 0px;
@@ -224,9 +225,11 @@ img, .hotels table{
     width: 90%;
 }
 .mainform{
+    padding: 30px;
     margin-left: 10px;
     width: 740px;
-    background: #88aaFF;
+    background: white;
+    box-shadow: 2px 2px 10px #aaaaaa;
 }
 .hotelSearchDiv{
     box-shadow: 2px 2px 10px #aaaaaa;
@@ -288,7 +291,7 @@ img, .hotels table{
 }
 .hotelSearchResult{
     background: #ffffff;
-    width: 770px;
+    width: 750px;
     box-shadow: 2px 2px 10px #aaaaaa;
     margin-top: 10px;
     margin-left: 10px;
@@ -399,4 +402,8 @@ img, .hotels table{
 .roomTable tr:nth-child(2) td:nth-child(2){
     text-align: center;
     vertical-align: middle;
+}
+.mainHr{
+    border: 1px solid #7644FF;
+    margin-top: -2px;
 }

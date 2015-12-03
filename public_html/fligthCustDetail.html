@@ -54,44 +54,102 @@ and open the template in the editor.
             </table>
             </div>
             <div class="mainform"><h3>Passenger Details</h3>
-                <hr/>
+                <hr class="mainHr"/>
             <div>
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
                   <li role="presentation" class="active"><a href="#Passenger1" aria-controls="Passenger1" role="tab" data-toggle="tab">Passenger 1</a></li>
                   <li role="presentation"><a href="#Passenger2" aria-controls="Passenger2" role="tab" data-toggle="tab">Passenger 2</a></li>
-                  <li role="presentation"><a href="#Passenger3" aria-controls="Passenger3" role="tab" data-toggle="tab">Passenger 3</a></li>
-                  <li role="presentation"><a href="#Passenger4" aria-controls="Passenger4" role="tab" data-toggle="tab">Passenger 4</a></li>
                 </ul>
 
                 <!-- Tab panes -->
                 <form>
                 <div class="tab-content">
                   <div role="tabpanel" class="tab-pane active" id="Passenger1">
-                      <select>
+                      <div class="inline">
+                          Title*<br/>
+                          <select>
                           <option p="1" value="Mr" name="title">Mr.</option>
                           <option p="1" value="Mrs" name="title">Mrs.</option>
                           <option p="1" value="Ms" name="title">Ms.</option>
-                      </select>
-                      <label>Full Name: <input type="text" p="1" name="fName" /></label>
-                      <label>Grender: <select>
+                          </select>
+                      </div>
+                      <div class="inline">
+                          Full Name*<br/>
+                          <input type="text" p="1" name="fName" />
+                          <label>As displayed in your Passport</label>
+                      </div>
+                      <div class="inline">
+                          Grender<br/>
+                          <select>
                           <option p="1" value="m" name="title">M</option>
                           <option p="1" value="f" name="title">F</option>
-                      </select>
-                      </label><br/>
-                      <label>Brithday: <input type="date" p="1" name="bod"/></label><br/>
-                      <label>ID: <input type="text" p="1" name="id"/></label><br/>
+                            </select>
+                      </div>
+                      <div class="inline">
+                          Brithday<br/>
+                          <input type="date" p="1" name="bod"/>
+                      </div>
+                      <div class="inline">
+                          ID<br/>
+                          <input type="text" p="1" name="id"/>
+                      </div>
                   </div>
-                  <div role="tabpanel" class="tab-pane" id="Passenger2">21312</div>
-                  <div role="tabpanel" class="tab-pane" id="Passenger3">...</div>
-                  <div role="tabpanel" class="tab-pane" id="Passenger4">...</div>
+                    <div role="tabpanel" class="tab-pane" id="Passenger2">
+                        <div class="inline">
+                          Title*<br/>
+                          <select>
+                          <option p="1" value="Mr" name="title">Mr.</option>
+                          <option p="1" value="Mrs" name="title">Mrs.</option>
+                          <option p="1" value="Ms" name="title">Ms.</option>
+                          </select>
+                      </div>
+                      <div class="inline">
+                          Full Name*<br/>
+                          <input type="text" p="1" name="fName" />
+                          <label>As displayed in your Passport</label>
+                      </div>
+                      <div class="inline">
+                          Grender<br/>
+                          <select>
+                          <option p="1" value="m" name="title">M</option>
+                          <option p="1" value="f" name="title">F</option>
+                            </select>
+                      </div>
+                      <div class="inline">
+                          Brithday<br/>
+                          <input type="date" p="1" name="bod"/>
+                      </div>
+                      <div class="inline">
+                          ID<br/>
+                          <input type="text" p="1" name="id"/>
+                      </div>
+                    </div>
                 </div>
                     <div>
-                        <h3>Payment</h3><hr/>
-                        <label>Full Name: <input type="text" name="fName" /></label><br/>
-                        <label>Email: <input type="text" name="email"/></label><br/>
-                        <label>Phone: <input type="text" name="tel"/></label><br/>
-                        <label>Credit Card: <input type="text" name="ccard"</label><br/>
+                        <h3>Itinerary</h3><hr class="mainHr"/>
+                        <div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Payment</h3><hr class="mainHr"/>
+                        <div class="inline">
+                            Full Name*<br/>
+                            <input type="text" name="fName" />
+                        </div>
+                        <div class="inline">
+                            Email*<br/>
+                            <input type="text" name="email"/>
+                            <label width="100%"> For receive the electronic receipt</label>
+                        </div>
+                        <div class="inline">
+                            Phone*<br/>
+                            <input type="text" name="tel"/>
+                        </div>
+                        <div class="inline">
+                            Credit Card*<br/>
+                            <input type="text" name="ccard"/>
+                        </div>
                     </div>
                 </form>
               </div>
