@@ -38,13 +38,13 @@
             ]
         },
         {
-            "flightID": "FL1338a",
+            "flightID": "FL1388",
             "fromCity": "Hong Kong",
             "fromAirport": "Hong Kong International Airport",
             "toCity": "New York",
             "toAirport": "John F. Kennedy International Airport",
-            "duration": "15:00",
-            "takeoffTime": "5:00",
+            "duration": "15:20",
+            "takeoffTime": "5:15",
             "companyName": "Cathay Pacific",
             "tax": "5",
             "img": [
@@ -52,7 +52,7 @@
             "seatTypes": [
                 {
                     "name": "Economy",
-                    "price": "5000",
+                    "price": "5396",
                     "avaSeat": "100"
                 },
                 {
@@ -90,6 +90,40 @@
                 {
                     "name": "Economy",
                     "price": "5396",
+                    "avaSeat": "100"
+                },
+                {
+                    "name": "Business",
+                    "price": "10300",
+                    "avaSeat": "10"
+                },
+                {
+                    "name": "First",
+                    "price": "14023",
+                    "avaSeat": "10"
+                }
+            ],
+            "comments": [
+                {
+                }
+            ]
+        },
+        {
+            "flightID": "FL1399e",
+            "fromCity": "New York",
+            "fromAirport": "John F. Kennedy International Airport",
+            "toCity": "Hong Kong",
+            "toAirport": "Hong Kong International Airport",
+            "duration": "13:00",
+            "takeoffTime": "9:00",
+            "companyName": "Cathay Pacific",
+            "tax": "5",
+            "img": [
+            ],
+            "seatTypes": [
+                {
+                    "name": "Economy",
+                    "price": "7000",
                     "avaSeat": "100"
                 },
                 {
