@@ -36,32 +36,20 @@ and open the template in the editor.
                 async: false
             });
             var goFlight, backFlight;
-            function updateGoFlight() {
-                goFlight["takeoffDate"] = _GET["sDate"];
-                goFlight["price"] = goFlight["seatTypes"][0]["price"];
-                goFlight["tax"] = parseFloat(goFlight["tax"]) * 0.01 * parseFloat(goFlight["price"]);
-                goFlight["totalPrice"] = parseFloat(goFlight["price"]) + parseFloat(goFlight["tax"]);
+            function updateFilght(flight, flightType) {
+                flight["takeoffDate"] = _GET["sDate"];
+                flight["price"] = goFlight["seatTypes"][0]["price"];
+                flight["tax"] = parseFloat(flight["tax"]) * 0.01 * parseFloat(flight["price"]);
+                flight["totalPrice"] = parseFloat(flight["price"]) + parseFloat(flight["tax"]);
 
-                for (var name in goFlight) {
-                    $(".goFlight_" + name).html(goFlight[name]);
+                for (var name in flight) {
+                    $("." + flightType + "_" + name).html(flight[name]);
                     console.log(name);
                 }
 
                 $(".totalPrice").html(parseFloat(goFlight["totalPrice"]) + parseFloat(backFlight["totalPrice"]));
             }
 
-            function updateBackFlight() {
-                backFlight["takeoffDate"] = _GET["eDate"];
-                backFlight["price"] = backFlight["seatTypes"][0]["price"];
-                backFlight["tax"] = parseFloat(backFlight["tax"]) * 0.01 * parseFloat(backFlight["price"]);
-                backFlight["totalPrice"] = parseFloat(backFlight["price"]) + parseFloat(backFlight["tax"]);
-
-                for (var name in backFlight) {
-                    $(".backFlight_" + name).html(backFlight[name]);
-                }
-
-                $(".totalPrice").html(parseFloat(goFlight["totalPrice"]) + parseFloat(backFlight["totalPrice"]));
-            }
             $(document).ready(function () {
                 var f = Flight.find([new WherePara("flightID", jadbOP.equals, _GET['goFlightID'])])[0];
                 var arriveTime = new Time(f["takeoffTime"]);
@@ -74,13 +62,15 @@ and open the template in the editor.
                 f["arriveTime"] = arriveTime.toSymbolTime();
                 backFlight = f;
 
-                updateGoFlight();
-                updateBackFlight();
+                updateFilght(goFlight, "goFlight");
+                updateFilght(backFlight, "backFlight");
 
                 for (var name in _GET) {
                     $("." + name).html(_GET[name]);
                     $("." + name).val(_GET[name]);
                 }
+                $(".mainform").hide();
+                $(".mainform").slideDown(1000);
             });
         </script>
     </head>
@@ -95,124 +85,133 @@ and open the template in the editor.
                         <hr class="mainHr"/>
                         <div>
                             <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#Passenger1" aria-controls="Passenger1" role="tab" data-toggle="tab">Passenger 1</a></li>
-                                <li role="presentation"><a href="#Passenger2" aria-controls="Passenger2" role="tab" data-toggle="tab">Passenger 2</a></li>
+                            <ul class="nav nav-tabs bg-info img-rounded" role="tablist" id="passenger_tab-header">
+                                <li role="presentation" class="active"><a href="#Passenger-1" aria-controls="Passenger-1" role="tab" data-toggle="tab">Passenger 1</a></li>
+                                <li role="presentation"><a href="#Passenger-2" aria-controls="Passenger-2" role="tab" data-toggle="tab">Passenger 2</a></li>
                             </ul>
 
                             <!-- Tab panes -->
-                            <form>
-                                <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane active" id="Passenger1">
-                                        <div class="inline">
-                                            Title*<br/>
-                                            <select>
+                            <p><sub>The field marked with * mean required</sub></p>
+                            <div class="tab-content" id="passenger_tab-content">
+                                <div role="tabpanel" class="tab-pane fade in active" id="Passenger-1">
+                                    <div class="inline">
+                                        Title*<br/>
+                                        <div class="input-group">
+                                            <select class="form-control">
                                                 <option p="1" value="Mr" name="title">Mr.</option>
                                                 <option p="1" value="Mrs" name="title">Mrs.</option>
                                                 <option p="1" value="Ms" name="title">Ms.</option>
                                             </select>
                                         </div>
-                                        <div class="inline">
-                                            Full Name*<br/>
-                                            <input type="text" p="1" name="fName" />
-                                            <label>As displayed in your Passport</label>
-                                        </div>
-                                        <div class="inline">
-                                            Grender<br/>
-                                            <select>
-                                                <option p="1" value="m" name="title">M</option>
-                                                <option p="1" value="f" name="title">F</option>
-                                            </select>
-                                        </div>
-                                        <div class="inline">
-                                            Brithday<br/>
-                                            <input type="date" p="1" name="bod"/>
-                                        </div>
-                                        <div class="inline">
-                                            ID<br/>
-                                            <input type="text" p="1" name="id"/>
+
+                                    </div>
+                                    <div class="inline">
+                                        Full Name*<br/>
+                                        <div class="input-group">
+                                            <input type="text" p="1" name="fName" class="form-control" placeholder="Shown in Passport" />
                                         </div>
                                     </div>
-                                    <div role="tabpanel" class="tab-pane" id="Passenger2">
-                                        <div class="inline">
-                                            Title*<br/>
-                                            <select>
-                                                <option p="1" value="Mr" name="title">Mr.</option>
-                                                <option p="1" value="Mrs" name="title">Mrs.</option>
-                                                <option p="1" value="Ms" name="title">Ms.</option>
-                                            </select>
-                                        </div>
-                                        <div class="inline">
-                                            Full Name*<br/>
-                                            <input type="text" p="1" name="fName" />
-                                            <label>As displayed in your Passport</label>
-                                        </div>
-                                        <div class="inline">
-                                            Grender<br/>
-                                            <select>
+                                    <div class="inline">
+                                        Grender*<br/>
+                                        <div class="input-group">
+                                            <select class="form-control">
                                                 <option p="1" value="m" name="title">M</option>
                                                 <option p="1" value="f" name="title">F</option>
                                             </select>
                                         </div>
-                                        <div class="inline">
-                                            Brithday<br/>
-                                            <input type="date" p="1" name="bod"/>
+                                    </div>
+                                    <div class="inline">
+                                        Brithday*<br/>
+                                        <div class="input-group">
+                                            <input class="form-control" type="date" p="1" name="bod"/>
                                         </div>
-                                        <div class="inline">
-                                            ID<br/>
-                                            <input type="text" p="1" name="id"/>
+                                    </div>
+                                    <div class="inline">
+                                        Passport ID*<br/>
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" p="1" name="id"/>
                                         </div>
                                     </div>
                                 </div>
+                                <div role="tabpanel" class="tab-pane fade" id="Passenger-2">
+                                    <div class="inline">
+                                        Title*<br/>
+                                        <select>
+                                            <option p="1" value="Mr" name="title">Mr.</option>
+                                            <option p="1" value="Mrs" name="title">Mrs.</option>
+                                            <option p="1" value="Ms" name="title">Ms.</option>
+                                        </select>
+                                    </div>
+                                    <div class="inline">
+                                        Full Name*<br/>
+                                        <input type="text" p="1" name="fName" />
+                                        <label>As displayed in your Passport</label>
+                                    </div>
+                                    <div class="inline">
+                                        Grender<br/>
+                                        <select>
+                                            <option p="1" value="m" name="title">M</option>
+                                            <option p="1" value="f" name="title">F</option>
+                                        </select>
+                                    </div>
+                                    <div class="inline">
+                                        Brithday<br/>
+                                        <input type="date" p="1" name="bod"/>
+                                    </div>
+                                    <div class="inline">
+                                        ID<br/>
+                                        <input type="text" p="1" name="id"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3>Itinerary</h3><hr class="mainHr"/>
+                                <div id="itineDiv">
+                                    <div id="goItinerary">
+                                        <table>
+                                            <tr>
+                                                <td><div class="inline"><label class="goFlight_takeoffDate">Mon, 1 Feb 2016</label></div></td>
+                                                <td><div class="inline"><label>Depart: </label><span class="goFlight_fromCity">Hong Kong</span> <span class="goFlight_fromAirport">International Airport Terminal 2</span> at <span class="goFlight_takeoffTime">18:15</span></div></td>
+                                                <td><div class="inline"><label>Arrive: </label><span class="goFlight_toCity">Tokyo</span> <span class="goFlight_toAirport">Haneda International Airport Terminal I</span> at <span class="goFlight_arriveTime">25:00</span></div></td>
+                                                <td><label class="goFlight_companyName">Fucking Airline</label> - <label class="goFlight_flightID">DL 689</label></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div id="backItinerary">
+                                        <table>
+                                            <tr>
+                                                <td><div class="inline"><label class="backFlight_takeoffDate">Mon, 1 Feb 2016</label></div></td>
+                                                <td><div class="inline"><label>Depart: </label><span class="backFlight_fromCity">Hong Kong</span> <span class="backFlight_fromAirport">International Airport Terminal 2</span> at <span class="backFlight_takeoffTime">18:15</span></div></td>
+                                                <td><div class="inline"><label>Arrive: </label><span class="backFlight_toCity">Tokyo</span> <span class="backFlight_toAirport">Haneda International Airport Terminal I</span> at <span class="backFlight_arriveTime">25:00</span></div></td>
+                                                <td><label class="backFlight_companyName">Fucking Airline</label> - <label class="backFlight_flightID">DL 689</label></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
                                 <div>
-                                    <h3>Itinerary</h3><hr class="mainHr"/>
-                                    <div id="itineDiv">
-                                        <div id="goItinerary">
-                                            <table>
-                                                <tr>
-                                                    <td><div class="inline"><label class="goFlight_takeoffDate">Mon, 1 Feb 2016</label></div></td>
-                                                    <td><div class="inline"><label>Depart: </label><span class="goFlight_fromCity">Hong Kong</span> <span class="goFlight_fromAirport">International Airport Terminal 2</span> at <span class="goFlight_takeoffTime">18:15</span></div></td>
-                                                    <td><div class="inline"><label>Arrive: </label><span class="goFlight_toCity">Tokyo</span> <span class="goFlight_toAirport">Haneda International Airport Terminal I</span> at <span class="goFlight_arriveTime">25:00</span></div></td>
-                                                    <td><label class="goFlight_companyName">Fucking Airline</label> - <label class="goFlight_flightID">DL 689</label></td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                        <div id="backItinerary">
-                                            <table>
-                                                <tr>
-                                                    <td><div class="inline"><label class="backFlight_takeoffDate">Mon, 1 Feb 2016</label></div></td>
-                                                    <td><div class="inline"><label>Depart: </label><span class="backFlight_fromCity">Hong Kong</span> <span class="backFlight_fromAirport">International Airport Terminal 2</span> at <span class="backFlight_takeoffTime">18:15</span></div></td>
-                                                    <td><div class="inline"><label>Arrive: </label><span class="backFlight_toCity">Tokyo</span> <span class="backFlight_toAirport">Haneda International Airport Terminal I</span> at <span class="backFlight_arriveTime">25:00</span></div></td>
-                                                    <td><label class="backFlight_companyName">Fucking Airline</label> - <label class="backFlight_flightID">DL 689</label></td>
-                                                </tr>
-                                            </table>
-                                        </div>
+                                    <h3>Payment</h3><hr class="mainHr"/>
+                                    <div class="inline">
+                                        Full Name*<br/>
+                                        <input type="text" name="fName" />
                                     </div>
-                                    <div>
-                                        <h3>Payment</h3><hr class="mainHr"/>
-                                        <div class="inline">
-                                            Full Name*<br/>
-                                            <input type="text" name="fName" />
-                                        </div>
-                                        <div class="inline">
-                                            Email*<br/>
-                                            <input type="text" name="email"/>
-                                            <label width="100%"> For receive the electronic receipt</label>
-                                        </div>
-                                        <div class="inline">
-                                            Phone*<br/>
-                                            <input type="text" name="tel"/>
-                                        </div>
-                                        <div class="inline">
-                                            Credit Card*<br/>
-                                            <input type="text" name="ccard"/>
-                                        </div>
+                                    <div class="inline">
+                                        Email*<br/>
+                                        <input type="text" name="email"/>
+                                        <label width="100%"> For receive the electronic receipt</label>
                                     </div>
-                            </form>
+                                    <div class="inline">
+                                        Phone*<br/>
+                                        <input type="text" name="tel"/>
+                                    </div>
+                                    <div class="inline">
+                                        Credit Card*<br/>
+                                        <input type="text" name="ccard"/>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <button type="button" id="cfPaymentBtn" class="btn btn-primary navbar-btn">Confirm Payment</button>
+                        <button type="button" id="cfPaymentBtn" class="btn btn-primary navbar-btn">Confirm Payment</button>
                 </td>
                 <td>
                     <div class="bookingSummaryDiv">
