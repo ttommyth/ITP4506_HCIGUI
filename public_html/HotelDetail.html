@@ -1,16 +1,187 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>BestTrip</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="application/javascript" src="libs/jquery/jquery-2.1.4.js"></script>
+        <script src="libs/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+        <link href="libs/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+        <link href="css/index.css" rel="stylesheet" type="text/css"/>
+        <script>
+            $.ajax({
+                url: 'js/Controllers.js',
+                dataType: 'script',
+                async: false
+            });
+            $(function () {
+                $("#header").load("components/header.html");
+            });
+        </script> 
+        <script>//do your own function here
+            $(document).ready(function () {
+                $(".roomNum").hide();
+                $("#checkRoomStatus").click(function(){
+                    $(".roomNum").show();
+                })
+            });
+        </script>
+        <style>
+            img.hotelImg{
+                max-height: 100px;
+                max-width: 140px;
+            }
+            .hotHotelImg{
+                max-height: 200px;
+                max-width: 280px;
+            }
+            .pull-left{
+                border-radius: 25px;
+                border: 10px solid #73AD21;
+                margin-top: 10px;
+                padding: 20px;
+                width: 25%;
+            }
+            .pull-right{
+                border-radius: 25px;
+                border: 10px solid #73AD21;
+                margin-top: 10px;
+                padding: 20px;
+                width: 75%;
+            }
+            .description{
+                padding: 20px;
+            }
+            #rooms {
+                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                width: 100%;
+                border-collapse: collapse;
+            }
+            #rooms td, #rooms th {
+                font-size: 1em;
+                border: 1px solid #98bf21;
+                padding: 3px 7px 2px 7px;
+                height: 50px;
+            }
+            #rooms th {
+                font-size: 1.1em;
+                text-align: left;
+                padding-top: 5px;
+                padding-bottom: 4px;
+                background-color: #A7C942;
+                color: #ffffff;
+            }
+        </style>
+        <!-- insert the style here -->
     </head>
     <body>
-        <div>TODO write content</div>
+        <div id="header"></div>
+        
+        <!-- content -->
+        
+        <div id="hotHotelImages" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#hotHotelImages" data-slide-to="0" class="active"></li>
+                <li data-target="#hotHotelImages" data-slide-to="1"></li>
+                <li data-target="#hotHotelImages" data-slide-to="2"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <img class="hotHotelImg" src="img/hotel.jpg" alt="1">
+                    <div class="carousel-caption">
+                        ...
+                    </div>
+                </div>
+                <div class="item">
+                    <img class="hotHotelImg" src="img/hotel.jpg" alt="2">
+                    <div class="carousel-caption">
+                        ...
+                    </div>
+                </div>
+                <div class="item">
+                    <img class="hotHotelImg" src="img/hotel.jpg" alt="3">
+                    <div class="carousel-caption">
+                        ...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <a class="left carousel-control" href="#hotHotelImages" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#hotHotelImages" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <div class="pull-left">
+            
+        </div>
+        <div class="pull-right">
+            <div class="page-header">
+                <h1 class="hotel_hotelName">花蓮阿里巴巴休閒民宿</h1>
+            </div>
+            <div id="links">
+                <a href="img/f1.jpg" title="f1" data-gallery>
+                    <img src="img/f1.jpg" class="hotelImg" alt="f1">
+                </a>
+                <a href="img/f2.jpg" title="f2" data-gallery>
+                    <img src="img/f2.jpg" class="hotelImg" alt="f2">
+                </a>
+                <a href="img/f3.jpg" title="f3" data-gallery>
+                    <img src="img/f3.jpg" class="hotelImg" alt="f3">
+                </a>
+                <a href="img/f4.jpg" title="f4" data-gallery>
+                    <img src="img/f4.jpg" class="hotelImg" alt="f4">
+                </a>
+            </div>
+            <div>
+                <br/>
+                <pre class="hotel_description">花蓮阿里巴巴休閒民宿位於花蓮市中心，提供帶免費無線網絡連接的色彩繽紛的獨特主題客房，距離南濱夜市和公園有5分鐘車程。民宿前設有24小時迷你市場。駕車前來的客人可以在這家禁煙民宿免費停車。所有客房均設配有定製家具、空調、平面電視以及帶淋浴和免費洗浴用品的連接浴室。花蓮阿里巴巴休閒民宿距離花蓮火車站有10分鐘車程，距離花蓮遠雄海洋公園有15分鐘車程。旅遊諮詢台的工作人員很樂意為您安排賞鯨和釣蝦等活動。民宿周圍分佈著多家當地餐廳和快餐店。</pre>
+            </div>
+            <div>
+                <h3>Period to stay</h3>
+                <pre>Check in Date <input type="text"/> Check out Date <input type="text"/></pre>
+                <pre><input type="button" id="checkRoomStatus" value="Check room status"/></pre>
+            </div>
+            <div>
+                <table id="rooms">
+                    <tr>
+                        <th>Available Room Types</th>
+                        <th>Max Occupancy</th>
+                        <th>Average Per Room Night</th>
+                        <th class="roomNum">Number of Room to Book</th>
+                    </tr>
+                    <tr>
+                        <td class="hotel_roomType-0_name">Standard Room, 1 Double Bed</td>
+                        <td class="hotel_roomType-0_occupancy">2 guests</td>
+                        <td class="hotel_roomType-0_price">HKD 284</td>
+                        <td class="roomNum"><select class="roomNum">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select></td>
+                    </tr>
+                    <tr>
+                        <td class="hotel_roomType-1_name">Standard Room, Multiple Beds</td>
+                        <td class="hotel_roomType-1_occupancy">2 guests</td>
+                        <td class="hotel_roomType-1_price">HKD 348</td>
+                        <td class="roomNum"><select class="roomNum">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select></td>
+                    </tr>
+                </table>
+                <input type="button" class="roomNum" value="Book!"/>
+            </div>
+        </div>
     </body>
 </html>
