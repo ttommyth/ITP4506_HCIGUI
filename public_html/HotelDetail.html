@@ -29,6 +29,9 @@
                     var imgSrc = $(this).attr("src");
                     $("#largeHotelImg").attr("src",imgSrc);
                 })
+                $("#submit").click(function(){
+                    window.location = "HotelPayment.html";
+                })
             });
         </script>
         <style>
@@ -183,7 +186,7 @@
                             </select></td>
                     </tr>
                 </table>
-                <input type="button" class="roomNum" value="Book!"/>
+                <input type="button" class="roomNum" id="submit" value="Book!"/>
             </div>
         </div>
     </body>
