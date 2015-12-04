@@ -9,6 +9,7 @@ function Hotel() {//object
     this.region = "";
     this.address = "";
     this.star = "";
+    this.description="";
     this.img = [];
     this.roomTypes = [];
     this.comments=[];
@@ -17,6 +18,7 @@ function Hotel() {//object
         this.name="";
         this.price="";
         this.description="";
+        this.occupacy="";
         this.img=[];
     }
     function Comment(){
