@@ -435,3 +435,7 @@ img, .hotels table{
 #cfPaymentBtn{
     margin-left: 500px;
 }
+.nextBtn{
+    font-size: 25px;
+    vertical-align: middle;
+}

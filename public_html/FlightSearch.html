@@ -157,7 +157,7 @@ and open the template in the editor.
         </script>
 
         <style>
-            .modal-dialog{
+            #searchModal .modal-dialog{
                 width:fit-content;
             }
             .input-group{
@@ -198,6 +198,8 @@ and open the template in the editor.
                             </tr>
                         </table>
                     </div>
+                    
+                    <div class="well">
                     <div class="page-header">
                         <h1>Select the flight below</h1>
                     </div>
@@ -253,6 +255,7 @@ and open the template in the editor.
                             </div>
                         </div>
                     </div>
+                    </div>
                 </td>
                 <td>
                     <div class="bookingSummaryDiv">
@@ -296,7 +299,9 @@ and open the template in the editor.
                             </div>
                             <div id="bookDiv">
                                 <h4>To Book this flight...</h4>
-                                <button class="btn btn-primary center-block" style="width:100%;height:100px" onclick="doNextStep();"><h3>Next Step<span class="glyphicon glyphicon-chevron-right"></span></h3></button>
+                                <button class="btn btn-success" style="width:100%;height:70px;margin-bottom: 10px" onclick="doNextStep();">
+                                    <span class="nextBtn">Next Step<span class="glyphicon glyphicon-chevron-right nextBtn"></span></span>
+                                </button>
                             </div>
                             <!--
                             <h4>Fees</h4>
