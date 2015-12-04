@@ -70,7 +70,7 @@ and open the template in the editor.
                             function (i, column) {
                                 var seatId = String.fromCharCode(97 + n) + (i + 1);
                                 if ($.inArray(seatId, sittedSeat) > -1) {
-                                    console.log("-1");
+                                    console.log("exist "+seatId+" in sitted seats");
                                     if (passengers[selectingSeatfor][selectedSeatType] != undefined && passengers[selectingSeatfor][selectedSeatType] == seatId) {
                                         $(column).removeClass("sittedSeat");
                                         $(column).unbind("click");

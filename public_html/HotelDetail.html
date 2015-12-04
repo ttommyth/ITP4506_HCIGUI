@@ -21,15 +21,20 @@
         <script>//do your own function here
             $(document).ready(function () {
                 $(".roomNum").hide();
-                $(".hotelImg").css('cursor','pointer');
-                $("#checkRoomStatus").click(function(){
+                $(".hotelImg").css('cursor', 'pointer');
+                $("#checkRoomStatus").click(function () {
                     $(".roomNum").show();
                 })
-                $(".hotelImg").click(function(){
+                $(".hotelImg").click(function () {
                     var imgSrc = $(this).attr("src");
-                    $("#largeHotelImg").attr("src",imgSrc);
-                })
-                $("#submit").click(function(){
+                    if ($("#largeHotelImg").attr("src") != imgSrc) {
+                        $("#largeHotelImg").fadeOut(1000, function () {
+                            $("#largeHotelImg").attr("src", imgSrc);
+                            $("#largeHotelImg").fadeIn(1000);
+                        });
+                    }
+                });
+                $("#submit").click(function () {
                     window.location = "HotelPayment.html";
                 })
             });
@@ -83,9 +88,9 @@
     </head>
     <body>
         <div id="header"></div>
-        
+
         <!-- content -->
-        
+
         <div id="hotHotelImages" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
@@ -127,7 +132,7 @@
             </a>
         </div>
         <div class="pull-left">
-            
+
         </div>
         <div class="pull-right">
             <div class="page-header">
