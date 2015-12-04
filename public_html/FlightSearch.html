@@ -59,6 +59,7 @@ and open the template in the editor.
                 $("#Msg_HereToThere").html(_GET["startPlace"] + " To " + _GET["endPlace"]);
                 $("#Msg_ThereToHere").html(_GET["endPlace"] + " To " + _GET["startPlace"]);
                 $('#bookDiv').slideUp();
+                $('.onSuccess').animate({"color":"#000000"},1000);
                 $('#searchModal').modal('hide');
                 currentGoFlightID = undefined;
                 currentBackFlightID = undefined;
@@ -90,6 +91,7 @@ and open the template in the editor.
                 $("#isGoFlightSelected").fadeIn();
                 if (_GET["type"] != "round-trip" || currentBackFlightID != undefined) {
                     $('#bookDiv').slideDown();
+                    $('.onSuccess').animate({"color":"#00DD00"},1000);
                 }
             }
             function selectedBackFlightID(id) {
@@ -105,6 +107,7 @@ and open the template in the editor.
                 $("#isBackFlightSelected").fadeIn();
                 if (currentGoFlightID != undefined) {
                     $('#bookDiv').slideDown();
+                    $('.onSuccess').animate({"color":"#00DD00"},1000);
                 }
             }
             var currentGoFlightID;
@@ -238,7 +241,7 @@ and open the template in the editor.
                         </table>
                     </div>
 
-                    <div class="well" id="resultContainer">
+                    <div class="well" id="resultContainer"><span class="glyphicon glyphicon-send pull-right onSuccess" style='font-size:72pt; opacity: 0.2'></span>
                         <div class="page-header">
                             <h1>Select the flight below</h1>
                         </div>
