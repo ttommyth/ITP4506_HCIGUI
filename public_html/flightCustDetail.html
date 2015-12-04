@@ -42,10 +42,23 @@ and open the template in the editor.
             });
             var goFlight, backFlight;
             var passengers = [];
-            var selectingSeatfor, selectedSeat;
-            function openFlightSeatModal(passengerNum) {
-                resetFlightSeat();
+            var sittedSeat = [];
+            var selectingSeatfor, selectedSeat, selectedSeatType;
+            function saveFormAsPassenger(index) {
+                var vArr = form.serializeArray();
+                for (var vName in vArr) {
+                    passengers[index][vName] = vArr[vName];
+                }
+            }
+            function openFlightSeatModal(seatType, passengerNum) {
+
                 selectingSeatfor = passengerNum;
+                selectedSeatType = seatType;
+                sittedSeat = [];
+                for (var p in passengers) {
+                    sittedSeat.push(passengers["" + p][selectedSeatType]);
+                }
+                resetFlightSeat();
                 $("#btn_confirmSeat").hide();
                 $("#flightSeatModal").modal('show');
             }
@@ -55,13 +68,32 @@ and open the template in the editor.
                 {
                     $(row).children().find('div.seat,div.seatB,div.seatC').each(
                             function (i, column) {
-                                $(column).removeClass("selectedSeat");
-                                $(column).unbind( "click" );
-                                $(column).click(function () {
-                                    resetFlightSeat();
-                                    onSelectSeat(this, String.fromCharCode(97 + n) + (i + 1));
-                                    $("#btn_confirmSeat").show();
-                                });
+                                var seatId = String.fromCharCode(97 + n) + (i + 1);
+                                if ($.inArray(seatId, sittedSeat) > -1) {
+                                    console.log("-1");
+                                    if (passengers[selectingSeatfor][selectedSeatType] != undefined && passengers[selectingSeatfor][selectedSeatType] == seatId) {
+                                        $(column).removeClass("sittedSeat");
+                                        $(column).unbind("click");
+                                        $(column).addClass("selectedSeat");
+                                        $(column).addClass("toBeChange");
+                                    } else {
+                                        $(column).removeClass("toBeChange");
+                                        $(column).removeClass("selectedSeat");
+                                        $(column).unbind("click");
+                                        $(column).addClass("sittedSeat");
+
+                                    }
+                                } else {
+                                    $(column).removeClass("toBeChange");
+                                    $(column).removeClass("sittedSeat");
+                                    $(column).removeClass("selectedSeat");
+                                    $(column).unbind("click");
+                                    $(column).click(function () {
+                                        resetFlightSeat();
+                                        onSelectSeat(this, seatId);
+                                        $("#btn_confirmSeat").show();
+                                    });
+                                }
                                 /**
                                  var seat = $(column).find('div.seat,div.seatB,div.seatC');
                                  if (seat.length != 0) {
@@ -79,16 +111,22 @@ and open the template in the editor.
             }
             function onSelectSeat(position, seatId) {
                 $(position).addClass("selectedSeat");
-                console.log("selected "+seatId);
-                selectedSeat=seatId;
+                console.log("selected " + seatId);
+                selectedSeat = seatId;
             }
             function saveSeat() {
-                $("#flightSeatModal").modal('hide');
                 resetFlightSeat();
-                console.log("passengers["+selectingSeatfor+"][seatId]="+selectedSeat);
-                passengers[selectingSeatfor]["seatId"]=selectedSeat;
-                $("#passenger-"+selectingSeatfor+"_seatId").val(""+selectedSeat);
-                selectedSeat=undefined;
+                passengers["" + selectingSeatfor][selectedSeatType] = selectedSeat;
+                $("#passenger-" + selectingSeatfor + "_" + selectedSeatType).val("" + selectedSeat);
+                selectedSeat = undefined;
+                selectingSeatfor = undefined;
+                selectedSeatType = undefined;
+
+                sittedSeat = [];
+                for (var p in passengers) {
+                    sittedSeat.push(passengers["" + p][selectedSeatType]);
+                }
+                $("#flightSeatModal").modal('hide');
             }
             function updateFilght(flight, flightType) {
                 flight["takeoffDate"] = _GET["sDate"];
@@ -126,32 +164,38 @@ and open the template in the editor.
                     $("." + name).html(_GET[name]);
                     $("." + name).val(_GET[name]);
                 }
+
+                $('.readonly').keyup(function () {
+                    this.value = this.value.replace(/[^0-9\.]/g, '');
+                });
+                
                 var j = 1;
                 for (var i = 1; i <= parseInt(_GET["adult"]); i++) {
-                    passengers[""+j] = new Object();
+                    passengers["" + j] = new Object();
                     $("#passenger_tab-header").append(getPassengerTabHeader(j, "adult"));
                     $("#passenger_tab-content").append(getPassengerTabBody(j, "adult"));
                     j++;
                 }
                 for (var i = 1; i <= parseInt(_GET["child"]); i++) {
-                    passengers[""+j] = new Object();
+                    passengers["" + j] = new Object();
                     $("#passenger_tab-header").append(getPassengerTabHeader(j, "child"));
                     $("#passenger_tab-content").append(getPassengerTabBody(j, "child"));
                     j++;
                 }
                 for (var i = 1; i <= parseInt(_GET["infant"]); i++) {
-                    passengers[""+j] = new Object();
+                    passengers["" + j] = new Object();
                     $("#passenger_tab-header").append(getPassengerTabHeader(j, "infant"));
                     $("#passenger_tab-content").append(getPassengerTabBody(j, "infant"));
                     j++;
                 }
                 $("#passenger_tab-header").children().first().addClass("active");
                 $("#passenger_tab-content").children().first().addClass("in active");
-
-                resetFlightSeat();
             });
         </script>
         <style>
+            .readonly{
+                background-color: #EEEEEE;
+            }
             .seat:hover{
                 opacity: 0.8;
                 cursor:pointer;
@@ -163,6 +207,32 @@ and open the template in the editor.
             .seatC:hover{
                 opacity: 0.8;
                 cursor:pointer;
+            }
+            .sittedSeat{
+                border-color: red;
+                background-color: #111111;
+                color: transparent;
+                font-size: 0pt;
+            }
+            .sittedSeat:after{
+                display: inline-block;
+                font-family: 'Glyphicons Halflings';
+                font-size: 10pt;
+                font-style: normal;
+                font-weight: normal;
+                color: white;
+                line-height: 2;
+
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                content: "\e014";
+            }
+            .sittedSeat:hover{
+                opacity: 1;
+                cursor:default;
+            }
+            .toBeChange{
+                border-color: red;
             }
             .selectedSeat{
                 background-color: #111111;

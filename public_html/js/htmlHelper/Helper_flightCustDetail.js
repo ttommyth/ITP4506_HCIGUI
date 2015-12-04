@@ -7,7 +7,7 @@ var str = '\
 }
 function getPassengerTabBody(number, type) {
 var str = '                         <div role="tabpanel" class="tab-pane fade" id="Passenger-'+number+'">\
-                                    <form id="passenger-'+number+'" onsubmit="passengers['+number+']=$(this).serializeArray();return false;">\
+                                    <form id="passenger-'+number+'" onsubmit="saveFormAsPassenger('+number+');return false;">\
                                     <div class="inline">\
                                         Title*<br/>\
                                         <div class="input-group">\
@@ -46,13 +46,18 @@ var str = '                         <div role="tabpanel" class="tab-pane fade" i
                                         </div>\
                                     </div>\
                                     <div class="inline">\
-                                        Seat No*<br/>\
+                                        Departing Flight Seat No*<br/>\
                                         <div class="input-group">\
-                                            <input class="form-control" type="text" id="passenger-'+number+'_seatId" name="passenger-'+number+'_seatId" onclick="openFlightSeatModal('+number+')" required readonly/>\
-                                        </div>\
+                                            <input class="form-control btn readonly" tabindex="-1" placeholder="Click here to select seat" type="text" id="passenger-'+number+'_toSeatId" name="passenger-'+number+'_toSeatId" onclick="openFlightSeatModal(\'toSeatId\','+number+');" required/>\
+                                      </div>\
                                     </div>\
-  Launch demo modal\
-</button>\
+                                    <div class="inline">\
+                                        Return Flight Seat No*<br/>\
+                                        <div class="input-group">\
+                                            <input class="form-control btn readonly" tabindex="-1" placeholder="Click here to select seat" type="text" id="passenger-'+number+'_backSeatId" name="passenger-'+number+'_backSeatId" onclick="openFlightSeatModal(\'backSeatId\','+number+');" required/>\
+                                      </div>\
+                                    </div>\
+                                    <input id="passenger-'+number+'_submit" type="submit" style="visibility: hidden"/>\
                                     </form>\
                                 </div>';
     return str;
