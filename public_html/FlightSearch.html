@@ -143,7 +143,11 @@ and open the template in the editor.
                 for (var name in _GET) {
                     url += "&" + name + "=" + _GET[name];
                 }
-                window.location.href = url;
+                $('.flightSearchDetails').slideUp();
+                $('.bookingSummaryDiv').hide("slide", {direction: "right"}, 1000);
+                $('#resultContainer').hide("slide", {direction: "left"}, 1000, function () {
+                    window.location.href = url;
+                });
             }
 
             $(document).ready(function () {
@@ -234,7 +238,7 @@ and open the template in the editor.
                         </table>
                     </div>
 
-                    <div class="well">
+                    <div class="well" id="resultContainer">
                         <div class="page-header">
                             <h1>Select the flight below</h1>
                         </div>
