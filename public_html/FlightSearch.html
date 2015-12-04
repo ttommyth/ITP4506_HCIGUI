@@ -31,24 +31,25 @@ and open the template in the editor.
                 async: false
             });
             function doSearch() {
-                $("#isGoFlightSelected").hide();
-                $("#isBackFlightSelected").hide();
+                $("#isGoFlightSelected").fadeOut();
+                $("#isBackFlightSelected").fadeOut();
                 var tempArr = $("#searchForm").serializeArray();
                 for (var i in tempArr) {
                     _GET[tempArr[i]["name"]] = tempArr[i]["value"];
                 }
-                $("#Container_HereToThere > tbody:last").children( 'tr:not(:first)' ).remove();
-                $("#Container_ThereToHere > tbody:last").children( 'tr:not(:first)' ).remove();
-                
+                $("#Container_HereToThere > tbody:last").children('tr:not(:first)').remove();
+                $("#Container_ThereToHere > tbody:last").children('tr:not(:first)').remove();
+
                 var goflights = Flight.find([new WherePara("fromCity", jadbOP.like, _GET["startPlace"]),
                     new WherePara("toCity", jadbOP.like, _GET["endPlace"])]);
                 updateFlightList(goflights, "#Container_HereToThere", "selectedGoFlightID");
                 if (_GET["type"] == "round-trip") {
+                    $('.backFlightInfo').slideDown();
                     var backflights = Flight.find([new WherePara("fromCity", jadbOP.like, _GET["endPlace"]),
                         new WherePara("toCity", jadbOP.like, _GET["startPlace"])]);
                     updateFlightList(backflights, "#Container_ThereToHere", "selectedBackFlightID");
                 } else {
-                    $('.backFlightInfo').hide();
+                    $('.backFlightInfo').slideUp();
                 }
 
                 for (var name in _GET) {
@@ -57,12 +58,12 @@ and open the template in the editor.
                 }
                 $("#Msg_HereToThere").html(_GET["startPlace"] + " To " + _GET["endPlace"]);
                 $("#Msg_ThereToHere").html(_GET["endPlace"] + " To " + _GET["startPlace"]);
-                $('#bookDiv').hide();
+                $('#bookDiv').slideUp();
                 $('#searchModal').modal('hide');
-                currentGoFlightID=undefined;
-                currentBackFlightID=undefined;
-                
-                window.history.pushState('flightSearch', 'BestTrip', 'flightSearch.html?'+ $("#searchForm").serialize());
+                currentGoFlightID = undefined;
+                currentBackFlightID = undefined;
+
+                window.history.pushState('flightSearch', 'BestTrip', 'flightSearch.html?' + $("#searchForm").serialize());
             }
             function fromDate_onchange() {
                 $("#in_toDate").attr({
@@ -135,7 +136,6 @@ and open the template in the editor.
             }
 
             function doNextStep() {
-
                 var url = 'flightCustDetail.html?goFlightID=' + currentGoFlightID + '';
                 if (currentBackFlightID != undefined) {
                     url += "&backFlightID=" + currentBackFlightID;
@@ -143,7 +143,11 @@ and open the template in the editor.
                 for (var name in _GET) {
                     url += "&" + name + "=" + _GET[name];
                 }
-                window.location.href = url;
+                $('.flightSearchDetails').slideUp();
+                $('.bookingSummaryDiv').hide("slide", {direction: "right"}, 1000);
+                $('#resultContainer').hide("slide", {direction: "left"}, 1000, function () {
+                    window.location.href = url;
+                });
             }
 
             $(document).ready(function () {
@@ -234,7 +238,7 @@ and open the template in the editor.
                         </table>
                     </div>
 
-                    <div class="well">
+                    <div class="well" id="resultContainer">
                         <div class="page-header">
                             <h1>Select the flight below</h1>
                         </div>
@@ -312,8 +316,8 @@ and open the template in the editor.
                                     <td class="arriveTime_HereToThere">--:--</td>
                                 </tr>
                             </table>
-                            <hr>
                             <div id="returnFlight" class="backFlightInfo">
+                                <hr>
                                 <h4>Returning</h4>
                                 <span class="eDate">Fir, 11,Des 2015</span>
                                 <br/>
@@ -330,8 +334,8 @@ and open the template in the editor.
                                         <td class="arriveTime_ThereToHere">--:--</td>
                                     </tr>
                                 </table>
-                                <hr>
                             </div>
+                            <hr>
                             <div id="bookDiv">
                                 <h4>To Book this flight...</h4>
                                 <button class="btn btn-success" style="width:100%;height:70px;margin-bottom: 10px" onclick="doNextStep();">
