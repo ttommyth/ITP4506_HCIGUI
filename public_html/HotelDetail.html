@@ -21,15 +21,19 @@
         <script>//do your own function here
             $(document).ready(function () {
                 $(".roomNum").hide();
+                $(".hotelImg").css('cursor','pointer');
                 $("#checkRoomStatus").click(function(){
                     $(".roomNum").show();
+                })
+                $(".hotelImg").click(function(){
+                    var imgSrc = $(this).attr("src");
+                    $("#largeHotelImg").attr("src",imgSrc);
                 })
             });
         </script>
         <style>
-            img.hotelImg{
-                max-height: 100px;
-                max-width: 140px;
+            .hotelImg{
+                max-width: 19.56%;
             }
             .hotHotelImg{
                 max-height: 200px;
@@ -126,19 +130,18 @@
             <div class="page-header">
                 <h1 class="hotel_hotelName">花蓮阿里巴巴休閒民宿</h1>
             </div>
-            <div id="links">
-                <a href="img/f1.jpg" title="f1" data-gallery>
-                    <img src="img/f1.jpg" class="hotelImg" alt="f1">
-                </a>
-                <a href="img/f2.jpg" title="f2" data-gallery>
-                    <img src="img/f2.jpg" class="hotelImg" alt="f2">
-                </a>
-                <a href="img/f3.jpg" title="f3" data-gallery>
-                    <img src="img/f3.jpg" class="hotelImg" alt="f3">
-                </a>
-                <a href="img/f4.jpg" title="f4" data-gallery>
-                    <img src="img/f4.jpg" class="hotelImg" alt="f4">
-                </a>
+            <div>
+                <img src="img/f1.jpg" id="largeHotelImg" alt="largerImg">
+            </div>
+            <div id="imageGallery">
+                <img src="img/f1.jpg" class="hotelImg" alt="f1">
+                <img src="img/f2.jpg" class="hotelImg" alt="f2">
+                <img src="img/f3.jpg" class="hotelImg" alt="f3">
+                <img src="img/f4.jpg" class="hotelImg" alt="f4">
+                <img src="img/f5.jpg" class="hotelImg" alt="f5">
+                <img src="img/f6.jpg" class="hotelImg" alt="f6">
+                <img src="img/f7.jpg" class="hotelImg" alt="f7">
+                <img src="img/f8.jpg" class="hotelImg" alt="f8">
             </div>
             <div>
                 <br/>
