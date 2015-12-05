@@ -130,7 +130,7 @@ and open the template in the editor.
             }
             function updateFilght(flight, flightType) {
                 flight["takeoffDate"] = _GET["sDate"];
-                flight["price"] = goFlight["seatTypes"][0]["price"];
+                flight["price"] = flight["seatTypes"][0]["price"];
                 flight["tax"] = parseFloat(flight["tax"]) * 0.01 * parseFloat(flight["price"]);
                 flight["totalPrice"] = parseFloat(flight["price"]) + parseFloat(flight["tax"]);
 
@@ -337,7 +337,7 @@ and open the template in the editor.
     <body>
         <div id="header"></div>
         <!-- content -->
-        <table >
+        <table>
             <tr>
                 <td>
 
