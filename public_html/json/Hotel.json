@@ -9,7 +9,7 @@
             "price": "200",
             "star": "4",
             "img": [
-                "", ""
+                "hotel.jpg", "hotel1.jpg"
             ],
             "roomTypes":
                     [
@@ -51,7 +51,7 @@
             "price": "300",
             "star": "5",
             "img": [
-                ""
+                "hotel3.jpg"
             ],
             "roomTypes":
                     [
@@ -83,7 +83,7 @@
             "price": "1100",
             "star": "5",
             "img": [
-                ""
+                "hotel2.jpg"
             ],
             "roomTypes":
                     [
@@ -115,7 +115,7 @@
             "price": "1350",
             "star": "5",
             "img": [
-                ""
+                "hotel4.jpg"
             ],
             "roomTypes":
                     [
@@ -147,7 +147,7 @@
             "price": "2130",
             "star": "4",
             "img": [
-                ""
+                "hotel5.jpg"
             ],
             "roomTypes":
                     [
@@ -179,7 +179,7 @@
             "price": "1120",
             "star": "4",
             "img": [
-                ""
+                "hotel6.jpg"
             ],
             "roomTypes":
                     [
