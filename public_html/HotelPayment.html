@@ -45,12 +45,11 @@ and open the template in the editor.
                 max-width: 280px;
             }
             .pull-left{
-                position: fixed;
                 border-radius: 25px;
                 border: 10px solid #1E90FF;
                 margin-top: 10px;
                 padding: 20px;
-                width: 23%;
+                width: 25%;
             }
             .pull-right{
                 border-radius: 25px;
@@ -211,6 +210,12 @@ and open the template in the editor.
                         </tr>
                         <tr><td colspan="20"></td></tr>
                         <tr class="question">
+                            <td colspan="20">I am making this booking for someone else (optional)</td>
+                        </tr>
+                        <tr class="anwser">
+                            <td colspan="20"><input type="radio" name="travelType" value="yes"/>Yes</td>
+                        </tr>
+                        <tr class="question">
                             <td colspan="20">What is your purpose of this travelling</td>
                         </tr>
                         <tr class="anwser">
@@ -246,13 +251,6 @@ and open the template in the editor.
                         </tr>
                         <tr class="anwser">
                             <td colspan="10"><input type="text" name="confirmEmail" size="40"/></td>
-                            <td colspan="10"><p></p></td>
-                        </tr>
-                        <tr class="question">
-                            <td colspan="20">input a password to register (optional)</td>
-                        </tr>
-                        <tr class="anwser">
-                            <td colspan="10"><input type="text" name="password" size="40"/></td>
                             <td colspan="10"><p></p></td>
                         </tr>
                         <tr id="endPersonal">
