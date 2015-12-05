@@ -7,6 +7,7 @@
         <script type="application/javascript" src="libs/jquery/jquery-2.1.4.js"></script>
         <script src="libs/bootstrap/js/bootstrap.js" type="text/javascript"></script>
         <link href="libs/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+        <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
         <link href="css/index.css" rel="stylesheet" type="text/css"/>
         <script>
             $.ajax({
@@ -19,6 +20,43 @@
             });
         </script> 
         <script>//do your own function here
+
+            $.ajax({
+                url: 'js/HotelControl.js',
+                dataType: 'script',
+                async: false
+            });
+
+            $.ajax({
+                url: 'js/htmlHelper/Helper_hotelDetail.js',
+                dataType: 'script',
+                async: false
+            });
+            var currentHotel;
+            var map;
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map-body'), {
+                    zoom: 16,
+                    center: new google.maps.LatLng(-34.397, 150.644)
+                });
+                var geocoder = new google.maps.Geocoder();
+                geocodeAddress(geocoder, map);
+            }
+
+            function geocodeAddress(geocoder, resultsMap) {
+                var address = currentHotel['address'];
+                geocoder.geocode({'address': address}, function (results, status) {
+                    if (status === google.maps.GeocoderStatus.OK) {
+                        resultsMap.setCenter(results[0].geometry.location);
+                        var marker = new google.maps.Marker({
+                            map: resultsMap,
+                            mapTypeId: google.maps.MapTypeId.SATELLITE,
+                            position: results[0].geometry.location
+                        });
+                    } else {
+                    }
+                });
+            }
             $(document).ready(function () {
                 $(".roomNum").hide();
                 $(".hotelImg").css('cursor', 'pointer');
@@ -34,9 +72,41 @@
                         });
                     }
                 });
+
+                var counter = 0;
+                var rcHotels = Hotel.find([new WherePara("", jadbOP.all, "")]);
+                for (var i in rcHotels) {
+                    if (counter >= 6) {
+                        break;
+                    }
+                    $("#Container_rcHotel").append(getRecommendedHotel(rcHotels[i]));
+                    counter++;
+                }
+
+                currentHotel = Hotel.find([new WherePara("hotelID", jadbOP.equals, _GET['hotelID'])])[0];
+
+                for (var name in currentHotel) {
+                    $(".hotel_" + name).html(currentHotel[name]);
+                    $(".hotel_" + name).val(currentHotel[name]);
+                }
+                var rooms = currentHotel['roomTypes'];
+                for (var name in rooms) {
+                    $("#rooms").append(getRoomTr(rooms[name]));
+                }
+
+                $("#bookBtn").click(function () {
+                    $(document).scrollTop($("#rooms").offset().top);
+                });
+
                 $("#submit").click(function () {
                     window.location = "HotelPayment.html";
-                })
+                });
+
+                initMap();
+                $('#mapModal').on('shown.bs.modal', function (e) {
+                    initMap();
+                    google.maps.event.trigger(map, 'resize');
+                });
             });
         </script>
         <style>
@@ -108,7 +178,7 @@
                 color: #7644FF;
             }
             #bookBtn{
-                 background: -webkit-linear-gradient(90deg, #8B5800 , #FFB83C);
+                background: -webkit-linear-gradient(90deg, #8B5800 , #FFB83C);
             }
             #heart{
                 color: red;
@@ -152,6 +222,11 @@
                 margin-left: 10px;
                 color: #008fff;
             }
+            #mapModal .modal-dialog
+            {
+                height: fit-content;
+                width: fit-content;
+            }
         </style>
         <!-- insert the style here -->
     </head>
@@ -159,253 +234,125 @@
         <div id="header"></div>
 
         <!-- content -->
-        <div class="inline">
-            <div class="hotelSearchDiv" >
-                <label class="titleLabel">Booking Info</label>
-            <div>
-                <span class="glyphicon glyphicon-map-marker">
-                    <span class="hotelAddress"> fksajfklasfjksafj</span></span><br/>
-                <span class="glyphicon glyphicon-calendar">
-                    <span class="bookingDate"> 6nights (05Dec-11Dec)</span></span><br/>
-                <span class="glyphicon glyphicon-user">
-                    <span class="num">2 adults</span></span><br>
-            <button type="button" class="btn btn-primary navbar-btn beforeLogin"
-                    id="hSearch" data-toggle="modal" data-target="#loginModal">
-                Change search</button>
-            </div>
-            </div>
-            
-            <div class="hotelFilterDiv">
+        <div class="pull-left">
+            <div class="hotelFilterDiv" id = "Container_rcHotel">
                 <label class="titleLabel">Recommented</label><br/>
-                
-                <!-- one hotel -->
-                <div class="rcHotel">
-                    <table>
-                    <tr>
-                        <th colspan="2"><span class="recomName">The fucking Hotel</span></th>
-                    </tr>
-                    <tr>
-                        <td><div class="recomIcon"><img src="img/f1.jpg" class="rcImg"/>
-                    </div></td>
-                        <td><div class="recomDetail">
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span><br/>
-                            <span class="hotelAddress">fjklasjfklas</span><br/>
-                            <span class="hotelMark">VeryGood 7.8</span>
-                    </div></td>
-                    </tr>
-                </table>
-                    <hr/>
-                </div>
-                <!-- -->
-                
-                <div class="rcHotel">
-                    <table>
-                    <tr>
-                        <th colspan="2"><span class="recomName">The fucking Hotel</span></th>
-                    </tr>
-                    <tr>
-                        <td><div class="recomIcon"><img src="img/f1.jpg" class="rcImg"/>
-                    </div></td>
-                        <td><div class="recomDetail">
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span><br/>
-                            <span class="hotelAddress">fjklasjfklas</span><br/>
-                            <span class="hotelMark">VeryGood 7.8</span>
-                    </div></td>
-                    </tr>
-                </table>
-                    <hr/>
-                </div>
-                <div class="rcHotel">
-                    <table>
-                    <tr>
-                        <th colspan="2"><span class="recomName">The fucking Hotel</span></th>
-                    </tr>
-                    <tr>
-                        <td><div class="recomIcon"><img src="img/f1.jpg" class="rcImg"/>
-                    </div></td>
-                        <td><div class="recomDetail">
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span><br/>
-                            <span class="hotelAddress">fjklasjfklas</span><br/>
-                            <span class="hotelMark">VeryGood 7.8</span>
-                    </div></td>
-                    </tr>
-                </table>
-                    <hr/>
-                </div>
-                <div class="rcHotel">
-                    <table>
-                    <tr>
-                        <th colspan="2"><span class="recomName">The fucking Hotel</span></th>
-                    </tr>
-                    <tr>
-                        <td><div class="recomIcon"><img src="img/f1.jpg" class="rcImg"/>
-                    </div></td>
-                        <td><div class="recomDetail">
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span><br/>
-                            <span class="hotelAddress">fjklasjfklas</span><br/>
-                            <span class="hotelMark">VeryGood 7.8</span>
-                    </div></td>
-                    </tr>
-                </table>
-                    <hr/>
-                </div>
-                <div class="rcHotel">
-                    <table>
-                    <tr>
-                        <th colspan="2"><span class="recomName">The fucking Hotel</span></th>
-                    </tr>
-                    <tr>
-                        <td><div class="recomIcon"><img src="img/f1.jpg" class="rcImg"/>
-                    </div></td>
-                        <td><div class="recomDetail">
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span><br/>
-                            <span class="hotelAddress">fjklasjfklas</span><br/>
-                            <span class="hotelMark">VeryGood 7.8</span>
-                    </div></td>
-                    </tr>
-                </table>
-                    <hr/>
-                </div>
-                <div class="rcHotel">
-                    <table>
-                    <tr>
-                        <th colspan="2"><span class="recomName">The fucking Hotel</span></th>
-                    </tr>
-                    <tr>
-                        <td><div class="recomIcon"><img src="img/f1.jpg" class="rcImg"/>
-                    </div></td>
-                        <td><div class="recomDetail">
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span><br/>
-                            <span class="hotelAddress">fjklasjfklas</span><br/>
-                            <span class="hotelMark">VeryGood 7.8</span>
-                    </div></td>
-                    </tr>
-                </table>
-                    <hr/>
-                </div>
+
             </div>
         </div>
         <div class="pull-right">
-            
+
             <div class="page-header">
                 <div id="hotelName">
                     <span class="hotel_hotelName">花蓮阿里巴巴休閒民宿</span><br/>
-                    <span class="hotelAddress">the fucking hotel address
-                        <a href="" class="hotelAddressLink">(Show on map)</a>
+                    <span class="hotel_address">the fucking hotel address
                     </span>
+                    <a href="" class="hotelAddressLink" data-toggle="modal" data-target="#mapModal">(Show on map)</a>
                 </div>
                 <div id="bookDiv">
                     <button type="button" id="bookBtn" class="btn btn-primary navbar-btn" 
-                        data-toggle="modal" data-target="#searchModal">Book Now!</button>
+                            data-toggle="modal" data-target="#searchModal">Book Now!</button>
                     <br/>
                     <span class="glyphicon glyphicon-heart" id="heart"></span>
                     from <span id="roomPriceTag">HKD <span class="roomP">731</span></span>
                 </div>
-                
+
             </div>  
-            
+
             <div id="hotHotelImages" class="carousel slide" data-ride="carousel">
-                
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                <li data-target="#hotHotelImages" data-slide-to="0" class="active"></li>
-                <li data-target="#hotHotelImages" data-slide-to="1"></li>
-                <li data-target="#hotHotelImages" data-slide-to="2"></li>
-                <li data-target="#hotHotelImages" data-slide-to="3"></li>
-                <li data-target="#hotHotelImages" data-slide-to="4"></li>
-                <li data-target="#hotHotelImages" data-slide-to="5"></li>
-                <li data-target="#hotHotelImages" data-slide-to="6"></li>
-                <li data-target="#hotHotelImages" data-slide-to="7"></li>
-                <li data-target="#hotHotelImages" data-slide-to="8"></li>
-            </ol>
 
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner" role="listbox">
-                <div class="item active"><img class="hotHotelImg" src="img/hotel.jpg" alt="1"></div>
-                <div class="item"><img class="hotHotelImg" src="img/hotel.jpg" alt="2"></div>
-                <div class="item"><img class="hotHotelImg" src="img/hotel.jpg" alt="3"></div>
-                <div class="item"><img class="hotHotelImg" src="img/hotel.jpg" alt="3"> </div>
-                <div class="item"><img class="hotHotelImg" src="img/hotel.jpg" alt="3"> </div>
-                <div class="item"><img class="hotHotelImg" src="img/hotel.jpg" alt="3"></div>
-                <div class="item"><img class="hotHotelImg" src="img/hotel.jpg" alt="3"></div>
-                <div class="item"><img class="hotHotelImg" src="img/hotel.jpg" alt="3"></div>
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#hotHotelImages" data-slide-to="0" class="active"></li>
+                    <li data-target="#hotHotelImages" data-slide-to="1"></li>
+                    <li data-target="#hotHotelImages" data-slide-to="2"></li>
+                    <li data-target="#hotHotelImages" data-slide-to="3"></li>
+                    <li data-target="#hotHotelImages" data-slide-to="4"></li>
+                    <li data-target="#hotHotelImages" data-slide-to="5"></li>
+                    <li data-target="#hotHotelImages" data-slide-to="6"></li>
+                    <li data-target="#hotHotelImages" data-slide-to="7"></li>
+                    <li data-target="#hotHotelImages" data-slide-to="8"></li>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active"><img class="hotHotelImg" src="img/hotel.jpg" alt="1"></div>
+                    <div class="item"><img class="hotHotelImg" src="img/hotel.jpg" alt="2"></div>
+                    <div class="item"><img class="hotHotelImg" src="img/hotel.jpg" alt="3"></div>
+                    <div class="item"><img class="hotHotelImg" src="img/hotel.jpg" alt="3"> </div>
+                    <div class="item"><img class="hotHotelImg" src="img/hotel.jpg" alt="3"> </div>
+                    <div class="item"><img class="hotHotelImg" src="img/hotel.jpg" alt="3"></div>
+                    <div class="item"><img class="hotHotelImg" src="img/hotel.jpg" alt="3"></div>
+                    <div class="item"><img class="hotHotelImg" src="img/hotel.jpg" alt="3"></div>
+                </div>
+                <!-- Controls -->
+                <a class="left carousel-control" href="#hotHotelImages" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#hotHotelImages" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+                <div class="scoreDiv">
+                    <span class="score" id="score">Very Good <span class="sMark">7.8</span></span><br/>
+                    <span class="rview">based on <a>1899 reviews</a></span>
+                </div>
             </div>
-            <!-- Controls -->
-            <a class="left carousel-control" href="#hotHotelImages" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#hotHotelImages" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-            <div class="scoreDiv">
-                <span class="score" id="score">Very Good <span class="sMark">7.8</span></span><br/>
-                <span class="rview">based on <a>1899 reviews</a></span>
-            </div>
-        </div>
-            
+
             <div id="hotHotelImagesSmall" class="carousel slide" data-ride="carousel">
-
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                    <div>
-                        <img src="img/f1.jpg" class="hotelImg" alt="f1">
-                        <img src="img/f2.jpg" class="hotelImg" alt="f2">
-                        <img src="img/f4.jpg" class="hotelImg" alt="f4">
-                        <img src="img/f5.jpg" class="hotelImg" alt="f5">
-                        <img src="img/f6.jpg" class="hotelImg" alt="f6">
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <div>
+                            <img src="img/f1.jpg" class="hotelImg" alt="f1">
+                            <img src="img/f2.jpg" class="hotelImg" alt="f2">
+                            <img src="img/f4.jpg" class="hotelImg" alt="f4">
+                            <img src="img/f5.jpg" class="hotelImg" alt="f5">
+                            <img src="img/f6.jpg" class="hotelImg" alt="f6">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div>
+                            <img src="img/f7.jpg" class="hotelImg" alt="f7">
+                            <img src="img/f8.jpg" class="hotelImg" alt="f8">
+                        </div>
                     </div>
                 </div>
-                <div class="item">
-                    <div>
-                        <img src="img/f7.jpg" class="hotelImg" alt="f7">
-                        <img src="img/f8.jpg" class="hotelImg" alt="f8">
+                <!-- Controls -->
+                <a class="left carousel-control" href="#hotHotelImages" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                </a>
+                <a class="right carousel-control" href="#hotHotelImages" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                </a>
+            </div>
+            <pre class="hotel_description">花蓮阿里巴巴休閒民宿位於花蓮市中心，提供帶免費無線網絡連接的色彩繽紛的獨特主題客房，距離南濱夜市和公園有5分鐘車程。民宿前設有24小時迷你市場。駕車前來的客人可以在這家禁煙民宿免費停車。所有客房均設配有定製家具、空調、平面電視以及帶淋浴和免費洗浴用品的連接浴室。花蓮阿里巴巴休閒民宿距離花蓮火車站有10分鐘車程，距離花蓮遠雄海洋公園有15分鐘車程。旅遊諮詢台的工作人員很樂意為您安排賞鯨和釣蝦等活動。民宿周圍分佈著多家當地餐廳和快餐店。</pre>
+            <table id="rooms">
+                <tr>
+                    <th>Available Room Types</th>
+                    <th>Max Occupancy</th>
+                    <th>Average Per Room Night</th>
+                    <th>#</th>
+                    <th></th>
+                </tr>
+            </table>
+            <input type="button" class="roomNum" id="submit" value="Book!"/>    
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    
+                        <h3>Map<span class="glyphicon glyphicon-map-marker"></span></h3>
+                    </div>
+                    <div id="map-body" style="width: 800px;height: 600px">
                     </div>
                 </div>
             </div>
-            <!-- Controls -->
-            <a class="left carousel-control" href="#hotHotelImages" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            </a>
-            <a class="right carousel-control" href="#hotHotelImages" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            </a>
-        </div>
-                <pre class="hotel_description">花蓮阿里巴巴休閒民宿位於花蓮市中心，提供帶免費無線網絡連接的色彩繽紛的獨特主題客房，距離南濱夜市和公園有5分鐘車程。民宿前設有24小時迷你市場。駕車前來的客人可以在這家禁煙民宿免費停車。所有客房均設配有定製家具、空調、平面電視以及帶淋浴和免費洗浴用品的連接浴室。花蓮阿里巴巴休閒民宿距離花蓮火車站有10分鐘車程，距離花蓮遠雄海洋公園有15分鐘車程。旅遊諮詢台的工作人員很樂意為您安排賞鯨和釣蝦等活動。民宿周圍分佈著多家當地餐廳和快餐店。</pre>
-                <table id="rooms">
-                    <tr>
-                        <th>Available Room Types</th>
-                        <th>Max Occupancy</th>
-                        <th>Average Per Room Night</th>
-                        <th>#</th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <td class="hotel_roomType-0_name">Standard Room, 1 Double Bed</td>
-                        <td class="hotel_roomType-0_occupancy">2 guests</td>
-                        <td class="hotel_roomType-0_price">HKD 284</td>
-                        <td ><input class="form-control roomQty"  type="number" name="roomQty" value="1" required /></td>
-                        <td><button type="button" id="RoombookBtn" class="btn btn-primary navbar-btn" 
-                    data-toggle="modal" data-target="#searchModal">Book</button></td>
-                    </tr>
-                    <tr>
-                        <td class="hotel_roomType-1_name">Standard Room, Multiple Beds</td>
-                        <td class="hotel_roomType-1_occupancy">2 guests</td>
-                        <td class="hotel_roomType-1_price">HKD 348</td>
-                        <td ><input class="form-control roomQty"  type="number" name="roomQty" value="1" required /></td>
-                            <td><button type="button" id="RoombookBtn" class="btn btn-primary navbar-btn" 
-                    data-toggle="modal" data-target="#searchModal">Book</button></td>
-                    </tr>
-                </table>
-                <input type="button" class="roomNum" id="submit" value="Book!"/>    
         </div>
     </body>
 </html>

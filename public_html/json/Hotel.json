@@ -18,7 +18,7 @@
                             "name": "Normal",
                             "price": "200",
                             "description": "Have the best bed",
-                            "occupacy": "4",
+                            "occupancy": "4",
                             "img": [
                                 ""
                             ]
@@ -28,7 +28,7 @@
                             "name": "Golden",
                             "price": "1000",
                             "description": "Golden price, Golden service",
-                            "occupacy": "4",
+                            "occupancy": "4",
                             "img": [
                                 ""
                             ]
@@ -60,7 +60,7 @@
                             "name": "Normal",
                             "price": "300",
                             "description": "Just normal",
-                            "occupacy": "4",
+                            "occupancy": "4",
                             "img": [
                                 ""
                             ]
@@ -92,7 +92,7 @@
                             "name": "Normal",
                             "price": "1100",
                             "description": "Easy to access and nearby metro station",
-                            "occupacy": "4",
+                            "occupancy": "4",
                             "img": [
                                 ""
                             ]
@@ -124,7 +124,7 @@
                             "name": "Normal",
                             "price": "1350",
                             "description": "Convenient, Friendly Staffs and what so ever",
-                            "occupacy": "4",
+                            "occupancy": "4",
                             "img": [
                                 ""
                             ]
@@ -156,7 +156,7 @@
                             "name": "Normal",
                             "price": "2130",
                             "description": "On East 46th Street, one block from United Nations Headquarters, this property offers one-bedroom apartments with fully equipped kitchens, private balconies and free high-speed internet access.",
-                            "occupacy": "4",
+                            "occupancy": "4",
                             "img": [
                                 ""
                             ]
@@ -188,7 +188,7 @@
                             "name": "Normal",
                             "price": "1120",
                             "description": "This modern and elegant design hotel offers self-catering accommodation with free Wi-Fi and panoramic views of New York City. The William is located within walking distance from the iconic Fifth Avenue and 450 metres from Grand Central Station.",
-                            "occupacy": "4",
+                            "occupancy": "4",
                             "img": [
                                 ""
                             ]

@@ -29,99 +29,153 @@
                 dataType: 'script',
                 async: false
             });
-            function doSearch(){
+            var hotelResult;
+            function getCompare(sortBy, sortValue) {
+                var compare = function (a, b) {
+                    if (a.last_nom < b.last_nom)
+                        return -1;
+                    if (a.last_nom > b.last_nom)
+                        return 1;
+                    return 0;
+                }
+            }
+            function doSearch() {
                 var tempArr = $("#searchHotel").serializeArray();
                 for (var i in tempArr) {
-                    if(tempArr[i]["value"].length > 0){
+                    if (tempArr[i]["value"].length > 0) {
                         _GET[tempArr[i]["name"]] = tempArr[i]["value"];
-                    }else{
+                    } else {
                         continue;
                     }
                 }
                 $('.hotels').remove();
-                var hotel = Hotel.find([new WherePara("address", jadbOP.like, _GET["place"]),new WherePara("price", jadbOP.lessThanOrEqual, _GET["hotelPrice"]),new WherePara("star", jadbOP.greaterThanOrEqual, _GET["rating"])]);
-                for(var i in hotel){
-                    console.log(hotel[i]);
-                    $("#hotelSearchResult").append(getHotelDiv(hotel[i]));
+                hotelResult = Hotel.find([new WherePara("address", jadbOP.like, _GET["place"]), new WherePara("price", jadbOP.lessThanOrEqual, _GET["price"]), new WherePara("star", jadbOP.equals, _GET["rating"])]);
+                for (var i in hotelResult) {
+                    console.log(hotelResult[i]);
+                    $("#hotelSearchResult").append(getHotelDiv(hotelResult[i]));
                 }
+                $(".numOfHotels").html(hotelResult.length);
+                $(".searchPlace").html(_GET["place"]);
                 window.history.pushState('hotelSearch', 'BestTrip', 'hotelSearch.html?' + $("#searchHotel").serialize());
             }
+            function changeStar(star) {
+                lookAtStar(star);
+                $("#rating").val(star);
+                console.log(star);
+            }
+            function lookAtStar(star) {
+                for (var i = 1; i <= 5; i++) {
+                    $(".s" + i).removeClass("ratedStar");
+                }
+                for (var i = 1; i <= parseInt(star); i++) {
+                    $(".s" + i).addClass("ratedStar");
+                }
+            }
             $(document).ready(function () {
+                for (var name in _GET) {
+                    $("." + name).html(_GET[name]);
+                    $("." + name).val(_GET[name]);
+                }
+
+                lookAtStar($("#rating").val());
+                $(".starContainer").mouseleave(function () {
+                    lookAtStar($("#rating").val());
+                });
+
+                doSearch();
             });
         </script>
         <!-- insert the style here -->
+        <style>
+            .ratedStar{
+                color: #aaaa00;
+            }
+            .ratingStar{
+                font-size: 20pt;
+            }
+            .ratingStar:hover{
+                color: greenyellow;
+            }
+        </style>
     </head>
     <body>
         <div id="header"></div>
         <!-- content -->
-        
+
         <table class="hotelSearchTable">
-        <tr>
-        <td>
-        <form id="searchHotel" action="hotelsearch.html" onsubmit="doSearch(); return false;">
-            <input type="hidden" id="rating" value="5"/>
-        <div class="hotelSearchDiv">
-            <label class="titleLabel">Booking Info</label>
-            <div>
-                Place: <input type="text" name="place" class="form-control midNum"/><br/>
-                Date:  <input type="date" name="date" class="form-control midNum"/><br/>
-                Night: <input type="number" name="night" class="form-control smallNum"/>
-                Rooms: <input type="number" name="rooms" class="form-control smallNum"/><br/>
-            <button type="submit" class="btn btn-primary"
-                    id="hSearch" data-toggle="modal">
-                Search Hotel</button>
-            </div>
-        </div>
-        <div class="hotelFilterDiv">
-            <label class="titleLabel">Filter</label><br/> 
-            <div>
-                <h5>Price</h5>
-                <hr class="shortHr"/>
-                <table width='98%'><tr><td>$0</td>
-                        <td class="right">
-                            below:<input type='number' id='hotelPrice'/></td>
-                        <td class='right'>$1500+</td></tr>
-                    <tr><td colspan="3"><input type="range" id="range" max="1500" min="0"/></td></tr>
-                </table>
-                <hr class="longHr"/>
-                <h5>Rating</h5>
-                <hr class="shortHr"/>
-                <table width="100%">
-                    <tr>
-                        <td><span class="glyphicon glyphicon-star"></span></td>
-                        <td><span class="glyphicon glyphicon-star"></span></td>
-                        <td><span class="glyphicon glyphicon-star"></span></td>
-                        <td><span class="glyphicon glyphicon-star"></span></td>
-                        <td><span class="glyphicon glyphicon-star"></span></td>
-                        <td><span class="glyphicon glyphicon-star"></span></td>
-                    </tr>
-                </table>
-                <hr class="longHr"/>
-                <br/>
-                <h5>Hotel Facilities</h5>
-                <hr class="shortHr"/>
-                <span><input type="checkbox"/>  Swimming Pool</span><br/>
-                <span><input type="checkbox"/>  Internet</span><br/>
-                <span><input type="checkbox"/>  Gym/Fitness</span><br/>
-                <span><input type="checkbox"/>  Car Park</span><br/>
-                <span><input type="checkbox"/>  Business Facilities</span><br/>
-                <span><input type="checkbox"/>  Restaurant</span><br/>
-                <span><input type="checkbox"/>  Non Smoking Rooms</span><br/>
-                <span><input type="checkbox"/>  Smoking Area</span><br/>
-                <span><input type="checkbox"/>  Airport Transfer</span><br/>
-                <span><input type="checkbox"/>  Pets Allowed</span><br/>
-                <span><input type="checkbox"/>  Golf Course</span><br/>
-                <hr class="longHr"/>
-                <br/>
-            </div>
-        </div>
-        </form>
-        </td>
-        <td>
-            <div id="hotelSearchResult" class="hotelSearchResult">
-            </div>
-        </td>
-        </tr>
+            <tr>
+                <td>
+                    <form id="searchHotel" action="hotelsearch.html" onsubmit="doSearch();
+                            return false;">
+                        <input type="hidden" id="rating" name="rating" value="5" class="rating"/>
+                        <div class="hotelSearchDiv">
+                            <label class="titleLabel">Booking Info</label>
+                            <div>
+                                Place: <input type="text" name="place" class="form-control midNum place"/><br/>
+                                Date:  <input type="date" name="date" class="form-control midNum date"/><br/>
+                                Night: <input type="number" name="night" class="form-control smallNum night" style="display:inline"/>
+                                Rooms: <input type="number" name="rooms" class="form-control smallNum rooms" style="display:inline"/><br/>
+                                <button type="submit" class="btn btn-primary"
+                                        id="hSearch" style="margin: 5pt">
+                                    Search Hotel</button>
+                            </div>
+                        </div>
+                        <div class="hotelFilterDiv">
+                            <label class="titleLabel">Filter</label><br/> 
+                            <div>
+                                <h5>Price</h5>
+                                <hr class="shortHr"/>
+                                            Below HKD:<input type='number' id='hotelPrice' name="price" min="0" class="price" value="1500"/>
+                                <hr class="longHr"/>
+                                <h5>Rating</h5>
+                                <hr class="shortHr"/>
+                                <table width="100%">
+                                    <tr class="starContainer">
+                                        <td><span class="glyphicon glyphicon-star ratingStar s1" onclick="changeStar(1)" onmouseover="lookAtStar(1)"></span></td>
+                                        <td><span class="glyphicon glyphicon-star ratingStar s2" onclick="changeStar(2)" onmouseover="lookAtStar(2)"></span></td>
+                                        <td><span class="glyphicon glyphicon-star ratingStar s3" onclick="changeStar(3)" onmouseover="lookAtStar(3)"></span></td>
+                                        <td><span class="glyphicon glyphicon-star ratingStar s4" onclick="changeStar(4)" onmouseover="lookAtStar(4)"></span></td>
+                                        <td><span class="glyphicon glyphicon-star ratingStar s5" onclick="changeStar(5)" onmouseover="lookAtStar(5)"></span></td>
+                                    </tr>
+                                </table>
+                                <hr class="longHr"/>
+                                <br/>
+                                <h5>Hotel Facilities</h5>
+                                <hr class="shortHr"/>
+                                <span><input type="checkbox"/>  Swimming Pool</span><br/>
+                                <span><input type="checkbox"/>  Internet</span><br/>
+                                <span><input type="checkbox"/>  Gym/Fitness</span><br/>
+                                <span><input type="checkbox"/>  Car Park</span><br/>
+                                <span><input type="checkbox"/>  Business Facilities</span><br/>
+                                <span><input type="checkbox"/>  Restaurant</span><br/>
+                                <span><input type="checkbox"/>  Non Smoking Rooms</span><br/>
+                                <span><input type="checkbox"/>  Smoking Area</span><br/>
+                                <span><input type="checkbox"/>  Airport Transfer</span><br/>
+                                <span><input type="checkbox"/>  Pets Allowed</span><br/>
+                                <span><input type="checkbox"/>  Golf Course</span><br/>
+                                <hr class="longHr"/>
+                                <br/>
+                            </div>
+                        </div>
+                    </form>
+                </td>
+                <td>
+                    <div id="hotelSearchResult" class="hotelSearchResult">
+                        <div class="sortDiv">
+                            <span class="resultMsg">We found <span class="numOfHotels">2</span>
+                                hotels with availability in <span class="searchPlace">Hollwood</span>.</span>
+                            <div class="dropdown" id="sortDropdown">
+                                <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort by
+                                    <span class="caret"></span></a>
+                                <ul class="dropdown-menu" id="sortMenu">
+                                    <li><a href="#">Name</a></li>
+                                    <li><a href="#">Price</a></li>
+                                    <li><a href="#">Rating</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                </td>
+            </tr>
         </table>
     </body>
 </html>

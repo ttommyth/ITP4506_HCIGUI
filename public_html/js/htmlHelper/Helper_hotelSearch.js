@@ -48,7 +48,7 @@ function getHotelDiv(hotel){
                                         <div class="panel-heading" role="tab" id="headingOne_'+hotel['hotelID']+'">\
                                           <h4 class="panel-title">\
                                             <a role="button" data-toggle="collapse" data-parent="#accordion_'+hotel['hotelID']+'" href="#collapseOne_'+hotel['hotelID']+'" >\
-                                                <div class="roomName">'+hotel['roomTypes'][0]['name']+'</div>\
+                                                <div class="roomName">'+hotel['roomTypes'][0]['name']+' Room</div>\
                                                 <div class="roomPrice">HKD <span class="hotelsPrice">'+hotel['roomTypes'][0]['price']+'</span></div>\
                                             </a>\
                                           </h4>\
