@@ -26,12 +26,80 @@ and open the template in the editor.
         </script> 
         <script>//do your own function here
             $(document).ready(function () {
-            });
+                $(".hotelImg").css('cursor','pointer');
+                $(".hotelImg").click(function(){
+                    var imgSrc = $(this).attr("src");
+                    $("#largeHotelImg").attr("src",imgSrc);
+                })
+                $("#changeDate").click(function(){
+                    alert("changeDate");
+                })
+            })
         </script>
         <style>
+            .hotelImg{
+                max-width: 100%;
+            }
             .hotHotelImg{
                 max-height: 200px;
                 max-width: 280px;
+            }
+            .pull-left{
+                position: fixed;
+                border-radius: 25px;
+                border: 10px solid #1E90FF;
+                margin-top: 10px;
+                padding: 20px;
+                width: 23%;
+            }
+            .pull-right{
+                border-radius: 25px;
+                margin-top: 10px;
+                padding: 20px;
+                width: 75%;
+            }
+            .price{
+                text-align: right;
+            }
+            #priceTable{
+                width: 100%
+            }
+            #header td {
+                font-size: 1em;
+                border: 1px;
+                vertical-align: middle;
+                padding: 3px 7px 2px 7px;
+                height: 50px;
+            }
+            #personal{
+                width:100%;
+                table-layout:fixed;
+            }
+            #personal td, #abc th{
+                width: 10%;
+                border: 1px;
+                padding: 3px 7px 2px 7px;
+                font-size: 1.3em;
+                height: 40px;
+            }
+            #personal th {
+                font-size: 1.5em;
+                padding-top: 5px;
+                padding-bottom: 4px;
+                background-color: #1E90FF;
+                color: #ffffff;
+                height: 60px;
+            }
+            .anwser td{
+                vertical-align: top;
+            }
+            .question td{
+                vertical-align: bottom;
+            }
+            #endPersonal td{
+                font-size: 1.5em;
+                padding-bottom: 9px;
+                border-bottom: 1px solid #000;
             }
         </style>
         <!-- insert the style here -->
@@ -81,6 +149,123 @@ and open the template in the editor.
                 <span class="sr-only">Next</span>
             </a>
         </div>
-        
+        <div class="pull-left">
+            <div>
+                <table id="priceTable">
+                    <tr>
+                        <td>Rooms</td>
+                        <td class="price">HKD 284</td>
+                    </tr>
+                    <tr>
+                        <td>Tax</td>
+                        <td class="price">HKD 5</td>
+                    </tr>
+                    <tr>
+                        <td>Service Payment</td>
+                        <td class="price">HKD 10</td>
+                    </tr>
+                    <tr>
+                        <td><hr style="border-top: 1px solid #000;"/></td>
+                        <td><hr style="border-top: 1px solid #000;"/></td>
+                    </tr>
+                    <tr>
+                        <td>Total Price</td>
+                        <td class="price">HKD 299</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="pull-right">
+            <div>
+                <table>
+                    <tr>
+                        <td rowspan="4" style="width:80%;"><img src="img/f1.jpg" id="largeHotelImg" alt="largerImg"></td>
+                        <td style="width:20%;"><img src="img/f1.jpg" class="hotelImg" alt="f1"></td>
+                    </tr>
+                    <tr>
+                        <td><img src="img/f2.jpg" class="hotelImg" alt="f2"></td>
+                    </tr>
+                    <tr>
+                        <td><img src="img/f3.jpg" class="hotelImg" alt="f3"></td>
+                    </tr>
+                    <tr>
+                        <td><img src="img/f4.jpg" class="hotelImg" alt="f4"></td>
+                    </tr>
+                </table>
+                <div class="page-header">
+                    <table id="header" style="width:100%;">
+                        <tr>
+                            <td rowspan="2" style="width:60%;"><h1 class="hotel_hotelName">花蓮阿里巴巴休閒民宿</h1></td>            
+                            <td style="width:30%;vertical-align:bottom;">Check in Date: 11-12-2015</td>
+                            <td rowspan="2" style="width:10%;"><input type="button" id="changeDate" value="Change Date"/></td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:top;">Check out Date: 18-12-2015</td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <table id="personal">
+                        <tr>
+                            <th colspan="20">Please input some personal information</th>
+                        </tr>
+                        <tr><td colspan="20"></td></tr>
+                        <tr class="question">
+                            <td colspan="20">What is your purpose of this travelling</td>
+                        </tr>
+                        <tr class="anwser">
+                            <td colspan="4"><input type="radio" name="travelType" value="relaxing"/>Relaxing</td>
+                            <td colspan="4"><input type="radio" name="travelType" value="commercial"/>Commercial</td>
+                            <td colspan="12"><p></p></td>
+                        </tr>
+                        <tr class="question">
+                            <td colspan="3">Mr/Miss</td>
+                            <td colspan="6">First Name</td>
+                            <td colspan="11">Last Name</td>
+                        </tr>
+                        <tr class="anwser">
+                            <td colspan="3">
+                                <select class="roomNum">
+                                    <option value="mr">Mr</option>
+                                    <option value="miss">Miss</option>
+                                </select>
+                            </td>
+                            <td colspan="6"><input type="text" name="lastName"/></td>
+                            <td colspan="6"><input type="text" name="lastName"/></td>
+                            <td colspan="5"><p></p></td>
+                        </tr>
+                        <tr class="question">
+                            <td colspan="20">Please input your email</td>
+                        </tr>
+                        <tr class="anwser">
+                            <td colspan="10"><input type="text" name="email" size="40"/></td>
+                            <td colspan="10"><p></p></td>
+                        </tr>
+                        <tr class="question">
+                            <td colspan="20">Please input your email one more time for confirm</td>
+                        </tr>
+                        <tr class="anwser">
+                            <td colspan="10"><input type="text" name="confirmEmail" size="40"/></td>
+                            <td colspan="10"><p></p></td>
+                        </tr>
+                        <tr class="question">
+                            <td colspan="20">input a password to register (optional)</td>
+                        </tr>
+                        <tr class="anwser">
+                            <td colspan="10"><input type="text" name="password" size="40"/></td>
+                            <td colspan="10"><p></p></td>
+                        </tr>
+                        <tr id="endPersonal">
+                            <td colspan="3">Room(s):</td>
+                            <td colspan="10"> Standard Room, 1 Double Bed</td>
+                            <td colspan="7" style="text-align:right;">HKD 299 (one night)</td>
+                        </tr>
+                        <tr>
+                            <td colspan="20"><input style="float:right;" type="button" value="Continue"/></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
