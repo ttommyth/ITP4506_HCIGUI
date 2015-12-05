@@ -29,17 +29,20 @@
                 dataType: 'script',
                 async: false
             });
-            $(document).ready(function () {
-            });
             function doSearch(){
                 var tempArr = $("#searchHotel").serializeArray();
                 for (var i in tempArr) {
                     _GET[tempArr[i]["name"]] = tempArr[i]["value"];
                 }
                 $('.hotels').remove();
-                var hotel = Hotel.find([new WherePara("address", jadbOP.like, _GET["place"]),new WherePara("price", jadbOP.like, _GET["hotelPrice"]),new WherePara("star", jadbOP.like, _GET["rating"])]);
-                $("#hotelSearchResult").append(getHotelDiv(hotel));
+                var hotel = Hotel.find([new WherePara("address", jadbOP.like, _GET["place"]),new WherePara("price", jadbOP.lessThanOrEqual, _GET["hotelPrice"]),new WherePara("star", jadbOP.greaterThanOrEqual, _GET["rating"])]);
+                for(var i in hotel){
+                    console.log(hotel[i]);
+                    $("#hotelSearchResult").append(getHotelDiv(hotel[i]));
+                }
             }
+            $(document).ready(function () {
+            });
         </script>
         <!-- insert the style here -->
     </head>
