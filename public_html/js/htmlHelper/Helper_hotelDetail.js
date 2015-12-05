@@ -42,14 +42,32 @@ function getRecommendedHotel(hotel){
 
 function getRoomTr(room){
     var str = '<tr>\
-                    <form action="hotelPayment.html">\
-                    <input type="hidden" name="room_name" value="'+room['name']+'">\
                     <td class="hotel_roomType-1_name">'+room['name']+'</td>\
                     <td class="hotel_roomType-1_occupancy">'+room['occupancy']+' guests</td>\
                     <td class="hotel_roomType-1_price">HKD '+room['price']+'</td>\
-                    <td ><input class="form-control roomQty"  type="number" name="roomQty" value="1" required /></td>\
-                    <td><button type="submit" id="RoombookBtn" class="btn btn-primary navbar-btn">Book</button></td>\
+                    <td colspan="2" class="afterLogin">\
+                    <form action="hotelPayment.html">\
+                    <input type="hidden" name="hotelID" class="hotel_hotelID">\
+                    <input type="hidden" name="room_name" value="'+room['name']+'">\
+                    <input class="form-control roomQty inline"  type="number" name="roomQty" value="1" required /> Rooms\
+                    <button type="submit" id="RoombookBtn" class="btn btn-primary inline">Book</button>\
                     </form>\
+                    </td>\
                 </tr>';
+    return str;
+}
+
+function getImgPoints(imgs){
+    var str = "";
+    for(var i = 0; i< imgs.length;i++){
+        str +='<li data-target="#hotHotelImages" data-slide-to="'+i+'"></li>';
+    }
+    return str;
+}
+function getImgContent(imgs){
+    var str = "";
+    for(var i = 0; i< imgs.length;i++){
+        str +='<div class="item"><img class="hotHotelImg" src="img/hotel/'+imgs[i]+'" alt="'+i+'"></div>';
+    }
     return str;
 }

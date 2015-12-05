@@ -32,6 +32,24 @@
                 dataType: 'script',
                 async: false
             });
+            function getMarkStr(hotel) {
+                var markStr = "";
+                if (hotel['star'] == "0") {
+                    markStr = "Poor";
+                } else if (hotel['star'] == "1") {
+                    markStr = "Normal";
+                } else if (hotel['star'] == "2") {
+                    markStr = "Not Bad";
+                } else if (hotel['star'] == "3") {
+                    markStr = "Good";
+                } else if (hotel['star'] == "4") {
+                    markStr = "Very Good";
+                } else if (hotel['star'] == "5") {
+                    markStr = "Awesome";
+                }
+                return markStr;
+            }
+
             var currentHotel;
             var map;
             function initMap() {
@@ -57,6 +75,27 @@
                     }
                 });
             }
+            ;
+            function doComment() {
+                var comment = new Object();
+                comment['username'] = $("#comment_username").val();
+                comment['star'] = $("#comment_star").val();
+                comment['content'] = $("#comment_content").val();
+                Hotel.doComment(currentHotel, comment);
+
+                $(".comment").hide(1000, function () {
+                    $(".comment").remove();
+                    writeComment(comment);
+                });
+            }
+            var isOk = true;
+            function writeComment(comment){
+                if(isOk){
+                    $("#commentTable").append("<tr class='info'><td>" + comment["username"] + "</td><td>" + comment["star"] + "</td><td>" + comment["content"] + "</td></tr>");
+                    isOk=false;
+                }
+            }
+
             $(document).ready(function () {
                 $(".roomNum").hide();
                 $(".hotelImg").css('cursor', 'pointer');
@@ -85,21 +124,37 @@
 
                 currentHotel = Hotel.find([new WherePara("hotelID", jadbOP.equals, _GET['hotelID'])])[0];
 
-                for (var name in currentHotel) {
-                    $(".hotel_" + name).html(currentHotel[name]);
-                    $(".hotel_" + name).val(currentHotel[name]);
-                }
+                currentHotel['markStr'] = getMarkStr(currentHotel);
+                //append room
                 var rooms = currentHotel['roomTypes'];
                 for (var name in rooms) {
                     $("#rooms").append(getRoomTr(rooms[name]));
                 }
+                var comments = currentHotel['comments'];
+                $("#commentTable").append("<tr><td>Username</td><td>Star</td><td>Comment</td></tr>");
+                for (var name in comments) {
+                    $("#commentTable").append("<tr><td>" + comments[name]["username"] + "</td><td>" + comments[name]["star"] + "</td><td>" + comments[name]["content"] + "</td></tr>");
+                }
+                $("#commentTable").append("<tr class='comment'><td colspan='3'><h2>Comment...</h2></td></tr><tr style='height:50px' class='comment'><td>\
+        <input type='text' class='form-control' id='comment_username' name='username' style='width:100%;height:100%' placeholder='username' required/></td><td>\
+<input type='number' class='form-control' id='comment_star' name='star' style='width:100%;height:100%' min='0' max='5' placeholder='star' required/></td><td>\
+<input type='text' class='form-control' id='comment_content' name='content' style='width:100%;height:100%' placeholder='comment' required/></td></tr><tr class='comment'><td colspan='3' style='text-align:right'>\
+<button type='submit' class='btn' onclick=''>Comment</button></td></tr>");
+                for (var name in currentHotel) {
+                    $(".hotel_" + name).html(currentHotel[name]);
+                    $(".hotel_" + name).val(currentHotel[name]);
+                }
+
+
+                //
+                $("#imgs_point").append(getImgPoints(currentHotel["img"]));
+                $("#imgs_inner").append(getImgContent(currentHotel["img"]));
+
+                $("#imgs_point").children().first().addClass("active");
+                $("#imgs_inner").children().first().addClass("active");
 
                 $("#bookBtn").click(function () {
                     $(document).scrollTop($("#rooms").offset().top);
-                });
-
-                $("#submit").click(function () {
-                    window.location = "HotelPayment.html";
                 });
 
                 initMap();
@@ -244,7 +299,15 @@
 
             <div class="page-header">
                 <div id="hotelName">
-                    <span class="hotel_hotelName">花蓮阿里巴巴休閒民宿</span><br/>
+                    <span class="hotel_hotelName">花蓮阿里巴巴休閒民宿</span>
+                    <div class="hotelsRing inline">
+                        <span class="glyphicon glyphicon-star s1"></span>
+                        <span class="glyphicon glyphicon-star s2"></span>
+                        <span class="glyphicon glyphicon-star s3"></span>
+                        <span class="glyphicon glyphicon-star s4"></span>
+                        <span class="glyphicon glyphicon-star s5"></span>
+                    </div>
+                    <br/>
                     <span class="hotel_address">the fucking hotel address
                     </span>
                     <a href="" class="hotelAddressLink" data-toggle="modal" data-target="#mapModal">(Show on map)</a>
@@ -262,28 +325,11 @@
             <div id="hotHotelImages" class="carousel slide" data-ride="carousel">
 
                 <!-- Indicators -->
-                <ol class="carousel-indicators">
-                    <li data-target="#hotHotelImages" data-slide-to="0" class="active"></li>
-                    <li data-target="#hotHotelImages" data-slide-to="1"></li>
-                    <li data-target="#hotHotelImages" data-slide-to="2"></li>
-                    <li data-target="#hotHotelImages" data-slide-to="3"></li>
-                    <li data-target="#hotHotelImages" data-slide-to="4"></li>
-                    <li data-target="#hotHotelImages" data-slide-to="5"></li>
-                    <li data-target="#hotHotelImages" data-slide-to="6"></li>
-                    <li data-target="#hotHotelImages" data-slide-to="7"></li>
-                    <li data-target="#hotHotelImages" data-slide-to="8"></li>
+                <ol class="carousel-indicators" id="imgs_point">
                 </ol>
 
                 <!-- Wrapper for slides -->
-                <div class="carousel-inner" role="listbox">
-                    <div class="item active"><img class="hotHotelImg" src="img/hotel.jpg" alt="1"></div>
-                    <div class="item"><img class="hotHotelImg" src="img/hotel.jpg" alt="2"></div>
-                    <div class="item"><img class="hotHotelImg" src="img/hotel.jpg" alt="3"></div>
-                    <div class="item"><img class="hotHotelImg" src="img/hotel.jpg" alt="3"> </div>
-                    <div class="item"><img class="hotHotelImg" src="img/hotel.jpg" alt="3"> </div>
-                    <div class="item"><img class="hotHotelImg" src="img/hotel.jpg" alt="3"></div>
-                    <div class="item"><img class="hotHotelImg" src="img/hotel.jpg" alt="3"></div>
-                    <div class="item"><img class="hotHotelImg" src="img/hotel.jpg" alt="3"></div>
+                <div class="carousel-inner" role="listbox" id="imgs_inner">
                 </div>
                 <!-- Controls -->
                 <a class="left carousel-control" href="#hotHotelImages" role="button" data-slide="prev">
@@ -295,13 +341,13 @@
                     <span class="sr-only">Next</span>
                 </a>
                 <div class="scoreDiv">
-                    <span class="score" id="score">Very Good <span class="sMark">7.8</span></span><br/>
-                    <span class="rview">based on <a>1899 reviews</a></span>
+                    <span class="score" id="score"><span class="hotel_markStr">Very Good</span> <span class="hotel_star">7.8</span></span><br/>
+                    <span class="rview">based on <a href="" data-toggle="modal" data-target="#commentModal">1899 reviews</a></span>
                 </div>
             </div>
 
+            <!--
             <div id="hotHotelImagesSmall" class="carousel slide" data-ride="carousel">
-                <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
                     <div class="item active">
                         <div>
@@ -319,22 +365,27 @@
                         </div>
                     </div>
                 </div>
-                <!-- Controls -->
-                <a class="left carousel-control" href="#hotHotelImages" role="button" data-slide="prev">
+                <a class="left carousel-control" href="#hotHotelImagesSmall" role="button" data-slide="prev">
                     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                 </a>
-                <a class="right carousel-control" href="#hotHotelImages" role="button" data-slide="next">
+                <a class="right carousel-control" href="#hotHotelImagesSmall" role="button" data-slide="next">
                     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                 </a>
             </div>
-            <pre class="hotel_description">花蓮阿里巴巴休閒民宿位於花蓮市中心，提供帶免費無線網絡連接的色彩繽紛的獨特主題客房，距離南濱夜市和公園有5分鐘車程。民宿前設有24小時迷你市場。駕車前來的客人可以在這家禁煙民宿免費停車。所有客房均設配有定製家具、空調、平面電視以及帶淋浴和免費洗浴用品的連接浴室。花蓮阿里巴巴休閒民宿距離花蓮火車站有10分鐘車程，距離花蓮遠雄海洋公園有15分鐘車程。旅遊諮詢台的工作人員很樂意為您安排賞鯨和釣蝦等活動。民宿周圍分佈著多家當地餐廳和快餐店。</pre>
+            -->
+            <div class="page-header">
+                <h1><small> Description:</small></h1>
+
+                <pre class="hotel_description">花蓮阿里巴巴休閒民宿位於花蓮市中心，提供帶免費無線網絡連接的色彩繽紛的獨特主題客房，距離南濱夜市和公園有5分鐘車程。民宿前設有24小時迷你市場。駕車前來的客人可以在這家禁煙民宿免費停車。所有客房均設配有定製家具、空調、平面電視以及帶淋浴和免費洗浴用品的連接浴室。花蓮阿里巴巴休閒民宿距離花蓮火車站有10分鐘車程，距離花蓮遠雄海洋公園有15分鐘車程。旅遊諮詢台的工作人員很樂意為您安排賞鯨和釣蝦等活動。民宿周圍分佈著多家當地餐廳和快餐店。</pre>
+
+            </div>
+            <div class="alert alert-info beforeLogin" role="alert">You should login before you make booking</div>
             <table id="rooms">
                 <tr>
                     <th>Available Room Types</th>
                     <th>Max Occupancy</th>
                     <th>Average Per Room Night</th>
-                    <th>#</th>
-                    <th></th>
+                    <th class="afterLogin">Booking</th>
                 </tr>
             </table>
             <input type="button" class="roomNum" id="submit" value="Book!"/>    
@@ -346,11 +397,29 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    
-                        <h3>Map<span class="glyphicon glyphicon-map-marker"></span></h3>
+
+                        <h3>Map <span class="glyphicon glyphicon-map-marker"></span></h3>
                     </div>
                     <div id="map-body" style="width: 800px;height: 600px">
                     </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                        <h3>Comment <span class="glyphicon glyphicon-comment"></span></h3>
+                    </div>
+                    <form action="" onsubmit="doComment();
+                            return false;">
+                        <table id="commentTable" class="table">
+
+                        </table>
+                    </form>
                 </div>
             </div>
         </div>

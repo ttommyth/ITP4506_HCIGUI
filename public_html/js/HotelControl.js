@@ -32,3 +32,13 @@ function Hotel() {//object
 }
 
 Hotel.find = function (paras) {return find(Hotel, "json/Hotel.json","hotels",paras);};
+
+Hotel.doComment= function(hotel, comment){
+    var hotels = JSON.parse(localStorage.getItem("json/Hotel.json"));
+    for(var name in hotels["hotels"]){
+        if(hotels["hotels"][name]["hotelID"]==hotel["hotelID"]){
+            hotels["hotels"][name]["comments"].push(comment);
+        }
+    }
+    localStorage.setItem("json/Hotel.json", JSON.stringify(hotels));
+};

@@ -13,6 +13,8 @@ function jadbOP() {
 ;
 
 jadbOP.equals = function (a, b) {
+    a = a.toUpperCase();
+    b = b.toUpperCase();
     return a == b;
 };
 
@@ -32,6 +34,8 @@ jadbOP.lessThanOrEqual = function (a, b) {
     return parseFloat(a) <= parseFloat(b);
 };
 jadbOP.like = function (a, b) {
+    a = a.toUpperCase();
+    b = b.toUpperCase();
     return a.indexOf(b) > -1;
 };
 jadbOP.all = function(a,b){
