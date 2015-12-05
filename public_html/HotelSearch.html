@@ -19,9 +19,27 @@
             });
         </script> 
         <script>//do your own function here
-            
+            $.ajax({
+                url: 'js/HotelControl.js',
+                dataType: 'script',
+                async: false
+            });
+            $.ajax({
+                url: 'js/htmlHelper/Helper_hotelSearch.js',
+                dataType: 'script',
+                async: false
+            });
             $(document).ready(function () {
             });
+            function doSearch(){
+                var tempArr = $("#searchHotel").serializeArray();
+                for (var i in tempArr) {
+                    _GET[tempArr[i]["name"]] = tempArr[i]["value"];
+                }
+                $('.hotels').remove();
+                var hotel = Hotel.find([new WherePara("address", jadbOP.like, _GET["place"]),new WherePara("price", jadbOP.like, _GET["hotelPrice"]),new WherePara("star", jadbOP.like, _GET["rating"])]);
+                $("#hotelSearchResult").append(getHotelDiv(hotel));
+            }
         </script>
         <!-- insert the style here -->
     </head>
@@ -32,16 +50,17 @@
         <table class="hotelSearchTable">
         <tr>
         <td>
-        <form>
+        <form id="searchHotel" action="hotelsearch.html" onsubmit="doSearch(); return false;">
+            <input type="hidden" id="rating" value="5"/>
         <div class="hotelSearchDiv">
             <label>Booking Info</label><br/>
             <div>
                 Place: <input type="text" name="place" class="form-control midNum"/><br/>
                 Date:  <input type="date" name="date" class="form-control midNum"/><br/>
-            Night: <input type="number" name="night" class="form-control smallNum"/>
-            Rooms: <input type="number" name="rooms" class="form-control smallNum"/><br/>
-            <button type="button" class="btn btn-primary navbar-btn beforeLogin"
-                    id="hSearch" data-toggle="modal" data-target="#loginModal">
+                Night: <input type="number" name="night" class="form-control smallNum"/>
+                Rooms: <input type="number" name="rooms" class="form-control smallNum"/><br/>
+            <button type="submit" class="btn btn-primary"
+                    id="hSearch" data-toggle="modal">
                 Search Hotel</button>
             </div>
         </div>
@@ -52,7 +71,7 @@
                 <hr class="shortHr"/>
                 <table width='98%'><tr><td>$0</td>
                         <td class="right">
-                            below:<input type='number' id='hotelPrince'/></td>
+                            below:<input type='number' id='hotelPrice'/></td>
                         <td class='right'>$1500+</td></tr>
                     <tr><td colspan="3"><input type="range" id="range" max="1500" min="0"/></td></tr>
                 </table>
@@ -91,225 +110,7 @@
         </form>
         </td>
         <td>
-            <div class="hotelSearchResult">
-                <div class="sortDiv">
-                    <span class="resultMsg">We found <span class="numOfHotels">2</span>
-                    hotels with availability in <span class="searchPlace">Hollwood</span>.</span>
-                <div class="dropdown" id="sortDropdown">
-                 <a id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort by
-                     <span class="caret"></span></a>
-                    <ul class="dropdown-menu" id="sortMenu">
-                  <li><a href="#">Name</a></li>
-                  <li><a href="#">Price</a></li>
-                  <li><a href="#">Rating</a></li>
-                </ul>
-              </div>
-                </div>
-                <br>
-                <div class="hotelRsult">
-                    <!-- one hotel -->
-                    <div class="hotels">
-                        <a href="">
-                        <table>
-                        <tr>
-                            <td rowspan="2">
-                        <div class="hotleImg">
-                        <img src="img/f4.jpg"/>
-                        </div>
-                        </td>
-                        <td>
-                        <div>
-                            <span class="hotelNamelbl">Fucking Hotel</span><br>
-                            <div class="hotelsRing">
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                            </div>
-                            <a href="" class="hotelregion">The Fucking region</a>
-                        </div>
-                        </td>
-                        <td>
-                            <span class="score">Very Good <span class="sMark">7.8</span></span>
-                            <button type="button" class="btn btn-primary navbar-btn beforeLogin"
-                    id="hSearch" data-toggle="modal" data-target="#loginModal">
-                More Detail</button>
-                        </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <div class="hotelsRoom">
-                                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                      <div class="panel panel-default">
-                                        <div class="panel-heading" role="tab" id="headingOne1">
-                                          <h4 class="panel-title">
-                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" >
-                                                <div class="roomName">The fucking big room</div>
-                                                <div class="roomPrice">HKD <span class="hotelsPrice">500</span></div>
-                                            </a>
-                                          </h4>
-                                        </div>
-                                        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                                          <div class="panel-body">
-                                              <table class="roomTable">
-                                                  <tr>
-                                                      <td>Discription</td>
-                                                  </tr>
-                                                  <tr>
-                                                      <td><span class="roomDis">this is a fucking room
-                                                              </span></td>
-                                                  
-                                                  </tr>
-                                              </table>
-                                          </div>
-                                        </div>
-                                      </div>
-                                        </div>
-                                </div>
-                            </td>
-                        </tr>
-                        </table>
-                        </a>
-                        <hr class="hotelHr"/>
-                    </div>
-                    <!-- -->
-                    
-                    <div class="hotels">
-                        <a href="">
-                        <table>
-                        <tr>
-                            <td rowspan="2">
-                        <div class="hotleImg">
-                        <img src="img/f4.jpg"/>
-                        </div>
-                        </td>
-                        <td>
-                        <div>
-                            <span class="hotelNamelbl">Fucking Hotel</span><br>
-                            <div class="hotelsRing">
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                            </div>
-                            <a href="" class="hotelregion">The Fucking region</a>
-                        </div>
-                        </td>
-                        <td>
-                            <span class="score">Very Good <span class="sMark">7.8</span></span>
-                            <button type="button" class="btn btn-primary navbar-btn beforeLogin"
-                    id="hSearch" data-toggle="modal" data-target="#loginModal">
-                More Detail</button>
-                        </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <div class="hotelsRoom">
-                                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                      <div class="panel panel-default">
-                                        <div class="panel-heading" role="tab" id="headingOne">
-                                          <h4 class="panel-title">
-                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" >
-                                                <div class="roomName">The fucking big room</div>
-                                                <div class="roomPrice">HKD <span class="hotelsPrice">500</span></div>
-                                            </a>
-                                          </h4>
-                                        </div>
-                                        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                                          <div class="panel-body">
-                                              <table class="roomTable">
-                                                  <tr>
-                                                      <td>Discription</td>
-                                                  </tr>
-                                                  <tr>
-                                                      <td><span class="roomDis">this is a fucking room
-                                                              </span></td>
-                                                  
-                                                  </tr>
-                                              </table>
-                                          </div>
-                                        </div>
-                                      </div>
-                                        </div>
-                                </div>
-                            </td>
-                        </tr>
-                        </table>
-                        </a>
-                        <hr class="hotelHr"/>
-                    </div>
-                    <div class="hotels">
-                        <a href="">
-                        <table>
-                        <tr>
-                            <td rowspan="2">
-                        <div class="hotleImg">
-                        <img src="img/f4.jpg"/>
-                        </div>
-                        </td>
-                        <td>
-                        <div>
-                            <span class="hotelNamelbl">Fucking Hotel</span><br>
-                            <div class="hotelsRing">
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                            </div>
-                            <a href="" class="hotelregion">The Fucking region</a>
-                        </div>
-                        </td>
-                        <td>
-                            <span class="score">Very Good <span class="sMark">7.8</span></span>
-                            <button type="button" class="btn btn-primary navbar-btn beforeLogin"
-                    id="hSearch" data-toggle="modal" data-target="#loginModal">
-                More Detail</button>
-                        </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <div class="hotelsRoom">
-                                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                      <div class="panel panel-default">
-                                        <div class="panel-heading" role="tab" id="headingOne">
-                                          <h4 class="panel-title">
-                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" >
-                                                <div class="roomName">The fucking big room</div>
-                                                <div class="roomPrice">HKD <span class="hotelsPrice">500</span></div>
-                                            </a>
-                                          </h4>
-                                        </div>
-                                        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                                          <div class="panel-body">
-                                              <table class="roomTable">
-                                                  <tr>
-                                                      <td>Discription</td>
-                                                  </tr>
-                                                  <tr>
-                                                      <td><span class="roomDis">this is a fucking room
-                                                              </span></td>
-                                                  
-                                                  </tr>
-                                              </table>
-                                          </div>
-                                        </div>
-                                      </div>
-                                        </div>
-                                </div>
-                            </td>
-                        </tr>
-                        </table>
-                        </a>
-                        <hr class="hotelHr"/>
-                    </div>
-                    
-                </div>
+            <div id="hotelSearchResult" class="hotelSearchResult">
             </div>
         </td>
         </tr>
