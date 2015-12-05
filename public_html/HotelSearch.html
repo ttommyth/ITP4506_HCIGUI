@@ -32,7 +32,11 @@
             function doSearch(){
                 var tempArr = $("#searchHotel").serializeArray();
                 for (var i in tempArr) {
-                    _GET[tempArr[i]["name"]] = tempArr[i]["value"];
+                    if(tempArr[i]["value"].length > 0){
+                        _GET[tempArr[i]["name"]] = tempArr[i]["value"];
+                    }else{
+                        continue;
+                    }
                 }
                 $('.hotels').remove();
                 var hotel = Hotel.find([new WherePara("address", jadbOP.like, _GET["place"]),new WherePara("price", jadbOP.lessThanOrEqual, _GET["hotelPrice"]),new WherePara("star", jadbOP.greaterThanOrEqual, _GET["rating"])]);
@@ -40,6 +44,7 @@
                     console.log(hotel[i]);
                     $("#hotelSearchResult").append(getHotelDiv(hotel[i]));
                 }
+                window.history.pushState('hotelSearch', 'BestTrip', 'hotelSearch.html?' + $("#searchHotel").serialize());
             }
             $(document).ready(function () {
             });
