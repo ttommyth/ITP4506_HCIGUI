@@ -289,6 +289,302 @@
                     "content": "Woo Hoo ~! Great Travel"
                 }
             ]
+        },
+        {
+            "flightID": "FL1349",
+            "fromCity": "Hong Kong",
+            "fromAirport": "Hong Kong International Airport",
+            "toCity": "Japan",
+            "toAirport": "Kansai International Airport",
+            "duration": "13:40",
+            "takeoffTime": "4:45",
+            "companyName": "Cathay Pacific",
+            "tax": "5",
+            "img": [
+            ],
+            "seatTypes": [
+                {
+                    "name": "Economy",
+                    "price": "5300",
+                    "avaSeat": "100"
+                },
+                {
+                    "name": "Business",
+                    "price": "9860",
+                    "avaSeat": "10"
+                },
+                {
+                    "name": "First",
+                    "price": "13490",
+                    "avaSeat": "10"
+                }
+            ],
+            "comments": [
+                {
+                    "username": "Japan Man",
+                    "star": "3",
+                    "content": "Normal one..."
+                }
+            ]
+        },
+        {
+            "flightID": "FL1137",
+            "fromCity": "Hong Kong",
+            "fromAirport": "Hong Kong International Airport",
+            "toCity": "USA",
+            "toAirport": "Dothan Regional Airport",
+            "duration": "8:25",
+            "takeoffTime": "9:35",
+            "companyName": "Cathay Pacific",
+            "tax": "5",
+            "img": [
+            ],
+            "seatTypes": [
+                {
+                    "name": "Economy",
+                    "price": "4950",
+                    "avaSeat": "110"
+                },
+                {
+                    "name": "Business",
+                    "price": "10000",
+                    "avaSeat": "10"
+                },
+                {
+                    "name": "First",
+                    "price": "14450",
+                    "avaSeat": "5"
+                }
+            ],
+            "comments": [
+                {
+                    "username": "Hong Kong Man",
+                    "star": "4",
+                    "content": "I like the movies!"
+                }
+            ]
+        },
+        {
+            "flightID": "FL1676",
+            "fromCity": "Swedish",
+            "fromAirport": "Anderstorp Airport",
+            "toCity": "Hong Kong",
+            "toAirport": "Hong Kong International Airport",
+            "duration": "13:50",
+            "takeoffTime": "14:15",
+            "companyName": "Scandinavian Airlines",
+            "tax": "8",
+            "img": [
+            ],
+            "seatTypes": [
+                {
+                    "name": "Economy",
+                    "price": "2000",
+                    "avaSeat": "90"
+                },
+                {
+                    "name": "Business",
+                    "price": "3700",
+                    "avaSeat": "10"
+                },
+                {
+                    "name": "First",
+                    "price": "6250",
+                    "avaSeat": "10"
+                }
+            ],
+            "comments": [
+                {
+                    "username": "Japanese",
+                    "star": "2",
+                    "content": "The seats are so dirty!"
+                }
+            ]
+        },
+        {
+            "flightID": "FL1734",
+            "fromCity": "New York",
+            "fromAirport": "John F. Kennedy International Airport",
+            "toCity": "Hong Kong",
+            "toAirport": "Hong Kong International Airport",
+            "duration": "11:30",
+            "takeoffTime": "3:00",
+            "companyName": "Cathay Pacific",
+            "tax": "5",
+            "img": [
+            ],
+            "seatTypes": [
+                {
+                    "name": "Economy",
+                    "price": "4900",
+                    "avaSeat": "90"
+                },
+                {
+                    "name": "Business",
+                    "price": "10001",
+                    "avaSeat": "10"
+                },
+                {
+                    "name": "First",
+                    "price": "14999",
+                    "avaSeat": "10"
+                }
+            ],
+            "comments": [
+                {
+                    "username": "New York guy",
+                    "star": "5",
+                    "content": "Girls are beautiful!"
+                }
+            ]
+        },
+        {
+            "flightID": "FL1234",
+            "fromCity": "Korea",
+            "fromAirport": "Cheongju International Airport",
+            "toCity": "Hong Kong",
+            "toAirport": "Hong Kong International Airport",
+            "duration": "15:30",
+            "takeoffTime": "4:30",
+            "companyName": "Korea Airline",
+            "tax": "3",
+            "img": [
+            ],
+            "seatTypes": [
+                {
+                    "name": "Economy",
+                    "price": "3600",
+                    "avaSeat": "90"
+                },
+                {
+                    "name": "Business",
+                    "price": "4600",
+                    "avaSeat": "10"
+                },
+                {
+                    "name": "First",
+                    "price": "7000",
+                    "avaSeat": "10"
+                }
+            ],
+            "comments": [
+                {
+                    "username": "Korea Girl",
+                    "star": "5",
+                    "content": "Boys are handsome!"
+                }
+            ]
+        },
+        {
+            "flightID": "FL1234",
+            "fromCity": "Shang Hai",
+            "fromAirport": "Pudong Airport",
+            "toCity": "Hong Kong",
+            "toAirport": "Hong Kong International Airport",
+            "duration": "12:00",
+            "takeoffTime": "2:30",
+            "companyName": "Korea Airline",
+            "tax": "3",
+            "img": [
+            ],
+            "seatTypes": [
+                {
+                    "name": "Economy",
+                    "price": "1200",
+                    "avaSeat": "90"
+                },
+                {
+                    "name": "Business",
+                    "price": "2400",
+                    "avaSeat": "10"
+                },
+                {
+                    "name": "First",
+                    "price": "3600",
+                    "avaSeat": "10"
+                }
+            ],
+            "comments": [
+                {
+                    "username": "Hong Kong Man",
+                    "star": "3",
+                    "content": "I met a pretty boy!"
+                }
+            ]
+        },
+        {
+            "flightID": "FL1105",
+            "fromCity": "Hong Kong",
+            "fromAirport": "Hong Kong International Airport",
+            "toCity": "UK",
+            "toAirport": "London Heathrow Airport",
+            "duration": "7:15",
+            "takeoffTime": "11:59",
+            "companyName": "Cathay Pacific",
+            "tax": "7",
+            "img": [
+            ],
+            "seatTypes": [
+                {
+                    "name": "Economy",
+                    "price": "3750",
+                    "avaSeat": "110"
+                },
+                {
+                    "name": "Business",
+                    "price": "7700",
+                    "avaSeat": "10"
+                },
+                {
+                    "name": "First",
+                    "price": "9999",
+                    "avaSeat": "5"
+                }
+            ],
+            "comments": [
+                {
+                    "username": "Jacky Chen",
+                    "star": "5",
+                    "content": "I could watch my film!"
+                }
+            ]
+        },
+        {
+            "flightID": "FL1250",
+            "fromCity": "Hong Kong",
+            "fromAirport": "Hong Kong International Airport",
+            "toCity": "USA",
+            "toAirport": "Dothan Regional Airport",
+            "duration": "14:30",
+            "takeoffTime": "10:00",
+            "companyName": "Japan AirLines",
+            "tax": "5",
+            "img": [
+            ],
+            "seatTypes": [
+                {
+                    "name": "Economy",
+                    "price": "3000",
+                    "avaSeat": "110"
+                },
+                {
+                    "name": "Business",
+                    "price": "5600",
+                    "avaSeat": "10"
+                },
+                {
+                    "name": "First",
+                    "price": "9999",
+                    "avaSeat": "5"
+                }
+            ],
+            "comments": [
+                {
+                    "username": "USA Man",
+                    "star": "3",
+                    "content": "Normal la"
+                }
+            ]
         }
     ]
 }
