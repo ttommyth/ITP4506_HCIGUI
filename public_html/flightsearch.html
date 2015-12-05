@@ -209,10 +209,8 @@ and open the template in the editor.
                 color: #aaaaaa;
                 font-size: 32pt;
             }
-            .bookingSummaryDiv{
-            }
             .nextBtnMsg{
-                font-size: 25px;
+                font-size: 20px;
                 vertical-align: middle;
             }
         </style>
@@ -220,7 +218,7 @@ and open the template in the editor.
     <body>
         <div id="header"></div>
         <!-- content -->
-        <table style="margin-left:10px">
+        <table style="margin-left:5px">
             <tr>
                 <td>
                     <div class="flightSearchDetails">
@@ -345,11 +343,11 @@ and open the template in the editor.
                             <hr>
                             <div id="bookDiv">
                                 <h4>To Book this flight...</h4>
-                                <button id="nextBtn" class="btn btn-success afterLogin" style="width:100%;height:70px;margin-bottom: 10px" onclick="doNextStep();">
-                                    <span class="nextBtnMsg">Next Step<span class="glyphicon glyphicon-chevron-right nextBtn"></span></span>
+                                <button id="nextBtn" class="btn btn-success afterLogin rightNextBtn" onclick="doNextStep();">
+                                    <span class="nextBtnMsg">Next Step <span class="glyphicon glyphicon-chevron-right nextBtn"></span></span>
                                 </button>
-                                <button id="loginFirstBtn" class="btn disabled beforeLogin" style="width:100%;height:70px;margin-bottom: 10px">
-                                    <span class="nextBtnMsg">You must login first<span class="glyphicon glyphicon glyphicon-lock nextBtn"></span></span>
+                                <button id="loginFirstBtn" class="btn disabled beforeLogin rightNextBtn">
+                                    <span class="nextBtnMsg">You must login first <span class="glyphicon glyphicon glyphicon-lock nextBtn"></span></span>
                                 </button>
                             </div>
                             <!--

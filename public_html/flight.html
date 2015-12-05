@@ -48,6 +48,16 @@
                 fromDate_onchange();
             });
         </script>
+        <style>
+            .bGroup{
+                margin-bottom: 10px;
+            }
+            #flightsubmitBtn{
+                position: relative;
+                left: 900px;
+                top: -60px;
+            }
+        </style>
         <!-- insert the style here -->
 
     </head>
@@ -94,20 +104,32 @@
                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
+            
         </div>
+        
+        
         <div id="fillAllModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
             <div class="modal-dialog">
                 <div id="fillInBlankMsg" class="alert alert-warning" role="alert">You must fill in all the blank</div>
-
             </div>
         </div>
-        <h1 class="pageTitle">Looking for a Flight?</h1>
-        <hr />
+        
+        
         <div class="searchDiv">
             <form id="searchForm" action="flightsearch.html">
                 <table id="flightTable" class="table">
                     <tr>
                         <td>
+                            <div class="btn-group bGroup" data-toggle="buttons">
+                                <label class="btn btn-primary active">
+                                    <input type="radio" name="type" value="round-trip" id="in_type_roundTrip" autocomplete="off" checked="checked"/>
+                                    Round-Trip
+                                </label>
+                                <label class="btn btn-primary">
+                                    <input type="radio" name="type" value="one-way" id="in_type_oneWay" autocomplete="off"/>
+                                    One-Way
+                                </label>
+                            </div>
                             <div class="input-group">
                                 <span class="input-group-addon">Departing From</span>
                                 <input id="in_fromCity" type="text" name="startPlace" class="form-control" aria-label="Place" required />
@@ -120,19 +142,8 @@
                                 <span class="input-group-addon">To</span>
                                 <input id="in_toDate" type="date" name="eDate" class="form-control" aria-label="Place" required/>
                             </div>
-                            <div class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-primary active">
-                                    <input type="radio" name="type" value="round-trip" id="in_type_roundTrip" autocomplete="off" checked="checked"/>
-                                    Round-Trip
-                                </label>
-                                <label class="btn btn-primary">
-                                    <input type="radio" name="type" value="one-way" id="in_type_oneWay" autocomplete="off"/>
-                                    One-Way
-                                </label>
-                            </div>
                         </td>
                         <td>
-                            <h4><strong>Passenger:</strong></h4>
                             <div class="col-xs-3">
                                 <label for="ex1">Adult</label>
                                 <input class="form-control" id="ex1" type="number" name="adult" value="1" required />
@@ -143,16 +154,15 @@
                                 <label for="ex3">Infant</label>
                                 <input class="form-control" id="ex3" type="number" name="infant" value="0" required />
                             </div>
-                            <br/>
-
                         </td>
                     </tr>
                 </table>
-                <div>
-                    <input type="submit" class="btn btn-primary pull-right" value="Search" />
+                <div id="flightsubmitBtn">
+                    <input type="submit" class="btn btn-primary" value="Search" />
                 </div>
             </form>
-        </div>
+         </div>
+
         <div class="content">
             <div class="page-header">
                 <h1 class="pageTitle">Find a place <small>that satisfy you</small></h1>
