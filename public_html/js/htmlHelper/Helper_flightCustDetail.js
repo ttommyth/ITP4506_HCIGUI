@@ -51,7 +51,7 @@ var str = '                         <div role="tabpanel" class="tab-pane fade" i
                                             <input class="form-control btn readonly" tabindex="-1" placeholder="Click here to select seat" type="text" id="passenger-'+number+'_toSeatId" name="passenger-'+number+'_toSeatId" onclick="openFlightSeatModal(\'toSeatId\','+number+');" required/>\
                                       </div>\
                                     </div>\
-                                    <div class="inline">\
+                                    <div class="inline backFlightInfo">\
                                         Return Flight Seat No*<br/>\
                                         <div class="input-group">\
                                             <input class="form-control btn readonly" tabindex="-1" placeholder="Click here to select seat" type="text" id="passenger-'+number+'_backSeatId" name="passenger-'+number+'_backSeatId" onclick="openFlightSeatModal(\'backSeatId\','+number+');" required/>\

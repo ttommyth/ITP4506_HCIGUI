@@ -137,8 +137,11 @@ and open the template in the editor.
                 for (var name in flight) {
                     $("." + flightType + "_" + name).html(flight[name]);
                 }
-
-                $(".totalPrice").html(parseFloat(goFlight["totalPrice"]) + parseFloat(backFlight["totalPrice"]));
+                if (backFlight == undefined) {
+                    $(".totalPrice").html(parseFloat(goFlight["totalPrice"]));
+                } else {
+                    $(".totalPrice").html(parseFloat(goFlight["totalPrice"]) + parseFloat(backFlight["totalPrice"]));
+                }
             }
             function checkOk() {
                 var state = true;
@@ -205,15 +208,17 @@ and open the template in the editor.
                 arriveTime.add(f["duration"]);
                 f["arriveTime"] = arriveTime.toSymbolTime();
                 goFlight = f;
-                var f = Flight.find([new WherePara("flightID", jadbOP.equals, _GET['backFlightID'])])[0];
-                var arriveTime = new Time(f["takeoffTime"]);
-                arriveTime.add(f["duration"]);
-                f["arriveTime"] = arriveTime.toSymbolTime();
-                backFlight = f;
-
                 updateFilght(goFlight, "goFlight");
-                updateFilght(backFlight, "backFlight");
 
+                if (_GET['type'] != 'one-way') {
+                    var f = Flight.find([new WherePara("flightID", jadbOP.equals, _GET['backFlightID'])])[0];
+                    var arriveTime = new Time(f["takeoffTime"]);
+                    arriveTime.add(f["duration"]);
+                    f["arriveTime"] = arriveTime.toSymbolTime();
+                    backFlight = f;
+                    updateFilght(backFlight, "backFlight");
+                }
+                
                 for (var name in _GET) {
                     $("." + name).html(_GET[name]);
                     $("." + name).val(_GET[name]);
@@ -244,6 +249,10 @@ and open the template in the editor.
                 }
                 $("#passenger_tab-header").children().first().addClass("active");
                 $("#passenger_tab-content").children().first().addClass("in active");
+
+                if(_GET['type']=='one-way'){
+                   $(".backFlightInfo").remove();
+                }
 
                 $("form#paymentForm :input").each(function () {
                     $(this).change(checkOk);
@@ -360,7 +369,7 @@ and open the template in the editor.
                                             </tr>
                                         </table>
                                     </div>
-                                    <div id="backItinerary" style="padding:5px;padding-top: 10px">
+                                    <div id="backItinerary" style="padding:5px;padding-top: 10px" class="backFlightInfo" >
                                         <h3>Returning Flight</h3>
                                         <table>
                                             <tr>
@@ -452,7 +461,7 @@ and open the template in the editor.
                                     <td>HKD <span class="goFlight_tax">359</span></td>
                                 </tr>
                             </table>
-                            <table id="returnFee" class="feeTable">
+                            <table id="returnFee" class="feeTable backFlightInfo">
                                 <tr>
                                     <th>Returning</th>
                                     <th>HKD <span class="backFlight_totalPrice">359</span></th>
