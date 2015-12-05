@@ -47,19 +47,15 @@
                 max-height: 400px;
                 max-width: 280px;
             }
-            .pull-left{
-                border-radius: 25px;
-                border: 10px solid #73AD21;
-                margin-top: 10px;
-                padding: 20px;
-                width: 25%;
-            }
             .pull-right{
+                margin-left: auto;
+                margin-right: auto;
                 background: white;
                 margin-top: 10px;
                 padding-left: 20px;
                 padding-right: 20px;
-                width: 75%;
+                padding-bottom: 50px;
+                width:750px;;
             }
             .description{
                 padding: 20px;
@@ -96,12 +92,14 @@
                 font-weight: bold;
             }
             #bookDiv{
+                position: relative;
+                right:0px;
                 width: 120px;
                 text-align: right;
                 display: inline-block;
             }
             .hotel_hotelName{
-                margin-top: -30px;
+                font-size: 40px;
             }
             #roomPriceTag{
                 font-weight: bold;
@@ -122,7 +120,7 @@
             .scoreDiv{
                 position: relative;
                 top: -380px;
-                left: 526px;
+                left: 510px;
                 padding: 10px;
                 background: rgba(0, 0, 0, 0.5);
                 width: 200px;
@@ -137,8 +135,22 @@
                 text-align: center;
             }
             #hotelName{
-                width: 600px;
-                display: inline-block;;
+                width: 570px;
+                display: inline-block;
+            }
+            .recomIcon{
+                width: 80px;
+                height: 60px;
+            }
+            .rcHotel{
+                width: 210px;
+            }
+            .rcImg{
+                width: 80px;
+            }
+            .recomName{
+                margin-left: 10px;
+                color: #008fff;
             }
         </style>
         <!-- insert the style here -->
@@ -147,23 +159,157 @@
         <div id="header"></div>
 
         <!-- content -->
-        <div>
+        <div class="inline">
+            <div class="hotelSearchDiv" >
+                <label class="titleLabel">Booking Info</label>
+            <div>
+                <span class="glyphicon glyphicon-map-marker">
+                    <span class="hotelAddress"> fksajfklasfjksafj</span></span><br/>
+                <span class="glyphicon glyphicon-calendar">
+                    <span class="bookingDate"> 6nights (05Dec-11Dec)</span></span><br/>
+                <span class="glyphicon glyphicon-user">
+                    <span class="num">2 adults</span></span><br>
+            <button type="button" class="btn btn-primary navbar-btn beforeLogin"
+                    id="hSearch" data-toggle="modal" data-target="#loginModal">
+                Change search</button>
+            </div>
+            </div>
+            
+            <div class="hotelFilterDiv">
+                <label class="titleLabel">Recommented</label><br/>
+                
+                <!-- one hotel -->
+                <div class="rcHotel">
+                    <table>
+                    <tr>
+                        <th colspan="2"><span class="recomName">The fucking Hotel</span></th>
+                    </tr>
+                    <tr>
+                        <td><div class="recomIcon"><img src="img/f1.jpg" class="rcImg"/>
+                    </div></td>
+                        <td><div class="recomDetail">
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span><br/>
+                            <span class="hotelAddress">fjklasjfklas</span><br/>
+                            <span class="hotelMark">VeryGood 7.8</span>
+                    </div></td>
+                    </tr>
+                </table>
+                    <hr/>
+                </div>
+                <!-- -->
+                
+                <div class="rcHotel">
+                    <table>
+                    <tr>
+                        <th colspan="2"><span class="recomName">The fucking Hotel</span></th>
+                    </tr>
+                    <tr>
+                        <td><div class="recomIcon"><img src="img/f1.jpg" class="rcImg"/>
+                    </div></td>
+                        <td><div class="recomDetail">
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span><br/>
+                            <span class="hotelAddress">fjklasjfklas</span><br/>
+                            <span class="hotelMark">VeryGood 7.8</span>
+                    </div></td>
+                    </tr>
+                </table>
+                    <hr/>
+                </div>
+                <div class="rcHotel">
+                    <table>
+                    <tr>
+                        <th colspan="2"><span class="recomName">The fucking Hotel</span></th>
+                    </tr>
+                    <tr>
+                        <td><div class="recomIcon"><img src="img/f1.jpg" class="rcImg"/>
+                    </div></td>
+                        <td><div class="recomDetail">
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span><br/>
+                            <span class="hotelAddress">fjklasjfklas</span><br/>
+                            <span class="hotelMark">VeryGood 7.8</span>
+                    </div></td>
+                    </tr>
+                </table>
+                    <hr/>
+                </div>
+                <div class="rcHotel">
+                    <table>
+                    <tr>
+                        <th colspan="2"><span class="recomName">The fucking Hotel</span></th>
+                    </tr>
+                    <tr>
+                        <td><div class="recomIcon"><img src="img/f1.jpg" class="rcImg"/>
+                    </div></td>
+                        <td><div class="recomDetail">
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span><br/>
+                            <span class="hotelAddress">fjklasjfklas</span><br/>
+                            <span class="hotelMark">VeryGood 7.8</span>
+                    </div></td>
+                    </tr>
+                </table>
+                    <hr/>
+                </div>
+                <div class="rcHotel">
+                    <table>
+                    <tr>
+                        <th colspan="2"><span class="recomName">The fucking Hotel</span></th>
+                    </tr>
+                    <tr>
+                        <td><div class="recomIcon"><img src="img/f1.jpg" class="rcImg"/>
+                    </div></td>
+                        <td><div class="recomDetail">
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span><br/>
+                            <span class="hotelAddress">fjklasjfklas</span><br/>
+                            <span class="hotelMark">VeryGood 7.8</span>
+                    </div></td>
+                    </tr>
+                </table>
+                    <hr/>
+                </div>
+                <div class="rcHotel">
+                    <table>
+                    <tr>
+                        <th colspan="2"><span class="recomName">The fucking Hotel</span></th>
+                    </tr>
+                    <tr>
+                        <td><div class="recomIcon"><img src="img/f1.jpg" class="rcImg"/>
+                    </div></td>
+                        <td><div class="recomDetail">
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span><br/>
+                            <span class="hotelAddress">fjklasjfklas</span><br/>
+                            <span class="hotelMark">VeryGood 7.8</span>
+                    </div></td>
+                    </tr>
+                </table>
+                    <hr/>
+                </div>
+            </div>
+        </div>
         <div class="pull-right">
+            
             <div class="page-header">
                 <div id="hotelName">
-                <h2 class="hotel_hotelName">花蓮阿里巴巴休閒民宿</h2>
-                <span class="hotelAddress">the fucking hotel address
-                    <a href="" class="hotelAddressLink">(Show on map)</a>
-                </span>
+                    <span class="hotel_hotelName">花蓮阿里巴巴休閒民宿</span><br/>
+                    <span class="hotelAddress">the fucking hotel address
+                        <a href="" class="hotelAddressLink">(Show on map)</a>
+                    </span>
                 </div>
                 <div id="bookDiv">
-                <button type="button" id="bookBtn" class="btn btn-primary navbar-btn" 
-                    data-toggle="modal" data-target="#searchModal">Book Now!</button>
-                <br/>
-                <span class="glyphicon glyphicon-heart" id="heart"></span>
-                from <span id="roomPriceTag">HKD <span class="roomP">731</span></span>
-            </div>
-            </div>     
+                    <button type="button" id="bookBtn" class="btn btn-primary navbar-btn" 
+                        data-toggle="modal" data-target="#searchModal">Book Now!</button>
+                    <br/>
+                    <span class="glyphicon glyphicon-heart" id="heart"></span>
+                    from <span id="roomPriceTag">HKD <span class="roomP">731</span></span>
+                </div>
+                
+            </div>  
+            
             <div id="hotHotelImages" class="carousel slide" data-ride="carousel">
                 
             <!-- Indicators -->
@@ -260,7 +406,6 @@
                     </tr>
                 </table>
                 <input type="button" class="roomNum" id="submit" value="Book!"/>    
-        </div>
         </div>
     </body>
 </html>
