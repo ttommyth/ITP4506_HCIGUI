@@ -20,16 +20,16 @@ jadbOP.notEquals = function (a, b) {
     return a != b;
 };
 jadbOP.greaterThan = function (a, b) {
-    return a > b;
+    return parseFloat(a) > parseFloat(b);
 };
 jadbOP.lessThan = function (a, b) {
-    return a < b;
+    return parseFloat(a) < parseFloat(b);
 };
 jadbOP.greaterThanOrEqual = function (a, b) {
-    return a >= b;
+    return parseFloat(a) >= parseFloat(b);
 };
 jadbOP.lessThanOrEqual = function (a, b) {
-    return a <= b;
+    return parseFloat(a) <= parseFloat(b);
 };
 jadbOP.like = function (a, b) {
     return a.indexOf(b) > -1;
