@@ -201,6 +201,156 @@
                     "content": "That's Great and .....hmm, Great!"
                 }
             ]
+        },
+        {
+            "hotelID": "H0007",
+            "hotelName": "Four Seasons Hotel Hong Kong",
+            "region": "Hong Kong",
+            "address": "8 Finance Street Central,Hong Kong",
+            "description": "Very Good",
+            "price": "5399",
+            "star": "5",
+            "img": [
+                "hotel7.jpg"
+            ],
+            "roomTypes":
+                    [
+                        {
+                            "qty": "2",
+                            "name": "Normal",
+                            "price": "5399",
+                            "description": "This modern and elegant design hotel offers self-catering accommodation with free Wi-Fi and panoramic views of New York City. The William is located within walking distance from the iconic Fifth Avenue and 450 metres from Grand Central Station.",
+                            "occupancy": "4",
+                            "img": [
+                                ""
+                            ]
+                        }
+                    ],
+            "comments": [
+                {
+                    "username": "The Great Great man",
+                    "star": "4",
+                    "content": "That's Great and .....hmm, Great! This is very good Hotel."
+                }
+            ]
+        },
+        {
+            "hotelID": "H0008",
+            "hotelName": "Regal Kowloon Hote",
+            "region": "Hong Kong",
+            "address": "71 Mody Road, Tsim Sha Tsui, Hong Kong, Hong Kong",
+            "description": "Normal",
+            "price": "200",
+            "star": "3",
+            "img": [
+                "hotel8.jpg"
+            ],
+            "roomTypes":
+                    [
+                        {
+                            "qty": "2",
+                            "name": "Normal",
+                            "price": "200",
+                            "description": "Regal Kowloon Hotel is a blend of elegance and hospitality in the heart of the commercial and business district of Hong Kong. Located in Tsimshatsui, Regal Kowloon Hotel provides easy access to the mainland and also to popular tourist destinations on the island. The MTR station and the pier are just a five-minute walk away from the hotel. The menus at the six dining options on-site let you savor Italian, European, and seafood dishes along with scrumptious dessert and cocktails. Stay in shape, even while on holiday, at the fitness center which is open round-the-clock to suit all guests. Make sure to visit the shopping complex inside the hotel, as you might just find the perfect gift. Please enter your dates on our secure online booking form to make a reservation at Regal Kowloon Hotel.",
+                            "occupancy": "4",
+                            "img": [
+                                ""
+                            ]
+                        }
+                    ],
+            "comments": [
+                {
+                    "username": "The Great Great man",
+                    "star": "4",
+                    "content": "My stay at RK has been really good. THis is my second time in this hotel. And both have been good. With only one exception. The check in is terrible. Both times I had to wait very long. This second time even worse because there was a queue and I was in line as other people was. But other guests were arriving jumping the queue and going to the counters directly and nobody doing nothing. The employers were just checking in whoever was in front of the counters. Took more than 30 minutes for checking in with just 2 persons before me. Really not organized at all.But a part the check in the hotel is really good."
+                }
+            ]
+        },
+        {
+            "hotelID": "H0009",
+            "hotelName": "The Mira Hotel",
+            "region": "Hong Kong",
+            "address": "118 Nathan Road, Tsim Sha Tsui, Hong Kong, Hong Kong",
+            "description": "Upscale, stylish, convenient, and comfortable – The Mira Hotel knows what is important to you and has captured these elements in its chic, centrally-located Tsim Sha Tsui hotel. Perfect for both the business and leisure travelers, guests will enjoy a kaleidoscope of benefits and facilities while staying in the sheer comfort of the hotel’s expansive rooms. From Michelin-starred restaurants to innovative technology that’s as simple to use as it is convenient, the hotel captures just the right mix of Hong Kong's urban pulse, skillfully-fused into a refreshingly refined cosmopolitan setting. Please enter your preferred dates of stay and submit our online booking form to make a reservation at The Mira Hotel.",
+            "price": "1200",
+            "star": "4",
+            "img": [
+                "hotel9.jpg"
+            ],
+            "roomTypes":
+                    [
+                        {
+                            "qty": "5",
+                            "name": "City Room",
+                            "price": "200",
+                            "description": "",
+                            "occupancy": "4",
+                            "img": [
+                                ""
+                            ]
+                        },
+                        {
+                            "qty": "1",
+                            "name": "Courtyard Room",
+                            "price": "219",
+                            "description": "",
+                            "occupancy": "4",
+                            "img": [
+                                ""
+                            ]
+                        }
+                    ],
+            "comments": [
+                {
+                    "username": "Meltem B.",
+                    "star": "4",
+                    "content": "my stay in mira is great as the hotel location is good and staff are friendly . hotel location is very near to shopping areas and food around the hotel area are nice and you can have many kinds of food around the hotel naerby area"
+                }
+            ]
+        },
+        {
+            "hotelID": "H0010",
+            "hotelName": "Metropark Mongkok Hotel",
+            "region": "Hong Kong",
+            "address": "22 Lai Chi Kok Road, Mongkok, Hong Kong, Hong Kong",
+            "description": "Renovated in 2015 and conveniently located in Mongkok, adjacent to Nathan Road and a one-minute walk to the Prince Edward MTR, the Metropark Mongkok Hotel allows gests to choose from 430 well-equipped guestrooms replete with the necessary modern amenities. A multi-function room with built-in AV and internet facilities which benefit business guests. This venue is ideal for conferences, seminars, and private functions. Metropark Mongkok Hotel also offers superb food and beverage outlets, including an award-winning Chinese restaurant, coffee shop, bar, and cake shop, offering guests a culinary experience that is both diverse and impressive. The airport shuttle service is generally the first drop-off and the last pick-up from the airport. For your reservation at the Metropark Mongkok Hotel, please select the dates of your stay and complete our secure online booking form.",
+            "price": "199",
+            "star": "2",
+            "img": [
+                "hotel10.jpg"
+            ],
+            "roomTypes":
+                    [
+                        {
+                            "qty": "10",
+                            "name": "Standard",
+                            "price": "199",
+                            "description": "",
+                            "occupancy": "4",
+                            "img": [
+                                ""
+                            ]
+                        },
+                        {
+                            "qty": "1",
+                            "name": "All New Superior (Free Minibar)",
+                            "price": "98",
+                            "description": "",
+                            "occupancy": "4",
+                            "img": [
+                                ""
+                            ]
+                        }
+                    ],
+            "comments": [
+                {
+                    "username": "Rommel J.",
+                    "star": "4",
+                    "content": "my stay in mira is great as the hotel location is good and staff are friendly . hotel location is very near to shopping areas and food around the hotel area are nice and you can have many kinds of food around the hotel naerby area"
+                }
+            ]
         }
+        
+        
     ]
 }
