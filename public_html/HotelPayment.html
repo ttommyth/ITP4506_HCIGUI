@@ -25,15 +25,75 @@ and open the template in the editor.
             });
         </script> 
         <script>//do your own function here
+            $.ajax({
+                url: 'js/HotelControl.js',
+                dataType: 'script',
+                async: false
+            });
+            function fromDate_onchange() {
+                $("#checkoutDate").attr({
+                    "min": $("#checkinDate").val()
+                });
+                var toDate = Date.parse($("#checkoutDate").val());
+                var fromDate = Date.parse($("#checkinDate").val());
+                if (toDate < fromDate) {
+                    $("#checkoutDate").attr({
+                        "value": $("#checkinDate").val()
+                    });
+                }
+            }
+            function countNight(){
+                var toDate = Date.parse($("#checkoutDate").val());
+                var fromDate = Date.parse($("#checkinDate").val());
+                var night =(toDate-fromDate)/86400000;
+                console.log(night);
+                $(".night").html(night);
+                $(".roomQty").html($("#roomQty").val());
+                $(".totalPrice").html(night*parseInt(currentRoom['price'])*parseInt($("#roomQty").val()));
+            }
+            function doSubmit(){
+                $("#bookingCompleteModal").modal('show');
+            }
+            var currentHotel, currentRoom;
             $(document).ready(function () {
-                $(".hotelImg").css('cursor','pointer');
-                $(".hotelImg").click(function(){
-                    var imgSrc = $(this).attr("src");
-                    $("#largeHotelImg").attr("src",imgSrc);
-                })
-                $("#changeDate").click(function(){
-                    alert("changeDate");
-                })
+                var d = new Date();
+
+                var month = d.getMonth() + 1;
+                var day = d.getDate();
+
+                var todayString = d.getFullYear() + '-' +
+                        (month < 10 ? '0' : '') + month + '-' +
+                        (day < 10 ? '0' : '') + day;
+
+                $("#checkinDate").attr({
+                    "min": todayString,
+                    "value": todayString
+                });
+                $("#checkoutDate").attr({
+                    "min": todayString,
+                    "value": todayString
+                });
+                fromDate_onchange();
+                
+                currentHotel = Hotel.find([new WherePara("hotelID", jadbOP.equals, _GET['hotelID'])])[0];
+                for (var name in currentHotel) {
+                    $(".hotel_" + name).html(currentHotel[name]);
+                    $(".hotel_" + name).val(currentHotel[name]);
+                }
+                $(".hotel_firstImg").attr("src", "img/hotel/" + currentHotel['img'][0]);
+                
+                for(var name in currentHotel['roomTypes']){
+                    if(currentHotel['roomTypes'][name]['name']==_GET['room_name']){
+                        currentRoom = currentHotel['roomTypes'][name];
+                    }
+                }
+                
+                countNight();
+                for (var name in _GET) {
+                    $("." + name).html(_GET[name]);
+                    $("." + name).val(_GET[name]);
+                }
+                $('.night').html(0);
             })
         </script>
         <style>
@@ -47,14 +107,14 @@ and open the template in the editor.
                 max-height: 200px;
                 max-width: 280px;
             }
-            .pull-left{
+            .pull-left x{
                 border-radius: 25px;
                 border: 10px solid #1E90FF;
                 margin-top: 10px;
                 padding: 20px;
                 width: 70%;
             }
-            .pull-right{
+            .pull-right x{
                 border-radius: 25px;
                 margin-top: 10px;
                 padding: 20px;
@@ -107,196 +167,205 @@ and open the template in the editor.
             #rooms td{
                 font-size: 1em;
             }
+            .roomQty{
+                width: 50px;
+            }
+            .night{
+                width: 50px;
+            }
         </style>
         <!-- insert the style here -->
     </head>
     <body>
         <div id="header"></div>
-        
-        <!-- content -->
-        
-        <div id="hotHotelImages" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                <li data-target="#hotHotelImages" data-slide-to="0" class="active"></li>
-                <li data-target="#hotHotelImages" data-slide-to="1"></li>
-                <li data-target="#hotHotelImages" data-slide-to="2"></li>
-            </ol>
 
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                    <img class="hotHotelImg" src="img/hotel.jpg" alt="1">
-                    <div class="carousel-caption">
-                        ...
+        <form action="" onsubmit="doSubmit();return false;">
+        <div class="panel panel-default inline pull-left" style="width:70%">
+            <div class="panel-heading">
+                <h3 class="panel-title">Payment</h3>
+            </div>
+            <div class="panel-body">
+
+                <div>
+                    <div class="panel panel-default panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Hotel Infomation</h3>
+                        </div>
+                        <div class="panel-body bg-info">
+
+                            <table style="width:100%;">
+                                <tr>
+                                    <td colspan="4"><p><h3 class="hotel_hotelName">Royal Pizza Hotel</h3></p></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"><p class="hotel_address">193 Prince Edward Road West, Kowloon Mongkok Hong Kong</p></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="4" style="width:30%"><img src="img/f1.jpg" class="hotel_firstImg" alt="f1"></td>
+                                    <td rowspan="4" style="width:5%"></td>
+                                    <td style="width:15%;"><p>Region: </td>
+                                    <td style="width:50%"><p class="hotel_region">Mongkok, Hong Kong</td>
+                                </tr>
+                                <tr>
+                                    <td style="width:15%;"><p>Check-in:</td>
+                                    <td style="width:50%"><p><input type="date" id="checkinDate" name="checkinDate" class="form-control" onchange="fromDate_onchange();countNight();" required/></td>
+                                </tr>
+                                <tr>
+                                    <td style="width:15%;"><p>Check-out:</td>
+                                    <td style="width:50%"><p><input type="date" id="checkoutDate" name="checkoutDate" class="form-control" onchange="countNight()" required/></td>
+                                </tr>
+                                <tr>
+                                    <td style="width:15%;"><p>Stay for</td>
+                                    <td style="width:50%"><p><span class="night"></span>
+                                            Nights, <input type="number" min="1" max="10" id="roomQty" name="roomQty" class="form-control roomQty inline" style="padding:0px" onchange="countNight()" required>Room, Max 2 Adult(s)</td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
-                </div>
-                <div class="item">
-                    <img class="hotHotelImg" src="img/hotel.jpg" alt="2">
-                    <div class="carousel-caption">
-                        ...
+
+                    <hr/>
+                    <div class="panel panel-default panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Personal Information</h3>
+                        </div>
+                        <div class="panel-body bg-warning">
+                            <table class="personal">
+                                <tr class="question">
+                                    <td colspan="20">What is your purpose of this travelling</td>
+                                </tr>
+                                <tr class="anwser">
+                                    <td colspan="10"><input type="radio" name="travelType" value="relaxing" class="form-control inline" style="width:100px" checked/>Relaxing</td>
+                                    <td colspan="10"><input type="radio" name="travelType" value="commercial" class="form-control inline" style="width: 100px"/>Commercial</td>
+                                </tr>
+                                <tr class="question">
+                                    <td colspan="3">Mr/Mrs</td>
+                                    <td colspan="6">First Name</td>
+                                    <td colspan="11">Last Name</td>
+                                </tr>
+                                <tr class="anwser">
+                                    <td colspan="3">
+                                        <select class="form-control roomNum">
+                                            <option value="mr">Mr</option>
+                                            <option value="miss">Mrs</option>
+                                        </select>
+                                    </td>
+                                    <td colspan="6"><input type="text" class="form-control" name="FirstName" required/></td>
+                                    <td colspan="6"><input type="text" class="form-control " name="lastName" required/></td>
+                                    <td colspan="5"><p></p></td>
+                                </tr>
+                                <tr class="question">
+                                    <td colspan="20">Please input your email</td>
+                                </tr>
+                                <tr class="anwser">
+                                    <td colspan="10"><input type="email" name="email" size="40" class="form-control " required/></td>
+                                    <td colspan="10"><p></p></td>
+                                </tr>
+                                <tr class="question">
+                                    <td colspan="10">Phone Number</td>
+                                    <td colspan="10">Country of Residence</td>
+                                </tr>
+                                <tr class="anwser">
+                                    <td colspan="9"><input type="text" name="phoneNum" size="30" class="form-control " required/></td>
+                                    <td colspan="1"></td>
+                                    <td colspan="9"><input type="text" name="country" size="30" class="form-control " required/></td>
+                                    <td colspan="1"></td>
+                                </tr>
+                                <tr class="anwser">
+                                    <td colspan="20"><input type="checkbox" value="bookForSomeoneElse" class="form-control inline" style="width:20px"/>
+                                        I'm not staying at the hotel. I'm making this booking for someone else.</td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
-                </div>
-                <div class="item">
-                    <img class="hotHotelImg" src="img/hotel.jpg" alt="3">
-                    <div class="carousel-caption">
-                        ...
+                    <hr />
+                    <div class="panel panel-default panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Room information</h3>
+                        </div>
+                        <div class="panel-body bg-success">
+                            <table class="personal" id="rooms">
+                                <tr>
+                                    <th colspan="10" style="width:100%">Room information</th>
+                                </tr>
+                                <tr>
+                                    <td rowspan="4" colspan="3"><img src="img/f2.jpg" class="hotelImg" alt="f2"></td>
+                                    <td colspan="7">。plaza Deluxe (33 sq.m.)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7">。Limited Time Offer. Rate includes 10% discount!</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7">。Extra beds not included</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7">。Don't miss out! There are only 3 rooms left at this price!</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10"><input type="checkbox" value="onlineAccess"/>
+                                        Online access to your booking details <b style="color:green;">FREE</b></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10">Did you know? You can amend your guest details, add special requests, view your points earned. print your voucher or change your check-in/check-out dates online using Agoda Self Service!</td>
+                                </tr>
+                                <tr><td></td></tr>
+                                <tr>
+                                    <td colspan="10"><input type="button" value="+"/> Need an extra bed?</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10"><input type="button" value="+"/> Special request (optional)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="20"><input type="submit" value="Continue" class="btn btn-success pull-right" style="width: 200px;height: 60px"/></td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Controls -->
-            <a class="left carousel-control" href="#hotHotelImages" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#hotHotelImages" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
         </div>
-        
-        <div class="pull-left">
-            <div>
-                <div class="payment">
-                    <table style="width:100%;">
+
+        <div class="panel panel-default inline pull-right" style="width:25%">
+            <div class="panel-heading">
+                <h3 class="panel-title">Payment</h3>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <table class="priceTable">
                         <tr>
-                            <td colspan="4"><p id="hotelName">Royal Pizza Hotel</p></td>
-                        </tr>
-                        <tr>
-                            <td colspan="4"><p id="hotelAddress">193 Prince Edward Road West, Kowloon Mongkok Hong Kong</p></td>
-                        </tr>
-                        <tr>
-                            <td rowspan="4" style="width:30%"><img src="img/f1.jpg" class="hotelImg" alt="f1"></td>
-                            <td rowspan="4" style="width:5%"></td>
-                            <td style="width:15%;"><p>Location:</td>
-                            <td style="width:50%"><p>Mongkok, Hong Kong</td>
-                        </tr>
-                        <tr>
-                            <td style="width:15%;"><p>Check-in:</td>
-                            <td style="width:50%"><p>Sun 06 Dec, 2015</td>
-                        </tr>
-                        <tr>
-                            <td style="width:15%;"><p>Check-out:</td>
-                            <td style="width:50%"><p>Tue 08 Dec, 2015</td>
-                        </tr>
-                        <tr>
-                            <td style="width:15%;"><p>Stay</td>
-                            <td style="width:50%"><p>2 Nights, 1Room, Max 2 Adult(s)</td>
+                            <td colspan="2"><b><span class="roomQty"></span> room for</b>
+                                <span class="night"></span> nights</td>
                         </tr>
                     </table>
-                </div>
-                <br/>
-                <div class="payment">
-                    <table class="personal">
+                    <br/>
+                    <table class="priceTable">
                         <tr>
-                            <th colspan="20">Your information</th>
-                        </tr>
-                        <tr class="question">
-                            <td colspan="20">What is your purpose of this travelling</td>
-                        </tr>
-                        <tr class="anwser">
-                            <td colspan="4"><input type="radio" name="travelType" value="relaxing"/>Relaxing</td>
-                            <td colspan="4"><input type="radio" name="travelType" value="commercial"/>Commercial</td>
-                            <td colspan="12"><p></p></td>
-                        </tr>
-                        <tr class="question">
-                            <td colspan="3">Mr/Miss</td>
-                            <td colspan="6">First Name</td>
-                            <td colspan="11">Last Name</td>
-                        </tr>
-                        <tr class="anwser">
-                            <td colspan="3">
-                                <select class="roomNum">
-                                    <option value="mr">Mr</option>
-                                    <option value="miss">Miss</option>
-                                </select>
-                            </td>
-                            <td colspan="6"><input type="text" name="lastName"/></td>
-                            <td colspan="6"><input type="text" name="lastName"/></td>
-                            <td colspan="5"><p></p></td>
-                        </tr>
-                        <tr class="question">
-                            <td colspan="20">Please input your email</td>
-                        </tr>
-                        <tr class="anwser">
-                            <td colspan="10"><input type="text" name="email" size="40"/></td>
-                            <td colspan="10"><p></p></td>
-                        </tr>
-                        <tr class="question">
-                            <td colspan="10">Phone Number</td>
-                            <td colspan="10">Country of Residence</td>
-                        </tr>
-                        <tr class="anwser">
-                            <td colspan="9"><input type="text" name="phoneNum" size="30"/></td>
-                            <td colspan="1"></td>
-                            <td colspan="9"><input type="text" name="country" size="30"/></td>
-                            <td colspan="1"></td>
-                        </tr>
-                        <tr class="anwser">
-                            <td colspan="20"><input type="checkbox" value="bookForSomeoneElse"/>
-                                I'm not staying at the hotel. I'm making this booking for someone else.</td>
-                        </tr>
-                    </table>
-                </div>
-                <br/>
-                <div class="payment">
-                    <table class="personal" id="rooms">
-                        <tr>
-                            <th colspan="10" style="width:100%">Room information</th>
+                            <td colspan="2"><b>Total Price</b> (for <span class="night"></span> nights)<br /></td>
                         </tr>
                         <tr>
-                            <td rowspan="4" colspan="3"><img src="img/f2.jpg" class="hotelImg" alt="f2"></td>
-                            <td colspan="7">。plaza Deluxe (33 sq.m.)</td>
-                        </tr>
-                        <tr>
-                            <td colspan="7">。Limited Time Offer. Rate includes 10% discount!</td>
-                        </tr>
-                        <tr>
-                            <td colspan="7">。Extra beds not included</td>
-                        </tr>
-                        <tr>
-                            <td colspan="7">。Don't miss out! There are only 3 rooms left at this price!</td>
-                        </tr>
-                        <tr>
-                            <td colspan="10"><input type="checkbox" value="onlineAccess"/>
-                                Online access to your booking details <b style="color:green;">FREE</b></td>
-                        </tr>
-                        <tr>
-                            <td colspan="10">Did you know? You can amend your guest details, add special requests, view your points earned. print your voucher or change your check-in/check-out dates online using Agoda Self Service!</td>
-                        </tr>
-                        <tr><td></td></tr>
-                        <tr>
-                            <td colspan="10"><input type="button" value="+"/> Need an extra bed?</td>
-                        </tr>
-                        <tr>
-                            <td colspan="10"><input type="button" value="+"/> Special request (optional)</td>
-                        </tr>
-                        <tr>
-                            <td colspan="20"><input style="float:right;" type="button" value="Continue"/></td>
+                            <td><b><br/>
+                                    <span  class="label label-success " style="font-size:15pt;">HKD <span class="totalPrice"></span></span></b>
+                                <br/></td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
-        <div class="pull-right">
-            <div>
-                <table class="priceTable">
-                    <tr>
-                        <td><b>1 Room(s)</b> x 2 Nights</td>
-                        <td class="price">HKD 284</td>
-                    </tr>
-                </table>
-                <br/>
-                <table class="priceTable">
-                    <tr>
-                        <td><b>Total Price</b> (for 2 nights)</td>
-                        <td class="price">HKD 299</td>
-                    </tr>
-                    <tr>
-                        <td style="font-size:0.1em;">Hotel tax 10% included</td>
-                    </tr>
-                </table>
+        </form>
+        
+                <div class="modal fade" id="bookingCompleteModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="page-header">
+                            <h1>Booking Success
+                                <br /><small>The copy of this Booking will send to your email...</small>
+                                <br /><small>Enjoy your trip</small> <span class="glyphicon glyphicon-road"></span></h1>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="window.location.href = 'index.html';">Back to Home</button>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
