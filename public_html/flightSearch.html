@@ -178,6 +178,12 @@ and open the template in the editor.
                         $('.backFlightInfo').hide();
                     }
                 });
+                if(_GET['sDate']==undefined){
+                    _GET['sDate'] = $("#in_fromDate").val();
+                }
+                if(_GET['eDate']==undefined){
+                    _GET['eDate'] = $("#in_toDate").val();
+                }
                 for (var name in _GET) {
                     $("." + name).html(_GET[name]);
                     $("." + name).val(_GET[name]);
