@@ -6,6 +6,7 @@
             "region": "Hong Kong",
             "address": "1 Debug Street, Testing Place, Hong Kong",
             "description": "Just normal",
+            "price": "200",
             "star": "4",
             "img": [
                 "", ""
@@ -17,7 +18,7 @@
                             "name": "Normal",
                             "price": "200",
                             "description": "Have the best bed",
-                            "occupacy":"4",
+                            "occupacy": "4",
                             "img": [
                                 ""
                             ]
@@ -27,7 +28,7 @@
                             "name": "Golden",
                             "price": "1000",
                             "description": "Golden price, Golden service",
-                            "occupacy":"4",
+                            "occupacy": "4",
                             "img": [
                                 ""
                             ]
@@ -47,6 +48,7 @@
             "region": "Hong Kong",
             "address": "145 Pokfulam Road, Pokfulam, Hong Kong",
             "description": "Just normal",
+            "price": "300",
             "star": "5",
             "img": [
                 ""
@@ -58,7 +60,7 @@
                             "name": "Normal",
                             "price": "300",
                             "description": "Just normal",
-                            "occupacy":"4",
+                            "occupacy": "4",
                             "img": [
                                 ""
                             ]
@@ -78,6 +80,7 @@
             "region": "Korea",
             "address": "145, Toegye-ro, Jung-gu, Myeong-dong, Seoul, South Korea",
             "description": "Just normal",
+            "price": "1100",
             "star": "5",
             "img": [
                 ""
@@ -89,7 +92,7 @@
                             "name": "Normal",
                             "price": "1100",
                             "description": "Easy to access and nearby metro station",
-                            "occupacy":"4",
+                            "occupacy": "4",
                             "img": [
                                 ""
                             ]
@@ -109,6 +112,7 @@
             "region": "Korea",
             "address": "1, Sogong-dong, Jung-gu, Myeong-dong, Seoul, South Korea",
             "description": "Just normal",
+            "price": "1350",
             "star": "5",
             "img": [
                 ""
@@ -120,7 +124,7 @@
                             "name": "Normal",
                             "price": "1350",
                             "description": "Convenient, Friendly Staffs and what so ever",
-                            "occupacy":"4",
+                            "occupacy": "4",
                             "img": [
                                 ""
                             ]
@@ -140,6 +144,7 @@
             "region": "USA",
             "address": "234 East 46th Street, Midtown East, New York, NY 10017, USA",
             "description": "Just normal",
+            "price": "2130",
             "star": "4",
             "img": [
                 ""
@@ -151,7 +156,7 @@
                             "name": "Normal",
                             "price": "2130",
                             "description": "On East 46th Street, one block from United Nations Headquarters, this property offers one-bedroom apartments with fully equipped kitchens, private balconies and free high-speed internet access.",
-                            "occupacy":"4",
+                            "occupacy": "4",
                             "img": [
                                 ""
                             ]
@@ -171,6 +176,7 @@
             "region": "USA",
             "address": "24 East 39th Street, Murray Hill, New York, NY 10016, USA",
             "description": "Just normal",
+            "price": "1120",
             "star": "4",
             "img": [
                 ""
@@ -182,7 +188,7 @@
                             "name": "Normal",
                             "price": "1120",
                             "description": "This modern and elegant design hotel offers self-catering accommodation with free Wi-Fi and panoramic views of New York City. The William is located within walking distance from the iconic Fifth Avenue and 450 metres from Grand Central Station.",
-                            "occupacy":"4",
+                            "occupacy": "4",
                             "img": [
                                 ""
                             ]

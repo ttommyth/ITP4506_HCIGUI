@@ -70,7 +70,7 @@ and open the template in the editor.
                             function (i, column) {
                                 var seatId = String.fromCharCode(97 + n) + (i + 1);
                                 if ($.inArray(seatId, sittedSeat) > -1) {
-                                    console.log("exist "+seatId+" in sitted seats");
+                                    console.log("exist " + seatId + " in sitted seats");
                                     if (passengers[selectingSeatfor][selectedSeatType] != undefined && passengers[selectingSeatfor][selectedSeatType] == seatId) {
                                         $(column).removeClass("sittedSeat");
                                         $(column).unbind("click");
@@ -137,11 +137,68 @@ and open the template in the editor.
                 for (var name in flight) {
                     $("." + flightType + "_" + name).html(flight[name]);
                 }
-
-                $(".totalPrice").html(parseFloat(goFlight["totalPrice"]) + parseFloat(backFlight["totalPrice"]));
+                if (backFlight == undefined) {
+                    $(".totalPrice").html(parseFloat(goFlight["totalPrice"]));
+                } else {
+                    $(".totalPrice").html(parseFloat(goFlight["totalPrice"]) + parseFloat(backFlight["totalPrice"]));
+                }
+            }
+            function checkOk() {
+                var state = true;
+                $("form#paymentForm :input").each(function () {
+                    if ($(this).val().length <= 0) {
+                        state = false;
+                        return false;
+                    }
+                });
+                for (var name in passengers) {
+                    $("form#passenger-" + name + "_form :input").each(function () {
+                        if ($(this).val().length <= 0) {
+                            console.log($(this));
+                            state = false;
+                            return false;
+                        }
+                    });
+                }
+                if (state) {
+                    $("#ConfirmBtn").hide();
+                    $("#bookDiv").slideDown();
+                    $("#fillInAlert").fadeOut();
+                } else {
+                    $("#ConfirmBtn").hide();
+                    $("#bookDiv").slideUp();
+                    $("#fillInAlert").fadeIn();
+                }
+            }
+            var nextStep = "review";
+            function doNextStep() {
+                if (nextStep == "review") {
+                    var $body = (window.opera) ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body');
+                    $body.animate({
+                        scrollTop: $('#header').offset().top
+                    }, 2000);
+                    $("#reviewAlert").slideDown();
+                    $("form#paymentForm :input").each(function () {
+                        $(this).attr("readonly", "readonly");
+                    });
+                    for (var name in passengers) {
+                        $("form#passenger-" + name + "_form :input").each(function () {
+                            $(this).attr("readonly", "readonly");
+                            $(this).prop('onclick', null).off('click');
+                        });
+                    }
+                    $("#nextBtn").slideUp();
+                    $("#ConfirmBtn").slideDown();
+                    nextStep = "confirm";
+                } else if (nextStep == "confirm") {
+                    $("#bookingCompleteModal").modal('show');
+                }
             }
 
             $(document).ready(function () {
+                $("#ConfirmBtn").hide();
+                $("#bookDiv").hide();
+                $("#reviewAlert").hide();
                 $(".mainform").hide();
                 $(".mainform").slideDown(1000);
                 $(".bookingSummaryDiv").hide();
@@ -151,15 +208,17 @@ and open the template in the editor.
                 arriveTime.add(f["duration"]);
                 f["arriveTime"] = arriveTime.toSymbolTime();
                 goFlight = f;
-                var f = Flight.find([new WherePara("flightID", jadbOP.equals, _GET['backFlightID'])])[0];
-                var arriveTime = new Time(f["takeoffTime"]);
-                arriveTime.add(f["duration"]);
-                f["arriveTime"] = arriveTime.toSymbolTime();
-                backFlight = f;
-
                 updateFilght(goFlight, "goFlight");
-                updateFilght(backFlight, "backFlight");
 
+                if (_GET['type'] != 'one-way') {
+                    var f = Flight.find([new WherePara("flightID", jadbOP.equals, _GET['backFlightID'])])[0];
+                    var arriveTime = new Time(f["takeoffTime"]);
+                    arriveTime.add(f["duration"]);
+                    f["arriveTime"] = arriveTime.toSymbolTime();
+                    backFlight = f;
+                    updateFilght(backFlight, "backFlight");
+                }
+                
                 for (var name in _GET) {
                     $("." + name).html(_GET[name]);
                     $("." + name).val(_GET[name]);
@@ -168,7 +227,7 @@ and open the template in the editor.
                 $('.readonly').keyup(function () {
                     this.value = this.value.replace(/[^0-9\.]/g, '');
                 });
-                
+
                 var j = 1;
                 for (var i = 1; i <= parseInt(_GET["adult"]); i++) {
                     passengers["" + j] = new Object();
@@ -190,6 +249,19 @@ and open the template in the editor.
                 }
                 $("#passenger_tab-header").children().first().addClass("active");
                 $("#passenger_tab-content").children().first().addClass("in active");
+
+                if(_GET['type']=='one-way'){
+                   $(".backFlightInfo").remove();
+                }
+
+                $("form#paymentForm :input").each(function () {
+                    $(this).change(checkOk);
+                });
+                for (var name in passengers) {
+                    $("form#passenger-" + name + "_form :input").each(function () {
+                        $(this).change(checkOk);
+                    });
+                }
             });
         </script>
         <style>
@@ -256,6 +328,10 @@ and open the template in the editor.
                 opacity: 1;
                 cursor:default;
             }
+            .nextBtnMsg{
+                font-size: 25px;
+                vertical-align: middle;
+            }
         </style>
     </head>
     <body>
@@ -265,7 +341,10 @@ and open the template in the editor.
             <tr>
                 <td>
 
-                    <div class="mainform"><h3>Passenger Details</h3>
+                    <div class="mainform">
+
+                        <div class="alert alert-info" role="alert" id="reviewAlert">Please Check if All information are correct</div>
+                        <h3>Passenger Details</h3>
                         <hr class="mainHr"/>
                         <div>
                             <!-- Nav tabs -->
@@ -279,7 +358,8 @@ and open the template in the editor.
                             <div>
                                 <h3>Itinerary</h3><hr class="mainHr"/>
                                 <div id="itineDiv">
-                                    <div id="goItinerary">
+                                    <div id="goItinerary" style="padding:5px;padding-top: 10px">
+                                        <h3>Departing Flight</h3>
                                         <table>
                                             <tr>
                                                 <td><div class="inline"><label class="goFlight_takeoffDate">Mon, 1 Feb 2016</label></div></td>
@@ -289,7 +369,8 @@ and open the template in the editor.
                                             </tr>
                                         </table>
                                     </div>
-                                    <div id="backItinerary">
+                                    <div id="backItinerary" style="padding:5px;padding-top: 10px" class="backFlightInfo" >
+                                        <h3>Returning Flight</h3>
                                         <table>
                                             <tr>
                                                 <td><div class="inline"><label class="backFlight_takeoffDate">Mon, 1 Feb 2016</label></div></td>
@@ -301,29 +382,29 @@ and open the template in the editor.
                                     </div>
                                 </div>
                                 <div>
-                                    <h3>Payment</h3><hr class="mainHr"/>
-                                    <div class="inline">
-                                        Full Name*<br/>
-                                        <input type="text" name="fName" required />
-                                    </div>
-                                    <div class="inline">
-                                        Email*<br/>
-                                        <input type="text" name="email" required />
-                                        <label width="100%"> For receive the electronic receipt</label>
-                                    </div>
-                                    <div class="inline">
-                                        Phone*<br/>
-                                        <input type="text" name="tel" required />
-                                    </div>
-                                    <div class="inline">
-                                        Credit Card*<br/>
-                                        <input type="text" name="ccard" required />
-                                    </div>
+                                    <form id="paymentForm">
+                                        <h3>Payment</h3><hr class="mainHr"/>
+                                        <div class="inline">
+                                            Full Name*<br/>
+                                            <input type="text" name="fName" class="form-control" placeholder="e.g. Tai Man Chan" required />
+                                        </div>
+                                        <div class="inline">
+                                            Email* 
+                                            <label width="100%" class="inline"> For receive the electronic receipt</label><br/>
+                                            <input type="text" name="email" class="form-control" placeholder="e.g. example@mail.com" required />
+                                        </div>
+                                        <div class="inline">
+                                            Phone*<br/>
+                                            <input type="text" name="tel" class="form-control" placeholder="e.g. +852 11111111" required />
+                                        </div>
+                                        <div class="inline">
+                                            Credit Card*<br/>
+                                            <input type="text" name="ccard" class="form-control" placeholder="e.g. 12345677" required />
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-
-                        <button type="button" id="cfPaymentBtn" class="btn btn-primary navbar-btn">Confirm Payment</button>
                 </td>
                 <td>
                     <div class="bookingSummaryDiv">
@@ -380,7 +461,7 @@ and open the template in the editor.
                                     <td>HKD <span class="goFlight_tax">359</span></td>
                                 </tr>
                             </table>
-                            <table id="returnFee" class="feeTable">
+                            <table id="returnFee" class="feeTable backFlightInfo">
                                 <tr>
                                     <th>Returning</th>
                                     <th>HKD <span class="backFlight_totalPrice">359</span></th>
@@ -401,8 +482,23 @@ and open the template in the editor.
                                     </td>
                                     <td><h3>HKD <span class="totalPrice">550</span></h3></td></tr>
                             </table>
+                            <hr>
+                            <div id="bookDiv">
+                                <h4>To Confirm Payment...</h4>
+                                <button id="nextBtn" class="btn btn-success afterLogin" style="width:100%;height:70px;margin-bottom: 10px" onclick="doNextStep();">
+                                    <span class="nextBtnMsg">Review Payment<span class="glyphicon glyphicon-chevron-right nextBtn"></span></span>
+                                </button>
+                                <button id="ConfirmBtn" class="btn btn-success afterLogin" style="width:100%;height:70px;margin-bottom: 10px" onclick="doNextStep();">
+                                    <span class="nextBtnMsg">Confirm Payment<span class="glyphicon glyphicon-chevron-right nextBtn"></span></span>
+                                </button>
+                                <button id="loginFirstBtn" class="btn disabled beforeLogin" style="width:100%;height:70px;margin-bottom: 10px">
+                                    <span class="nextBtnMsg">You must login first<span class="glyphicon glyphicon glyphicon-lock nextBtn"></span></span>
+                                </button>
+                            </div>
+                            <div class="alert alert-info" role="alert" id="fillInAlert">You must fill in all the blank to continue</div>
                         </div>
                     </div>
+
                 </td>
             </tr>
         </table>
@@ -725,6 +821,23 @@ and open the template in the editor.
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary" onClick="saveSeat()" id='btn_confirmSeat'>Confirm Seat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="bookingCompleteModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="page-header">
+                            <h1>Booking Success
+                                <br /><small>The copy of this Booking will send to your email...</small>
+                                <br /><small>Enjoy your flight</small><span class="glyphicon glyphicon-send"></span></h1>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="window.location.href = 'index.html';">Back to Home</button>
                     </div>
                 </div>
             </div>

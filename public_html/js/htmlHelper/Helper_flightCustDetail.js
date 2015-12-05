@@ -7,7 +7,7 @@ var str = '\
 }
 function getPassengerTabBody(number, type) {
 var str = '                         <div role="tabpanel" class="tab-pane fade" id="Passenger-'+number+'">\
-                                    <form id="passenger-'+number+'" onsubmit="saveFormAsPassenger('+number+');return false;">\
+                                    <form id="passenger-'+number+'_form" onsubmit="saveFormAsPassenger('+number+');return false;">\
                                     <div class="inline">\
                                         Title*<br/>\
                                         <div class="input-group">\
@@ -42,7 +42,7 @@ var str = '                         <div role="tabpanel" class="tab-pane fade" i
                                     <div class="inline">\
                                         Passport ID*<br/>\
                                         <div class="input-group">\
-                                            <input class="form-control" type="text" name="passenger-'+number+'_id" required />\
+                                            <input class="form-control" type="text" name="passenger-'+number+'_id" placeholder="e.g. Y11111111" required />\
                                         </div>\
                                     </div>\
                                     <div class="inline">\
@@ -51,13 +51,13 @@ var str = '                         <div role="tabpanel" class="tab-pane fade" i
                                             <input class="form-control btn readonly" tabindex="-1" placeholder="Click here to select seat" type="text" id="passenger-'+number+'_toSeatId" name="passenger-'+number+'_toSeatId" onclick="openFlightSeatModal(\'toSeatId\','+number+');" required/>\
                                       </div>\
                                     </div>\
-                                    <div class="inline">\
+                                    <div class="inline backFlightInfo">\
                                         Return Flight Seat No*<br/>\
                                         <div class="input-group">\
                                             <input class="form-control btn readonly" tabindex="-1" placeholder="Click here to select seat" type="text" id="passenger-'+number+'_backSeatId" name="passenger-'+number+'_backSeatId" onclick="openFlightSeatModal(\'backSeatId\','+number+');" required/>\
                                       </div>\
                                     </div>\
-                                    <input id="passenger-'+number+'_submit" type="submit" style="visibility: hidden"/>\
+                                    <input id="passenger-'+number+'_submit" type="submit" style="visibility: hidden" value="submit"/>\
                                     </form>\
                                 </div>';
     return str;
